@@ -1,38 +1,93 @@
+// Swift
 //
-//  AppDelegate.swift
-//  tribarb
-//
-//  Created by Anith Manu on 18/10/2020.
-//
+// AppDelegate.swift
 
 import UIKit
-
-@main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+import FBSDKCoreKit
 
 
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate  {
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+    
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
+          
+        
+        ApplicationDelegate.shared.application(
+            application,
+            didFinishLaunchingWithOptions: launchOptions
+        )
+        
+
+        
         UITabBar.appearance().barTintColor = .black
         UITabBar.appearance().tintColor = UIColor(red: 1.00, green: 0.76, blue: 0.43, alpha: 1.00)
+
         return true
     }
+          
+    func application(
+        _ app: UIApplication,
+        open url: URL,
+        options: [UIApplication.OpenURLOptionsKey : Any] = [:]
+    ) -> Bool {
 
-    // MARK: UISceneSession Lifecycle
+        ApplicationDelegate.shared.application(
+            app,
+            open: url,
+            sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+            annotation: options[UIApplication.OpenURLOptionsKey.annotation]
+        )
+        
 
-    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        // Called when a new scene session is being created.
-        // Use this method to select a configuration to create the new scene with.
-        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+    }
+    
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        AppEvents.activateApp()
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        APIManager.shared.logout { (error) in
+            if error != nil {
+                print("Unable to logout.")
+            }
+        }
+        sleep(3)
+    }
+}
+
+
+// Class for text fields
+import Foundation
+
+class CustomTextField:UITextField{
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setProperties()
     }
 
-    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        // Called when the user discards a scene session.
-        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setProperties()
     }
 
+    func setProperties(){
 
+        backgroundColor = UIColor.white
+        textAlignment = .left
+        textColor = .black
+        font = UIFont.systemFont(ofSize: 15)
+        layer.borderWidth = 1.0
+        layer.borderColor = UIColor.black.cgColor
+        layer.cornerRadius = 5
+        if let placeholder = self.placeholder {
+            self.attributedPlaceholder = NSAttributedString(string:placeholder, attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+        }
+    }
 }
 
