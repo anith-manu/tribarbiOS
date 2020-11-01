@@ -3,22 +3,41 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3CF9EE9A9D1D0FD7B65E3F4C /* Pods_tribarb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2A0D4D9CB703AE73A796819 /* Pods_tribarb.framework */; };
 		CA5A5DA4253C946A00A268C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5A5DA3253C946A00A268C2 /* AppDelegate.swift */; };
 		CA5A5DA6253C946A00A268C2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5A5DA5253C946A00A268C2 /* SceneDelegate.swift */; };
-		CA5A5DA8253C946A00A268C2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5A5DA7253C946A00A268C2 /* ViewController.swift */; };
 		CA5A5DAB253C946A00A268C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA5A5DA9253C946A00A268C2 /* Main.storyboard */; };
 		CA5A5DAD253C947000A268C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA5A5DAC253C947000A268C2 /* Assets.xcassets */; };
 		CA5A5DB0253C947000A268C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA5A5DAE253C947000A268C2 /* LaunchScreen.storyboard */; };
 		CA5A5DE1253D888B00A268C2 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5A5DE0253D888B00A268C2 /* ShopViewController.swift */; };
 		CA5A5DE6253DAA9100A268C2 /* ServiceListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5A5DE5253DAA9100A268C2 /* ServiceListTableViewController.swift */; };
 		CA5A5DEB253E1D5200A268C2 /* ServiceDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5A5DEA253E1D5100A268C2 /* ServiceDetailsViewController.swift */; };
+		CA5C3B5625416A5A008D6DA7 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = CA5C3B5525416A5A008D6DA7 /* FacebookCore */; };
+		CA5C3B5825416A5A008D6DA7 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = CA5C3B5725416A5A008D6DA7 /* FacebookLogin */; };
+		CA5C3B5A25416A5A008D6DA7 /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = CA5C3B5925416A5A008D6DA7 /* FacebookShare */; };
+		CA5C3B5F25417121008D6DA7 /* FBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5C3B5E25417121008D6DA7 /* FBManager.swift */; };
+		CA5C3B7925417936008D6DA7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5C3B7825417936008D6DA7 /* LoginViewController.swift */; };
+		CA5C3B7E25418DF7008D6DA7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5C3B7D25418DF7008D6DA7 /* User.swift */; };
+		CA5C3B832541B788008D6DA7 /* CustomerAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5C3B822541B788008D6DA7 /* CustomerAccountViewController.swift */; };
+		CA5CD00D254446AC00290225 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5CD00C254446AC00290225 /* APIManager.swift */; };
+		CA5CD01D254447CC00290225 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5CD01C254447CC00290225 /* Constants.swift */; };
+		CA5CD0222546B60600290225 /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5CD0212546B60500290225 /* Shop.swift */; };
+		CA5CD0272546DD4100290225 /* ShopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5CD0262546DD4100290225 /* ShopTableViewCell.swift */; };
+		CAA5BE58254D68970080B2CE /* GSImageViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA5BE57254D68960080B2CE /* GSImageViewerController.swift */; };
+		CAA5BE71254E8F290080B2CE /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA5BE70254E8F290080B2CE /* Cart.swift */; };
 		CAC2D419253EDD0C00E16536 /* CheckoutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC2D418253EDD0C00E16536 /* CheckoutTableViewController.swift */; };
 		CAC2D41F253EF18E00E16536 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAC2D41E253EF18E00E16536 /* MapKit.framework */; };
 		CAC2D421253EF1E000E16536 /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC2D420253EF1E000E16536 /* AddressViewController.swift */; };
+		CAE9C79325494C5F004D2AC1 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE9C79225494C5F004D2AC1 /* Service.swift */; };
+		CAE9C79B25494D64004D2AC1 /* ServiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE9C79A25494D64004D2AC1 /* ServiceTableViewCell.swift */; };
+		CAE9C7A025495FEF004D2AC1 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE9C79F25495FEF004D2AC1 /* Helpers.swift */; };
+		CAEA6EC225401A5A0075E5C2 /* BookingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEA6EC125401A590075E5C2 /* BookingsViewController.swift */; };
+		CAEA6ECA254040950075E5C2 /* OngoingBookingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEA6EC9254040950075E5C2 /* OngoingBookingsTableViewController.swift */; };
+		CAEA6ECF254040A40075E5C2 /* PreviousBookingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEA6ECE254040A40075E5C2 /* PreviousBookingsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,10 +58,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		09A1E9E7E507A1FFD2EF7859 /* Pods-tribarb.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tribarb.release.xcconfig"; path = "Target Support Files/Pods-tribarb/Pods-tribarb.release.xcconfig"; sourceTree = "<group>"; };
+		A2A0D4D9CB703AE73A796819 /* Pods_tribarb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tribarb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C68D426DEADD15ABF96CC5A4 /* Pods-tribarb.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tribarb.debug.xcconfig"; path = "Target Support Files/Pods-tribarb/Pods-tribarb.debug.xcconfig"; sourceTree = "<group>"; };
 		CA5A5DA0253C946A00A268C2 /* tribarb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tribarb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA5A5DA3253C946A00A268C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CA5A5DA5253C946A00A268C2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CA5A5DA7253C946A00A268C2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CA5A5DAA253C946A00A268C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CA5A5DAC253C947000A268C2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CA5A5DAF253C947000A268C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -52,9 +73,26 @@
 		CA5A5DE0253D888B00A268C2 /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		CA5A5DE5253DAA9100A268C2 /* ServiceListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceListTableViewController.swift; sourceTree = "<group>"; };
 		CA5A5DEA253E1D5100A268C2 /* ServiceDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailsViewController.swift; sourceTree = "<group>"; };
+		CA5C3B4825416855008D6DA7 /* tribarb.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = tribarb.entitlements; sourceTree = "<group>"; };
+		CA5C3B5E25417121008D6DA7 /* FBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBManager.swift; sourceTree = "<group>"; };
+		CA5C3B7825417936008D6DA7 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		CA5C3B7D25418DF7008D6DA7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		CA5C3B822541B788008D6DA7 /* CustomerAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerAccountViewController.swift; sourceTree = "<group>"; };
+		CA5CD00C254446AC00290225 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		CA5CD01C254447CC00290225 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		CA5CD0212546B60500290225 /* Shop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shop.swift; sourceTree = "<group>"; };
+		CA5CD0262546DD4100290225 /* ShopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopTableViewCell.swift; sourceTree = "<group>"; };
+		CAA5BE57254D68960080B2CE /* GSImageViewerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GSImageViewerController.swift; path = ../../../../../Downloads/GSImageViewerController.swift; sourceTree = "<group>"; };
+		CAA5BE70254E8F290080B2CE /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
 		CAC2D418253EDD0C00E16536 /* CheckoutTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutTableViewController.swift; sourceTree = "<group>"; };
 		CAC2D41E253EF18E00E16536 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		CAC2D420253EF1E000E16536 /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
+		CAE9C79225494C5F004D2AC1 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		CAE9C79A25494D64004D2AC1 /* ServiceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTableViewCell.swift; sourceTree = "<group>"; };
+		CAE9C79F25495FEF004D2AC1 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		CAEA6EC125401A590075E5C2 /* BookingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingsViewController.swift; sourceTree = "<group>"; };
+		CAEA6EC9254040950075E5C2 /* OngoingBookingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OngoingBookingsTableViewController.swift; sourceTree = "<group>"; };
+		CAEA6ECE254040A40075E5C2 /* PreviousBookingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviousBookingsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,7 +100,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA5C3B5825416A5A008D6DA7 /* FacebookLogin in Frameworks */,
 				CAC2D41F253EF18E00E16536 /* MapKit.framework in Frameworks */,
+				CA5C3B5625416A5A008D6DA7 /* FacebookCore in Frameworks */,
+				CA5C3B5A25416A5A008D6DA7 /* FacebookShare in Frameworks */,
+				3CF9EE9A9D1D0FD7B65E3F4C /* Pods_tribarb.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +131,7 @@
 				CA5A5DA2253C946A00A268C2 /* tribarb */,
 				CA5A5DA1253C946A00A268C2 /* Products */,
 				CAC2D41D253EF18E00E16536 /* Frameworks */,
+				DF96A830CDE3C9AA5646C316 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -105,28 +148,86 @@
 		CA5A5DA2253C946A00A268C2 /* tribarb */ = {
 			isa = PBXGroup;
 			children = (
+				CA5CD0082544458A00290225 /* Manager */,
+				CA5CD0072544457000290225 /* Controller */,
+				CA5CD0062544456B00290225 /* View */,
+				CA5CD0052544456400290225 /* Model */,
+				CA5C3B4825416855008D6DA7 /* tribarb.entitlements */,
 				CA5A5DA3253C946A00A268C2 /* AppDelegate.swift */,
 				CA5A5DA5253C946A00A268C2 /* SceneDelegate.swift */,
-				CA5A5DA7253C946A00A268C2 /* ViewController.swift */,
 				CA5A5DA9253C946A00A268C2 /* Main.storyboard */,
 				CA5A5DAC253C947000A268C2 /* Assets.xcassets */,
 				CA5A5DAE253C947000A268C2 /* LaunchScreen.storyboard */,
 				CA5A5DB1253C947000A268C2 /* Info.plist */,
+			);
+			path = tribarb;
+			sourceTree = "<group>";
+		};
+		CA5CD0052544456400290225 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CA5C3B7D25418DF7008D6DA7 /* User.swift */,
+				CA5CD0212546B60500290225 /* Shop.swift */,
+				CAE9C79225494C5F004D2AC1 /* Service.swift */,
+				CAA5BE70254E8F290080B2CE /* Cart.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CA5CD0062544456B00290225 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CA5CD0262546DD4100290225 /* ShopTableViewCell.swift */,
+				CAE9C79A25494D64004D2AC1 /* ServiceTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CA5CD0072544457000290225 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
 				CA5A5DE0253D888B00A268C2 /* ShopViewController.swift */,
 				CA5A5DE5253DAA9100A268C2 /* ServiceListTableViewController.swift */,
 				CA5A5DEA253E1D5100A268C2 /* ServiceDetailsViewController.swift */,
+				CAA5BE57254D68960080B2CE /* GSImageViewerController.swift */,
 				CAC2D418253EDD0C00E16536 /* CheckoutTableViewController.swift */,
 				CAC2D420253EF1E000E16536 /* AddressViewController.swift */,
+				CAEA6EC125401A590075E5C2 /* BookingsViewController.swift */,
+				CAEA6EC9254040950075E5C2 /* OngoingBookingsTableViewController.swift */,
+				CAEA6ECE254040A40075E5C2 /* PreviousBookingsTableViewController.swift */,
+				CA5C3B7825417936008D6DA7 /* LoginViewController.swift */,
+				CA5C3B822541B788008D6DA7 /* CustomerAccountViewController.swift */,
 			);
-			path = tribarb;
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		CA5CD0082544458A00290225 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				CA5C3B5E25417121008D6DA7 /* FBManager.swift */,
+				CA5CD00C254446AC00290225 /* APIManager.swift */,
+				CA5CD01C254447CC00290225 /* Constants.swift */,
+				CAE9C79F25495FEF004D2AC1 /* Helpers.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		CAC2D41D253EF18E00E16536 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				CAC2D41E253EF18E00E16536 /* MapKit.framework */,
+				A2A0D4D9CB703AE73A796819 /* Pods_tribarb.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DF96A830CDE3C9AA5646C316 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C68D426DEADD15ABF96CC5A4 /* Pods-tribarb.debug.xcconfig */,
+				09A1E9E7E507A1FFD2EF7859 /* Pods-tribarb.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,15 +237,22 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CA5A5DCA253C947000A268C2 /* Build configuration list for PBXNativeTarget "tribarb" */;
 			buildPhases = (
+				AD3A4BC86B46CF4BF7C05BD9 /* [CP] Check Pods Manifest.lock */,
 				CA5A5D9C253C946A00A268C2 /* Sources */,
 				CA5A5D9D253C946A00A268C2 /* Frameworks */,
 				CA5A5D9E253C946A00A268C2 /* Resources */,
+				1C0F34C6368DFE912A366DBD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = tribarb;
+			packageProductDependencies = (
+				CA5C3B5525416A5A008D6DA7 /* FacebookCore */,
+				CA5C3B5725416A5A008D6DA7 /* FacebookLogin */,
+				CA5C3B5925416A5A008D6DA7 /* FacebookShare */,
+			);
 			productName = tribarb;
 			productReference = CA5A5DA0253C946A00A268C2 /* tribarb.app */;
 			productType = "com.apple.product-type.application";
@@ -196,6 +304,7 @@
 				TargetAttributes = {
 					CA5A5D9F253C946A00A268C2 = {
 						CreatedOnToolsVersion = 12.0;
+						LastSwiftMigration = 1200;
 					};
 					CA5A5DB5253C947000A268C2 = {
 						CreatedOnToolsVersion = 12.0;
@@ -216,6 +325,9 @@
 				Base,
 			);
 			mainGroup = CA5A5D97253C946A00A268C2;
+			packageReferences = (
+				CA5C3B5425416A5A008D6DA7 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+			);
 			productRefGroup = CA5A5DA1253C946A00A268C2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -254,18 +366,75 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1C0F34C6368DFE912A366DBD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-tribarb/Pods-tribarb-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-tribarb/Pods-tribarb-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-tribarb/Pods-tribarb-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AD3A4BC86B46CF4BF7C05BD9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-tribarb-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CA5A5D9C253C946A00A268C2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				CA5A5DE1253D888B00A268C2 /* ShopViewController.swift in Sources */,
+				CAE9C7A025495FEF004D2AC1 /* Helpers.swift in Sources */,
+				CA5C3B5F25417121008D6DA7 /* FBManager.swift in Sources */,
 				CA5A5DE6253DAA9100A268C2 /* ServiceListTableViewController.swift in Sources */,
-				CA5A5DA8253C946A00A268C2 /* ViewController.swift in Sources */,
+				CAEA6ECF254040A40075E5C2 /* PreviousBookingsTableViewController.swift in Sources */,
+				CAA5BE58254D68970080B2CE /* GSImageViewerController.swift in Sources */,
 				CAC2D421253EF1E000E16536 /* AddressViewController.swift in Sources */,
+				CA5C3B7E25418DF7008D6DA7 /* User.swift in Sources */,
 				CA5A5DA4253C946A00A268C2 /* AppDelegate.swift in Sources */,
+				CA5CD0222546B60600290225 /* Shop.swift in Sources */,
+				CA5CD01D254447CC00290225 /* Constants.swift in Sources */,
+				CAEA6EC225401A5A0075E5C2 /* BookingsViewController.swift in Sources */,
+				CAA5BE71254E8F290080B2CE /* Cart.swift in Sources */,
 				CA5A5DA6253C946A00A268C2 /* SceneDelegate.swift in Sources */,
+				CAEA6ECA254040950075E5C2 /* OngoingBookingsTableViewController.swift in Sources */,
+				CAE9C79B25494D64004D2AC1 /* ServiceTableViewCell.swift in Sources */,
 				CA5A5DEB253E1D5200A268C2 /* ServiceDetailsViewController.swift in Sources */,
+				CA5C3B832541B788008D6DA7 /* CustomerAccountViewController.swift in Sources */,
+				CA5CD00D254446AC00290225 /* APIManager.swift in Sources */,
+				CA5CD0272546DD4100290225 /* ShopTableViewCell.swift in Sources */,
+				CAE9C79325494C5F004D2AC1 /* Service.swift in Sources */,
+				CA5C3B7925417936008D6DA7 /* LoginViewController.swift in Sources */,
 				CAC2D419253EDD0C00E16536 /* CheckoutTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -437,9 +606,12 @@
 		};
 		CA5A5DCB253C947000A268C2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C68D426DEADD15ABF96CC5A4 /* Pods-tribarb.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = tribarb/tribarb.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QV3TMVS67M;
 				INFOPLIST_FILE = tribarb/Info.plist;
@@ -449,6 +621,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tribarb.tribarb;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -456,9 +629,12 @@
 		};
 		CA5A5DCC253C947000A268C2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 09A1E9E7E507A1FFD2EF7859 /* Pods-tribarb.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = tribarb/tribarb.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QV3TMVS67M;
 				INFOPLIST_FILE = tribarb/Info.plist;
@@ -597,6 +773,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CA5C3B5425416A5A008D6DA7 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CA5C3B5525416A5A008D6DA7 /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CA5C3B5425416A5A008D6DA7 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookCore;
+		};
+		CA5C3B5725416A5A008D6DA7 /* FacebookLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CA5C3B5425416A5A008D6DA7 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookLogin;
+		};
+		CA5C3B5925416A5A008D6DA7 /* FacebookShare */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CA5C3B5425416A5A008D6DA7 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookShare;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CA5A5D98253C946A00A268C2 /* Project object */;
 }
