@@ -4,7 +4,7 @@
 
 import UIKit
 import FBSDKCoreKit
-
+import Stripe
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate  {
@@ -15,13 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
           
-        
+        Stripe.setDefaultPublishableKey("pk_test_51GwZcgJGRtokdLfWGTP34rmIWR1Rzqb2rx7KruKurcBeRD6mglqetEFuUdRwCdLNtm93siuUqtgV24mvS3yDcHdG00Mvjovux2")
         ApplicationDelegate.shared.application(
             application,
             didFinishLaunchingWithOptions: launchOptions
         )
-        
-
         
         UITabBar.appearance().barTintColor = .black
         UITabBar.appearance().tintColor = UIColor(red: 1.00, green: 0.76, blue: 0.43, alpha: 1.00)

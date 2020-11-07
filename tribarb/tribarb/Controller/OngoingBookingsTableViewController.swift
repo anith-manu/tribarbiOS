@@ -8,17 +8,24 @@
 import UIKit
 
 class OngoingBookingsTableViewController: UITableViewController {
+    
+    var fromController: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        navigationController?.setNavigationBarHidden(false, animated: false)
+
+        if fromController == 1 {
+            self.navigationController?.setNavigationBarHidden(true, animated: false)
+        } else {
+            self.navigationController?.setNavigationBarHidden(false, animated: false)
+        }
     }
 
     
