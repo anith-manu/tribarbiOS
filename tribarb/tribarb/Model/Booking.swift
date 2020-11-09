@@ -18,7 +18,6 @@ class Booking {
 
     
     init(json: JSON) {
-        print(json)
         self.id = json["id"].int
         self.shopName = json["shop"]["name"].string
         self.booking_type = "\(json["booking_type"])"

@@ -46,20 +46,20 @@ class PaymentViewController: UIViewController {
                 Cart.currentCart.reset()
                 self.tabBarController?.tabBar.items?[1].isEnabled = false
                 self.tabBarController?.tabBar.items?[1].badgeValue = nil
-                self.performSegue(withIdentifier: "BookingStatus", sender: self)
+               // self.performSegue(withIdentifier: "BookingStatus", sender: self)
                 self.performSegue(withIdentifier: "BackToCart", sender: self)
             }
         }
     }
     
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "BookingStatus" {
-            let vc = segue.destination as? OngoingBookingsTableViewController
-            vc?.fromController = 1
-        }
-    }
-    
+//    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "BookingStatus" {
+//            let vc = segue.destination as? OngoingBookingsTableViewController
+//            vc?.fromController = 1
+//        }
+//    }
+//    
     @IBAction func changePayment(_ sender: Any) {
         if paymentMethod.selectedSegmentIndex == 1 {
             self.paymentContext?.presentPaymentOptionsViewController()
@@ -95,7 +95,7 @@ extension PaymentViewController: STPPaymentContextDelegate {
                         Cart.currentCart.reset()
                         self.tabBarController?.tabBar.items?[1].isEnabled = false
                         self.tabBarController?.tabBar.items?[1].badgeValue = nil
-                        self.performSegue(withIdentifier: "BookingStatus", sender: self)
+                        //self.performSegue(withIdentifier: "BookingStatus", sender: self)
                         self.performSegue(withIdentifier: "BackToCart", sender: self)
                     }
                     // Your backend asynchronously fulfills the customer's order, e.g. via webhook

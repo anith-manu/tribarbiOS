@@ -76,6 +76,15 @@ class BookingsViewController: UIViewController {
     @IBAction func switchBookingsFilter(_ sender: Any) {
         load_bookings()
     }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "BookingDetail" {
+            let controller = segue.destination as! BookingViewController
+            controller.booking = bookings[(tbvBookings.indexPathForSelectedRow?.row)!]
+        }
+    }
 }
 
 

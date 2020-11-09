@@ -12,6 +12,7 @@ class BookingTableViewCell: UITableViewCell {
     @IBOutlet weak var lbServiceName: UILabel!
     @IBOutlet weak var lbServicePrice: UILabel!
     
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

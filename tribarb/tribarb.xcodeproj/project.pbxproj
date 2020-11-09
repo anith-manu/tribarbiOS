@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3CF9EE9A9D1D0FD7B65E3F4C /* Pods_tribarb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2A0D4D9CB703AE73A796819 /* Pods_tribarb.framework */; };
+		CA4456742559401E00E96E62 /* BookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4456732559401D00E96E62 /* BookingViewController.swift */; };
 		CA5A5DA4253C946A00A268C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5A5DA3253C946A00A268C2 /* AppDelegate.swift */; };
 		CA5A5DA6253C946A00A268C2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5A5DA5253C946A00A268C2 /* SceneDelegate.swift */; };
 		CA5A5DAB253C946A00A268C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA5A5DA9253C946A00A268C2 /* Main.storyboard */; };
@@ -43,7 +44,6 @@
 		CAE9C79B25494D64004D2AC1 /* ServiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE9C79A25494D64004D2AC1 /* ServiceTableViewCell.swift */; };
 		CAE9C7A025495FEF004D2AC1 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE9C79F25495FEF004D2AC1 /* Helpers.swift */; };
 		CAEA6EC225401A5A0075E5C2 /* BookingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEA6EC125401A590075E5C2 /* BookingsViewController.swift */; };
-		CAEA6ECA254040950075E5C2 /* OngoingBookingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEA6EC9254040950075E5C2 /* OngoingBookingsTableViewController.swift */; };
 		CAEA6ECF254040A40075E5C2 /* PreviousBookingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEA6ECE254040A40075E5C2 /* PreviousBookingsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +68,7 @@
 		09A1E9E7E507A1FFD2EF7859 /* Pods-tribarb.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tribarb.release.xcconfig"; path = "Target Support Files/Pods-tribarb/Pods-tribarb.release.xcconfig"; sourceTree = "<group>"; };
 		A2A0D4D9CB703AE73A796819 /* Pods_tribarb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tribarb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C68D426DEADD15ABF96CC5A4 /* Pods-tribarb.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tribarb.debug.xcconfig"; path = "Target Support Files/Pods-tribarb/Pods-tribarb.debug.xcconfig"; sourceTree = "<group>"; };
+		CA4456732559401D00E96E62 /* BookingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingViewController.swift; sourceTree = "<group>"; };
 		CA5A5DA0253C946A00A268C2 /* tribarb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tribarb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA5A5DA3253C946A00A268C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CA5A5DA5253C946A00A268C2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -105,7 +106,6 @@
 		CAE9C79A25494D64004D2AC1 /* ServiceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTableViewCell.swift; sourceTree = "<group>"; };
 		CAE9C79F25495FEF004D2AC1 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		CAEA6EC125401A590075E5C2 /* BookingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingsViewController.swift; sourceTree = "<group>"; };
-		CAEA6EC9254040950075E5C2 /* OngoingBookingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OngoingBookingsTableViewController.swift; sourceTree = "<group>"; };
 		CAEA6ECE254040A40075E5C2 /* PreviousBookingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviousBookingsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -211,12 +211,12 @@
 				CAA5BE57254D68960080B2CE /* GSImageViewerController.swift */,
 				CAC2D418253EDD0C00E16536 /* CheckoutTableViewController.swift */,
 				CAC2D420253EF1E000E16536 /* AddressViewController.swift */,
-				CAEA6EC125401A590075E5C2 /* BookingsViewController.swift */,
-				CAEA6EC9254040950075E5C2 /* OngoingBookingsTableViewController.swift */,
 				CAEA6ECE254040A40075E5C2 /* PreviousBookingsTableViewController.swift */,
 				CA5C3B7825417936008D6DA7 /* LoginViewController.swift */,
 				CA5C3B822541B788008D6DA7 /* CustomerAccountViewController.swift */,
 				CAA5BE8725519FD90080B2CE /* PaymentViewController.swift */,
+				CAEA6EC125401A590075E5C2 /* BookingsViewController.swift */,
+				CA4456732559401D00E96E62 /* BookingViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -452,7 +452,6 @@
 				CA88A4C325584B8600CEA1D2 /* FilterBookingTableViewCell.swift in Sources */,
 				CAA5BE71254E8F290080B2CE /* Cart.swift in Sources */,
 				CA5A5DA6253C946A00A268C2 /* SceneDelegate.swift in Sources */,
-				CAEA6ECA254040950075E5C2 /* OngoingBookingsTableViewController.swift in Sources */,
 				CAA811232557CC6F00E9558F /* BookingTableViewCell.swift in Sources */,
 				CAA5BE76254EBF0A0080B2CE /* CheckoutTableViewCell.swift in Sources */,
 				CAE9C79B25494D64004D2AC1 /* ServiceTableViewCell.swift in Sources */,
@@ -463,6 +462,7 @@
 				CAE9C79325494C5F004D2AC1 /* Service.swift in Sources */,
 				CA5C3B7925417936008D6DA7 /* LoginViewController.swift in Sources */,
 				CAC2D419253EDD0C00E16536 /* CheckoutTableViewController.swift in Sources */,
+				CA4456742559401E00E96E62 /* BookingViewController.swift in Sources */,
 				CA88A4C825584C5300CEA1D2 /* Booking.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

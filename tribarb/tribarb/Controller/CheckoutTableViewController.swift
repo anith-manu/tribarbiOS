@@ -15,7 +15,7 @@ class CheckoutTableViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var viewTotal: UIView!
     @IBOutlet weak var lbShopName: UILabel!
     @IBOutlet weak var lbBookingType: UILabel!
-    @IBOutlet weak var tfRequest: CustomTextField!
+    @IBOutlet weak var tfRequest: UITextField!
     @IBOutlet weak var lbSubTotal: UILabel!
     @IBOutlet weak var lbTotal: UILabel!
     @IBOutlet weak var btNext: UIButton!

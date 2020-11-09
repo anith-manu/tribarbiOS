@@ -11,10 +11,10 @@ import CoreLocation
 
 class AddressViewController: UIViewController, UITextFieldDelegate {
 
-    @IBOutlet weak var tbBuilding: CustomTextField!
-    @IBOutlet weak var tbHouseNo: CustomTextField!
-    @IBOutlet weak var tbCity: CustomTextField!
-    @IBOutlet weak var tbPostCode: CustomTextField!
+    @IBOutlet weak var tbBuilding: UITextField!
+    @IBOutlet weak var tbHouseNo: UITextField!
+    @IBOutlet weak var tbCity: UITextField!
+    @IBOutlet weak var tbPostCode: UITextField!
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var addPayment: UIButton!
     var locationManager: CLLocationManager!
@@ -78,9 +78,9 @@ class AddressViewController: UIViewController, UITextFieldDelegate {
             
             map.removeAnnotations(map.annotations)
             
-            let addressOptional = tbBuilding.text! + ", " + tbHouseNo.text!
-            let addressEssential = tbCity.text! + ", " + tbPostCode.text!
-            let address = addressOptional + ", " + addressEssential
+            let addressOptional = tbBuilding.text! + " " + tbHouseNo.text!
+            let addressEssential = tbCity.text! + " " + tbPostCode.text!
+            let address = addressOptional + " " + addressEssential
             Cart.currentCart.address = address
             
             let geocoder = CLGeocoder()

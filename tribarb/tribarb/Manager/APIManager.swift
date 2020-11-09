@@ -239,4 +239,15 @@ class APIManager {
         ]
         requestServer(.get, path, params, URLEncoding(), completionHandler)
     }
+    
+    
+    // API for getting shop service list
+    func getBooking(bookingID: Int, completionHandler: @escaping (JSON?) -> Void) {
+        let path = "api/customer/booking/get/\(bookingID)/"
+        let params: [String: Any] = [
+            "access_token": self.accessToken
+        ]
+    
+        requestServer(.get, path, params,  URLEncoding(), completionHandler)
+    }
 }
