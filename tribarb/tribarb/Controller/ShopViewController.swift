@@ -35,6 +35,11 @@ class ShopViewController: UIViewController {
         super.viewWillAppear(animated)
     
         navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        if Cart.currentCart.items.isEmpty {
+            self.tabBarController?.tabBar.items?[1].isEnabled = false
+            self.tabBarController?.tabBar.items?[1].badgeValue = nil
+        }
     }
     
     
@@ -94,6 +99,7 @@ class ShopViewController: UIViewController {
             
             let okAction = UIAlertAction(title: "Start \(bookingTypeString)", style: .default) { (action: UIAlertAction!) in
                 Cart.currentCart.reset()
+                self.tabBarController?.tabBar.items?[1].isEnabled = false
                 self.tabBarController?.tabBar.items?[1].badgeValue = nil
                 self.shops.removeAll()
                 self.tbvShops.reloadData()
@@ -170,7 +176,7 @@ extension ShopViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ShopCell", for: indexPath) as! ShopTableViewCell
-        cell.selectionStyle = .none
+
         let shop: Shop
         
         if searchShops.text != "" {

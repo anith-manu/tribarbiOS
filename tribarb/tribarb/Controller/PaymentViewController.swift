@@ -44,9 +44,10 @@ class PaymentViewController: UIViewController {
         } else {
             APIManager.shared.createBooking { (json) in
                 Cart.currentCart.reset()
+                self.tabBarController?.tabBar.items?[1].isEnabled = false
+                self.tabBarController?.tabBar.items?[1].badgeValue = nil
                 self.performSegue(withIdentifier: "BookingStatus", sender: self)
                 self.performSegue(withIdentifier: "BackToCart", sender: self)
-                
             }
         }
     }
@@ -92,8 +93,10 @@ extension PaymentViewController: STPPaymentContextDelegate {
                 case .succeeded:
                     APIManager.shared.createBooking { (json) in
                         Cart.currentCart.reset()
+                        self.tabBarController?.tabBar.items?[1].isEnabled = false
                         self.tabBarController?.tabBar.items?[1].badgeValue = nil
                         self.performSegue(withIdentifier: "BookingStatus", sender: self)
+                        self.performSegue(withIdentifier: "BackToCart", sender: self)
                     }
                     // Your backend asynchronously fulfills the customer's order, e.g. via webhook
                     completion(.success, nil)
@@ -114,33 +117,6 @@ extension PaymentViewController: STPPaymentContextDelegate {
                 }
             }
         }
-        
-//        APIManager.shared.createBooking { (json) in
-//
-//            let clientSecret = json!["clientSecret"].string
-//
-//            let paymentIntentParams = STPPaymentIntentParams(clientSecret: clientSecret!)
-//            paymentIntentParams.paymentMethodId = paymentResult.paymentMethod?.stripeId
-//
-//
-//            STPPaymentHandler.shared().confirmPayment(withParams: paymentIntentParams, authenticationContext: paymentContext) { (status, paymentIntent, error) in
-//                print(status)
-//                print(paymentIntent)
-//                print(error)
-//                switch status {
-//                case .succeeded:
-//                    print("SUCCESSS")
-//                    completion(.success, nil)
-//                case .failed:
-//                    print("FAILED")
-//                    completion(.error, error)
-//                case .canceled:
-//                    completion(.userCancellation, nil)
-//
-//
-//                }
-//            }
-//        }
     }
     
     func paymentContext(_ paymentContext: STPPaymentContext, didFinishWith status: STPPaymentStatus, error: Error?) {

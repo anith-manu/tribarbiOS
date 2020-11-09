@@ -206,4 +206,37 @@ class APIManager {
         ]
         requestServer(.get, path, params, URLEncoding(), completionHandler)
     }
+    
+    
+    // API - Getting the latest booking (Customer)
+    func getLatestBooking(completionHandler: @escaping (JSON?) -> Void) {
+        
+        let path = "api/customer/booking/latest/"
+        let params: [String: Any] = [
+            "access_token": self.accessToken
+        ]
+        requestServer(.get, path, params, URLEncoding(), completionHandler)
+    }
+    
+    
+    // API - Getting the latest booking (Customer)
+    func getUpcomingBookings(completionHandler: @escaping (JSON?) -> Void) {
+        
+        let path = "api/customer/bookings/upcoming/"
+        let params: [String: Any] = [
+            "access_token": self.accessToken
+        ]
+        requestServer(.get, path, params, URLEncoding(), completionHandler)
+    }
+    
+    
+    // API - Getting the latest booking (Customer)
+    func getPastBookings(completionHandler: @escaping (JSON?) -> Void) {
+        
+        let path = "api/customer/bookings/past/"
+        let params: [String: Any] = [
+            "access_token": self.accessToken
+        ]
+        requestServer(.get, path, params, URLEncoding(), completionHandler)
+    }
 }

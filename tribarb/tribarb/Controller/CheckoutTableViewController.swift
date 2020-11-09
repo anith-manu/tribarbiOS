@@ -40,6 +40,10 @@ class CheckoutTableViewController: UITableViewController, UITextFieldDelegate {
             tabBarController?.tabBar.items?[1].badgeValue = nil
             self.viewBookingType.isHidden = true
             self.viewTotal.isHidden = true
+            self.navigationController?.setNavigationBarHidden(false, animated: false)
+            let backButton = UIBarButtonItem(title: "", style: .plain, target: navigationController, action: nil)
+            navigationItem.leftBarButtonItem = backButton
+            
         } else {
             self.navigationItem.title = "Cart"
             self.viewBookingType.isHidden = false
