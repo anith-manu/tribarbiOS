@@ -23,12 +23,15 @@ class Cart {
     
     var shop: Shop?
     var items = [CartItem]()
-    var address: String?
+    var address = ""
     var request: String?
     var bookingType: Int?
+    var paymentMode: Int?
+    var bookingTime: String?
     
     
-    func getTotal() -> Float {
+    
+    func getSubtotal() -> Float {
         var total: Float = 0
         
         for item in self.items {
@@ -37,12 +40,20 @@ class Cart {
         return total
     }
     
+    func getTotal() -> Float {
+        let subTotal = getSubtotal()
+        let total = subTotal + 1.50
+        return total
+    }
+    
     func reset() {
         self.shop = nil
         self.items = []
-        self.address = nil
+        self.address = ""
         self.request = nil
         self.bookingType = nil
+        self.paymentMode = nil
+        self.bookingTime = nil
     }
     
 }

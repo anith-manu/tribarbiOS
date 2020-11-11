@@ -11,7 +11,9 @@ import SwiftyJSON
 import FBSDKLoginKit
 
 
+
 class APIManager {
+    
     
     static let shared = APIManager()
     
@@ -59,6 +61,9 @@ class APIManager {
     }
     
     
+
+    
+    
     // API to logout user
     func logout(completionHandler: @escaping (NSError?) -> Void) {
 
@@ -85,6 +90,7 @@ class APIManager {
         }
     }
     
+
     
     
     // Request server function
@@ -120,6 +126,7 @@ class APIManager {
     }
     
     
+    
     // API for getting Barbershop list that offers home bookings
     func get_home_booking_shops(completionHandler: @escaping (JSON?) -> Void) {
         let path = "api/customer/shops/home-booking/"
@@ -148,6 +155,135 @@ class APIManager {
     }
     
     
+    // API - Create new booking
+    func createBooking(completionHandler: @escaping (JSON?) -> Void) {
+        
+        let path = "api/customer/booking/add/"
+        let simpleArray = Cart.currentCart.items
+        let jsonArray = simpleArray.map { item in
+            return [
+                "service_id": item.service.id!
+            ]
+        }
+        
+        let shopID = Cart.currentCart.shop?.id
+        
+        if JSONSerialization.isValidJSONObject(jsonArray) {
+            do  {
+                let data = try JSONSerialization.data(withJSONObject: jsonArray, options: [])
+                let dataString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)!
+                
+                let params: [String: Any] = [
+                    "access_token": self.accessToken,
+                    "shop_id": shopID!,
+                    "booking_details": dataString,
+                    "booking_type": "\(Cart.currentCart.bookingType!)",
+                    "requested_time": "\(Cart.currentCart.bookingTime!)",
+                    "requests": "\(Cart.currentCart.request!)",
+                    "payment_mode": "\(Cart.currentCart.paymentMode!)",
+                    "address": Cart.currentCart.address,
+                    "total": Cart.currentCart.getTotal()
+                ]
+                
+                requestServer(.post, path, params, URLEncoding(), completionHandler)
+            }
+            catch {
+                
+                print("JSON serialization failed: \(error)")
+                
+            }
+        }
+    }
     
     
+    // API - Getting the latest booking (Customer)
+    func getStripeSecret(completionHandler: @escaping (JSON?) -> Void) {
+        
+        let path = "api/customer/stripe/secret/"
+        let params: [String: Any] = [
+            "access_token": self.accessToken,
+            "total": Cart.currentCart.getTotal()
+        ]
+        requestServer(.get, path, params, URLEncoding(), completionHandler)
+    }
+    
+    
+    // API - Getting the latest booking (Customer)
+    func getLatestBooking(completionHandler: @escaping (JSON?) -> Void) {
+        
+        let path = "api/customer/booking/latest/"
+        let params: [String: Any] = [
+            "access_token": self.accessToken
+        ]
+        requestServer(.get, path, params, URLEncoding(), completionHandler)
+    }
+    
+    
+    // API - Getting the latest booking (Customer)
+    func getUpcomingBookings(completionHandler: @escaping (JSON?) -> Void) {
+        
+        let path = "api/customer/bookings/upcoming/"
+        let params: [String: Any] = [
+            "access_token": self.accessToken
+        ]
+        requestServer(.get, path, params, URLEncoding(), completionHandler)
+    }
+    
+    
+    // API - Getting the latest booking (Customer)
+    func getPastBookings(completionHandler: @escaping (JSON?) -> Void) {
+        
+        let path = "api/customer/bookings/past/"
+        let params: [String: Any] = [
+            "access_token": self.accessToken
+        ]
+        requestServer(.get, path, params, URLEncoding(), completionHandler)
+    }
+    
+    
+    // API for getting shop service list
+    func getBooking(bookingID: Int, completionHandler: @escaping (JSON?) -> Void) {
+        let path = "api/customer/booking/get/\(bookingID)/"
+        let params: [String: Any] = [
+            "access_token": self.accessToken
+        ]
+    
+        requestServer(.get, path, params,  URLEncoding(), completionHandler)
+    }
+    
+    
+    // API for getting shop service list
+    func cancelBooking(bookingID: Int, completionHandler: @escaping (JSON?) -> Void) {
+        let path = "api/customer/booking/cancel/\(bookingID)/"
+        let params: [String: Any] = [
+            "access_token": self.accessToken
+        ]
+    
+        requestServer(.post, path, params,  URLEncoding(), completionHandler)
+    }
+    
+    
+    // API for getting shop service list
+    func customerGetDetails(completionHandler: @escaping (JSON?) -> Void) {
+        let path = "api/customer/getinfo/"
+        let params: [String: Any] = [
+            "access_token": self.accessToken
+        ]
+    
+        requestServer(.get, path, params,  URLEncoding(), completionHandler)
+    }
+    
+    
+    
+    // API for getting shop service list
+    func customerUpdateDetails(phone: String, address: String, completionHandler: @escaping (JSON?) -> Void) {
+        let path = "api/customer/updateinfo/"
+        let params: [String: Any] = [
+            "access_token": self.accessToken,
+            "phone": phone,
+            "address": address
+        ]
+    
+        requestServer(.post, path, params,  URLEncoding(), completionHandler)
+    }
 }

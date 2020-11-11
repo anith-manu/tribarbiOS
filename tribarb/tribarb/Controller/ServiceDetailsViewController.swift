@@ -14,34 +14,29 @@ class ServiceDetailsViewController: UIViewController {
     @IBOutlet weak var lbServiceName: UILabel!
     @IBOutlet weak var lbServiceShortDescription: UILabel!
     @IBOutlet weak var lbServicePrice: UILabel!
-    
     var service: Service?
     var shop: Shop?
-
     var urls = [String]()
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
+        serviceImagesCV.isHidden = true
         serviceImagesCV.frame = .zero
         serviceImagesCV.collectionViewLayout = layout
         serviceImagesCV.translatesAutoresizingMaskIntoConstraints = false
         serviceImagesCV.register(CustomCell.self, forCellWithReuseIdentifier: "cell")
-
         serviceImagesCV.backgroundColor = .white
-
-        
         loadService()
         loadAlbum()
     }
     
     
  
-    
     func loadService() {
-        
         lbServiceName.text = service?.name
         lbServiceShortDescription.text = service?.short_description
         
@@ -53,6 +48,7 @@ class ServiceDetailsViewController: UIViewController {
     
     
     func loadAlbum() {
+        
         if let serviceId = service?.id {
             APIManager.shared.getServiceAlbum(serviceID: serviceId) { (json) in
            
@@ -60,10 +56,14 @@ class ServiceDetailsViewController: UIViewController {
                     
                     if let tempServices = json?["album"].array {
                         
-                        for item in tempServices {
-                            self.urls.append(item["image"].string!)
+                        if tempServices.count > 0 {
+                            self.serviceImagesCV.isHidden = false
+                            
+                            for item in tempServices {
+                                self.urls.append(item["image"].string!)
+                            }
+                            self.serviceImagesCV.reloadData()
                         }
-                        self.serviceImagesCV.reloadData()
                     }
                 }
             }
@@ -72,19 +72,16 @@ class ServiceDetailsViewController: UIViewController {
     
     
     @IBAction func addToCart(_ sender: Any) {
-        
+        tabBarController?.tabBar.items?[1].isEnabled = true
         tabBarController?.tabBar.items?[1].badgeValue = ""
-        tabBarController?.tabBar.items?[1].badgeColor = UIColor(red: 1.00, green: 0.76, blue: 0.43, alpha: 1.00)
-        
+
         Cart.currentCart.bookingType = ShopViewController.BOOKING_TYPE_VAR
         let cartItem = CartItem(service: self.service!)
+        
         guard let cartShop = Cart.currentCart.shop, let currentShop = self.shop else {
-            
-            // If those requirements are not met
             Cart.currentCart.shop = self.shop
             Cart.currentCart.items.append(cartItem)
             addedToCartMessage()
-            
             return
         }
         
@@ -95,22 +92,19 @@ class ServiceDetailsViewController: UIViewController {
                 return item.service.id! == cartItem.service.id!
             }
             
-            if let index = inCart {
+            if inCart != nil {
                 let alertView = UIAlertController(
                     title: "Service Already Added",
                     message: "Your cart already has this service.",
                     preferredStyle: .alert)
-                
                 alertView.addAction(cancelAction)
-                
                 self.present(alertView, animated: true, completion: nil)
 
             } else {
                 Cart.currentCart.items.append(cartItem)
                 addedToCartMessage()
             }
-        } else { // If booking from different barber
-            
+        } else { 
             let alertView = UIAlertController(
                 title: "Clear Cart?",
                 message: "You were booking from another shop. Would you like to clear current cart and start a new booking?",
@@ -150,11 +144,12 @@ class ServiceDetailsViewController: UIViewController {
 
 extension ServiceDetailsViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width/2.5, height: collectionView.frame.width/2)
+        return CGSize(width: collectionView.frame.width - 30, height: collectionView.frame.height - 30)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //return data.count
+        
         return self.urls.count
     }
     
@@ -164,7 +159,7 @@ extension ServiceDetailsViewController: UICollectionViewDelegateFlowLayout, UICo
         let serviceDefault = UIImageView()
         let defaultImage = UIImage(named: "loading")
         serviceDefault.image = defaultImage
-           
+
         cell.data = self.urls[indexPath.item]
         cell.backgroundView = serviceDefault
         cell.layer.cornerRadius = 12

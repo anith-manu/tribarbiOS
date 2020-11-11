@@ -12,6 +12,8 @@ import SwiftyJSON
 class User {
     
     var name: String?
+    var phone: String?
+    var address: String?
     var email: String?
     var pictureURL: String?
     
@@ -20,7 +22,7 @@ class User {
     func setInfo(json: JSON) {
         self.name = json["name"].string
         self.email = json["email"].string
-        
+
         let image = json["picture"].dictionary
         let imageData = image?["data"]?.dictionary
         self.pictureURL = imageData?["url"]?.string
