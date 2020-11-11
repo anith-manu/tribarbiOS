@@ -250,4 +250,40 @@ class APIManager {
     
         requestServer(.get, path, params,  URLEncoding(), completionHandler)
     }
+    
+    
+    // API for getting shop service list
+    func cancelBooking(bookingID: Int, completionHandler: @escaping (JSON?) -> Void) {
+        let path = "api/customer/booking/cancel/\(bookingID)/"
+        let params: [String: Any] = [
+            "access_token": self.accessToken
+        ]
+    
+        requestServer(.post, path, params,  URLEncoding(), completionHandler)
+    }
+    
+    
+    // API for getting shop service list
+    func customerGetDetails(completionHandler: @escaping (JSON?) -> Void) {
+        let path = "api/customer/getinfo/"
+        let params: [String: Any] = [
+            "access_token": self.accessToken
+        ]
+    
+        requestServer(.get, path, params,  URLEncoding(), completionHandler)
+    }
+    
+    
+    
+    // API for getting shop service list
+    func customerUpdateDetails(phone: String, address: String, completionHandler: @escaping (JSON?) -> Void) {
+        let path = "api/customer/updateinfo/"
+        let params: [String: Any] = [
+            "access_token": self.accessToken,
+            "phone": phone,
+            "address": address
+        ]
+    
+        requestServer(.post, path, params,  URLEncoding(), completionHandler)
+    }
 }

@@ -74,7 +74,7 @@ class ServiceDetailsViewController: UIViewController {
     @IBAction func addToCart(_ sender: Any) {
         tabBarController?.tabBar.items?[1].isEnabled = true
         tabBarController?.tabBar.items?[1].badgeValue = ""
-        tabBarController?.tabBar.items?[1].badgeColor = UIColor(red: 1.00, green: 0.76, blue: 0.43, alpha: 1.00)
+
         Cart.currentCart.bookingType = ShopViewController.BOOKING_TYPE_VAR
         let cartItem = CartItem(service: self.service!)
         

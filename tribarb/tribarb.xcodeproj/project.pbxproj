@@ -37,7 +37,7 @@
 		CAA5BE802551632C0080B2CE /* StripeAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA5BE7F255163280080B2CE /* StripeAPIManager.swift */; };
 		CAA5BE8825519FDA0080B2CE /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA5BE8725519FD90080B2CE /* PaymentViewController.swift */; };
 		CAA811232557CC6F00E9558F /* BookingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA811222557CC6F00E9558F /* BookingTableViewCell.swift */; };
-		CAC2D419253EDD0C00E16536 /* CheckoutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC2D418253EDD0C00E16536 /* CheckoutTableViewController.swift */; };
+		CAC06ED92559D6F200E15284 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC06ED82559D6F200E15284 /* CheckoutViewController.swift */; };
 		CAC2D41F253EF18E00E16536 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAC2D41E253EF18E00E16536 /* MapKit.framework */; };
 		CAC2D421253EF1E000E16536 /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC2D420253EF1E000E16536 /* AddressViewController.swift */; };
 		CAE9C79325494C5F004D2AC1 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE9C79225494C5F004D2AC1 /* Service.swift */; };
@@ -99,7 +99,7 @@
 		CAA5BE7F255163280080B2CE /* StripeAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripeAPIManager.swift; sourceTree = "<group>"; };
 		CAA5BE8725519FD90080B2CE /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		CAA811222557CC6F00E9558F /* BookingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingTableViewCell.swift; sourceTree = "<group>"; };
-		CAC2D418253EDD0C00E16536 /* CheckoutTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutTableViewController.swift; sourceTree = "<group>"; };
+		CAC06ED82559D6F200E15284 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 		CAC2D41E253EF18E00E16536 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		CAC2D420253EF1E000E16536 /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
 		CAE9C79225494C5F004D2AC1 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
@@ -205,18 +205,18 @@
 		CA5CD0072544457000290225 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				CA5C3B7825417936008D6DA7 /* LoginViewController.swift */,
 				CA5A5DE0253D888B00A268C2 /* ShopViewController.swift */,
 				CA5A5DE5253DAA9100A268C2 /* ServiceListTableViewController.swift */,
 				CA5A5DEA253E1D5100A268C2 /* ServiceDetailsViewController.swift */,
 				CAA5BE57254D68960080B2CE /* GSImageViewerController.swift */,
-				CAC2D418253EDD0C00E16536 /* CheckoutTableViewController.swift */,
 				CAC2D420253EF1E000E16536 /* AddressViewController.swift */,
 				CAEA6ECE254040A40075E5C2 /* PreviousBookingsTableViewController.swift */,
-				CA5C3B7825417936008D6DA7 /* LoginViewController.swift */,
 				CA5C3B822541B788008D6DA7 /* CustomerAccountViewController.swift */,
-				CAA5BE8725519FD90080B2CE /* PaymentViewController.swift */,
 				CAEA6EC125401A590075E5C2 /* BookingsViewController.swift */,
 				CA4456732559401D00E96E62 /* BookingViewController.swift */,
+				CAC06ED82559D6F200E15284 /* CheckoutViewController.swift */,
+				CAA5BE8725519FD90080B2CE /* PaymentViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -461,8 +461,8 @@
 				CA5CD0272546DD4100290225 /* ShopTableViewCell.swift in Sources */,
 				CAE9C79325494C5F004D2AC1 /* Service.swift in Sources */,
 				CA5C3B7925417936008D6DA7 /* LoginViewController.swift in Sources */,
-				CAC2D419253EDD0C00E16536 /* CheckoutTableViewController.swift in Sources */,
 				CA4456742559401E00E96E62 /* BookingViewController.swift in Sources */,
+				CAC06ED92559D6F200E15284 /* CheckoutViewController.swift in Sources */,
 				CA88A4C825584C5300CEA1D2 /* Booking.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

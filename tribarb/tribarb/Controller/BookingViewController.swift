@@ -56,6 +56,8 @@ class BookingViewController: UIViewController {
     }
     
     
+
+    
     func getBooking() {
         Helpers.showActivityIndicator(activityIndicator, view)
     
@@ -77,7 +79,63 @@ class BookingViewController: UIViewController {
         }
     }
     
+    
+    func bookingCancelledMessage() {
+        let message = "Booking has been cancelled."
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        self.present(alert, animated: true)
 
+        // duration in seconds
+        let duration: Double = 2
+
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + duration) {
+            alert.dismiss(animated: true)
+        }
+    }
+    
+    
+    func bookingCancelledFailedMessage() {
+        let alertView = UIAlertController(
+            title: "Unable To Cancel",
+            message: "This booking has already been accepeted. If you would like to cancel, please call the barber.",
+            preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+    
+        alertView.addAction(cancelAction)
+        self.present(alertView, animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func cancelBooking(_ sender: Any) {
+        
+        let alertView = UIAlertController(
+            title: "Cancel Booking?",
+            message: "Are you sure you want to cancel this booking?",
+            preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "Yes", style: .default) { (action: UIAlertAction!) in
+            if let bookingID = self.booking?.id {
+                APIManager.shared.cancelBooking(bookingID: bookingID) { (json) in
+                    
+                    
+                    if json!["status"] == "success" {
+                        self.bookingCancelledMessage()
+                    } else {
+                        self.bookingCancelledFailedMessage()
+                    }
+                }
+            }
+            self.navigationController?.popToRootViewController(animated: true)
+        }
+        
+        let cancelAction = UIAlertAction(title: "No", style: .cancel)
+        
+        alertView.addAction(cancelAction)
+        alertView.addAction(okAction)
+        self.present(alertView, animated: true, completion: nil)        
+    }
+    
     
     func setUIElements(json: JSON) {
         
@@ -176,8 +234,7 @@ class BookingViewController: UIViewController {
     }
     
     
-    @IBAction func cancelBooking(_ sender: Any) {
-    }
+
 }
 
 

@@ -8,6 +8,7 @@
 import UIKit
 
 class BookingsViewController: UIViewController {
+
     
     @IBOutlet weak var tbvBookings: UITableView!
     var filter_bookings_var = 0
@@ -18,16 +19,28 @@ class BookingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        load_bookings()
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         navigationController?.setNavigationBarHidden(true, animated: false)
+        load_bookings()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { // Change `2.0` to the desired number of seconds.
+            APIManager.shared.getUpcomingBookings { (json) in
+    
+                if json == nil || json!["bookings"].isEmpty {
+                    self.tabBarController?.tabBar.items?[2].badgeValue = nil
+                } else {
+                    self.tabBarController?.tabBar.items?[2].badgeValue = ""
+                }
+            }
+        }
     }
+    
+    
+    
+
     
     
     func load_bookings() {
@@ -36,7 +49,7 @@ class BookingsViewController: UIViewController {
         
         if filter_bookings_var == 0 {
             APIManager.shared.getUpcomingBookings { (json) in
-                
+        
                 if json != nil {
                     
                     self.bookings = []
@@ -50,7 +63,7 @@ class BookingsViewController: UIViewController {
                         self.tbvBookings.reloadData()
                         Helpers.hideActivityIndicator(self.activityIndicator)
                     }
-                }
+                } 
             }
         } else {
             APIManager.shared.getPastBookings { (json) in
@@ -127,7 +140,7 @@ extension BookingsViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+  //      dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:SSZ"
         let date = dateFormatter.date(from: booking.date!)
         dateFormatter.dateFormat = "d MMM y, HH:mm"

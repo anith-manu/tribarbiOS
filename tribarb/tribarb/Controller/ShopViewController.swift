@@ -24,11 +24,21 @@ class ShopViewController: UIViewController {
         super.viewDidLoad()
         self.tbvShops.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.00)
         self.booking_type.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
-        self.booking_type.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.00)
     
         load_shops()
+        tabbarConfig()
+        
     }
     
+    
+    func tabbarConfig() {
+        guard let tabbar = self.tabBarController?.tabBar else { return }
+        tabbar.layer.cornerRadius = 30
+        tabbar.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        tabbar.layer.masksToBounds = true
+        tabbar.barTintColor = .black
+        tabbar.tintColor = UIColor(red: 1.00, green: 0.76, blue: 0.43, alpha: 1.00)
+    }
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,6 +49,27 @@ class ShopViewController: UIViewController {
         if Cart.currentCart.items.isEmpty {
             self.tabBarController?.tabBar.items?[1].isEnabled = false
             self.tabBarController?.tabBar.items?[1].badgeValue = nil
+        }
+        
+    
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { // Change `2.0` to the desired number of seconds.
+            APIManager.shared.getUpcomingBookings { (json) in
+    
+                if json == nil || json!["bookings"].isEmpty {
+                    self.tabBarController?.tabBar.items?[2].badgeValue = nil
+                } else {
+                    self.tabBarController?.tabBar.items?[2].badgeValue = ""
+                }
+            }
+            
+            APIManager.shared.customerGetDetails { (json) in
+                
+                if json != nil {
+                    User.currentUser.phone = json!["customer"]["phone"].string
+                    User.currentUser.address = json!["customer"]["address"].string
+                }
+            }
         }
     }
     

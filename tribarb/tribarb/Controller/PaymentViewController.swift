@@ -14,6 +14,8 @@ class PaymentViewController: UIViewController {
 
     var customerContext : STPCustomerContext?
     var paymentContext : STPPaymentContext?
+   
+    let currentShop = Cart.currentCart.shop?.name
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +30,7 @@ class PaymentViewController: UIViewController {
         STPTheme.default().secondaryBackgroundColor = .white
         STPTheme.default().secondaryForegroundColor = .blue
         STPTheme.default().errorColor = .red
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,14 +55,16 @@ class PaymentViewController: UIViewController {
         }
     }
     
-//    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "BookingStatus" {
-//            let vc = segue.destination as? OngoingBookingsTableViewController
-//            vc?.fromController = 1
-//        }
-//    }
-//    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "BackToCart" {
+            let vc = segue.destination as? CheckoutViewController
+            vc?.fromController = 1
+            vc?.shopName = currentShop
+        }
+    }
+    
+
     @IBAction func changePayment(_ sender: Any) {
         if paymentMethod.selectedSegmentIndex == 1 {
             self.paymentContext?.presentPaymentOptionsViewController()

@@ -21,9 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
             didFinishLaunchingWithOptions: launchOptions
         )
         
-        UITabBar.appearance().barTintColor = .black
-        UITabBar.appearance().tintColor = UIColor(red: 1.00, green: 0.76, blue: 0.43, alpha: 1.00)
-
         return true
     }
           
