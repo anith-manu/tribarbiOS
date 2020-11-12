@@ -19,13 +19,14 @@ class AddressViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var tbCity: UITextField!
     @IBOutlet weak var tbPostcode: UITextField!
     @IBOutlet weak var map: MKMapView!
+    @IBOutlet weak var btDifferentAddress: UIButton!
     
     var locationManager: CLLocationManager!
     var ADDRESS_SET = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         if CLLocationManager.locationServicesEnabled() {
             locationManager = CLLocationManager()
             locationManager.delegate = self
@@ -37,14 +38,16 @@ class AddressViewController: UIViewController, UITextFieldDelegate {
         
         if User.currentUser.address != nil && User.currentUser.address! != "" {
             print("called")
+            self.btDifferentAddress.isHidden = false
             self.newAddress.isHidden = true
             self.lbSavedAddress.text = User.currentUser.address!
             self.pinAddress(address: User.currentUser.address!)
             Cart.currentCart.address = User.currentUser.address!
         } else {
             ADDRESS_SET = false
-            self.savedAddress.isHidden = true
+            self.lbSavedAddress.text = "No address set."
             self.newAddress.isHidden = false
+            self.btDifferentAddress.isHidden = true
         }
 
     }

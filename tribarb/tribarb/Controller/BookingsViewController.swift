@@ -130,6 +130,8 @@ extension BookingsViewController: UITableViewDelegate, UITableViewDataSource {
         
         
         cell.lbStatus.text = booking.status
+        cell.lbStatus.layer.cornerRadius = 10
+        cell.lbStatus.layer.masksToBounds = true
         
         if booking.status == "Placed" {
             cell.lbStatus.backgroundColor = UIColor(red: 1.00, green: 0.76, blue: 0.43, alpha: 1.00)

@@ -16,6 +16,7 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var lbEmail: UILabel!
     @IBOutlet weak var imgAvatar: UIImageView!
     @IBOutlet weak var lbAddress: UILabel!
+    @IBOutlet weak var lbPhoneNumber: UILabel!
     
     @IBOutlet weak var tbPhone: UITextField!
     @IBOutlet weak var tbLine1: UITextField!
@@ -46,11 +47,12 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate {
                 User.currentUser.address = json!["customer"]["address"].string
                 
                 if User.currentUser.address! == "" || User.currentUser.address == nil {
-                    self.lbAddress.text = "Address not set."
+                    self.lbAddress.text = "No address set."
                 } else {
                     self.lbAddress.text = User.currentUser.address!
+                    
                 }
-                self.tbPhone.text =  User.currentUser.phone!
+                self.lbPhoneNumber.text =  User.currentUser.phone!
                 
             }
             
@@ -88,7 +90,15 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBAction func updateInfo(_ sender: Any) {
-        let phone = tbPhone.text
+        
+        
+        var phone = ""
+        
+        if tbPhone.hasText {
+            phone = tbPhone.text!
+        } else {
+            phone = User.currentUser.phone!
+        }
 
         var address = ""
         
@@ -112,7 +122,7 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate {
             address = User.currentUser.address!
         }
         
-        if phone! != User.currentUser.phone! || address != User.currentUser.address! {
+        if address != User.currentUser.address! {
             
             if tbCity.text == "" || tbPostCode.text == "" {
                 // Showing alert that the field is required
@@ -134,7 +144,7 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate {
                         self.present(alertController, animated: true, completion: nil)
                     } else {
                         
-                        APIManager.shared.customerUpdateDetails(phone: phone!, address: address) { (json) in
+                        APIManager.shared.customerUpdateDetails(phone: phone, address: address) { (json) in
                             print(json)
                             self.viewWillAppear(true)
                         }
@@ -142,10 +152,15 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate {
                     }
                 }
             }
-            
-        } else {
-            print("Same")
         }
+        
+        if phone != User.currentUser.phone! {
+            APIManager.shared.customerUpdateDetails(phone: phone, address: address) { (json) in
+                print(json)
+                self.viewWillAppear(true)
+            }
+        }
+        
     }
     
     

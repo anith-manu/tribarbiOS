@@ -22,8 +22,8 @@ class ShopViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tbvShops.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.00)
-        self.booking_type.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
+  
+
     
         load_shops()
         tabbarConfig()
@@ -81,7 +81,7 @@ class ShopViewController: UIViewController {
         
         if ShopViewController.BOOKING_TYPE_VAR == 0 {
             APIManager.shared.get_shop_booking_shops { (json) in
-                
+                print(json)
                 if json != nil {
                     self.shops = []
                     
@@ -207,13 +207,37 @@ extension ShopViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ShopCell", for: indexPath) as! ShopTableViewCell
+        cell.mainBackground.layer.cornerRadius = 8
+        cell.mainBackground.layer.masksToBounds = true
+        cell.shadowLayer.setupShadow()
+        
+//        cell.shadowLayer.layer.cornerRadius = 8
+//        cell.shadowLayer.layer.shadowOffset = CGSize(width: 0, height: 3)
+//        cell.shadowLayer.layer.shadowRadius = 3
+//        cell.shadowLayer.layer.shadowColor = UIColor.black.cgColor
+//        cell.shadowLayer.layer.shadowOpacity = 0.3
+//        cell.shadowLayer.layer.shadowPath = UIBezierPath(roundedRect: cell.shadowLayer.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 8, height: 8)).cgPath
+//
+//        cell.shadowLayer.layer.shouldRasterize = true
+//        cell.shadowLayer.layer.rasterizationScale = UIScreen.main.scale
 
         let shop: Shop
-        
+      
         if searchShops.text != "" {
             shop = filteredShops[indexPath.row]
         } else {
             shop = shops[indexPath.row]
+        }
+        
+        if shop.totalRating! == 0 {
+            cell.ratingView.isHidden = true
+            cell.lbNewlyAdded.isHidden = false
+        } else {
+            cell.ratingView.isHidden = false
+            cell.lbNewlyAdded.isHidden = true
+            let rating = ((shop.totalRating!)/(shop.numberOfRatings!))
+            cell.lbRating.text = String(format: "%.1f", rating)
+            cell.lbNumberOfRatings.text = "(\(Int(shop.numberOfRatings!)))"
         }
         
         cell.lbShopName.text = shop.name!
@@ -227,3 +251,16 @@ extension ShopViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 
+class ShadowView: UIView {
+
+    func setupShadow() {
+        self.layer.cornerRadius = 8
+        self.layer.shadowOffset = CGSize(width: 0, height: 0)
+        self.layer.shadowRadius = 3
+        self.layer.shadowColor = UIColor.lightGray.cgColor
+        self.layer.shadowOpacity = 0.3
+        self.layer.shadowPath = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 8, height: 8)).cgPath
+        self.layer.shouldRasterize = true
+        self.layer.rasterizationScale = UIScreen.main.scale
+    }
+}

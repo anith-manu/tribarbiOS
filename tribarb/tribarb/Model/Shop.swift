@@ -17,6 +17,9 @@ class Shop {
     var logo: String?
     var instagram: String?
     var facebook: String?
+    var totalRating: Float?
+    var numberOfRatings: Float?
+    
     
     init(json: JSON) {
         self.id = json["id"].int
@@ -26,5 +29,7 @@ class Shop {
         self.logo = json["logo"].string
         self.instagram = json["instagram"].string
         self.facebook = json["facebook"].string
+        self.totalRating = json["totalRating"].float
+        self.numberOfRatings = json["numberOfRatings"].float
     }
 }
