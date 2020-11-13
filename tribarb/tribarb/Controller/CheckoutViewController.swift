@@ -137,18 +137,6 @@ extension CheckoutViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//    
-//        if editingStyle == .delete {
-//            Cart.currentCart.items.remove(at: indexPath.row)
-//            self.tbvServices.deleteRows(at: [indexPath], with: .automatic)
-//            viewWillAppear(true)
-//        }
-//    }
-//    
-//    
-
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CheckoutCell", for: indexPath) as! CheckoutTableViewCell
         let cart = Cart.currentCart.items[indexPath.row]

@@ -9,6 +9,8 @@ target 'tribarb' do
   pod 'Stripe'
   pod 'SwiftyJSON', '5.0.0'
   pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git'
+  pod 'Cosmos'
+  pod 'TinyConstraints'
 
 
 #  target 'tribarbTests' do

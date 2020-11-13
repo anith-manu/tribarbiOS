@@ -29,7 +29,8 @@
 		CA5CD0222546B60600290225 /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5CD0212546B60500290225 /* Shop.swift */; };
 		CA5CD0272546DD4100290225 /* ShopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5CD0262546DD4100290225 /* ShopTableViewCell.swift */; };
 		CA88A4C325584B8600CEA1D2 /* FilterBookingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA88A4C225584B8600CEA1D2 /* FilterBookingTableViewCell.swift */; };
-		CA88A4C825584C5300CEA1D2 /* Booking.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA88A4C725584C5300CEA1D2 /* Booking.swift */; };
+		CA88A4C825584C5300CEA1D2 /* Bookings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA88A4C725584C5300CEA1D2 /* Bookings.swift */; };
+		CA8F3799255E7F710045DC01 /* Booking.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8F3798255E7F710045DC01 /* Booking.swift */; };
 		CAA5BE58254D68970080B2CE /* GSImageViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA5BE57254D68960080B2CE /* GSImageViewerController.swift */; };
 		CAA5BE71254E8F290080B2CE /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA5BE70254E8F290080B2CE /* Cart.swift */; };
 		CAA5BE76254EBF0A0080B2CE /* CheckoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA5BE75254EBF090080B2CE /* CheckoutTableViewCell.swift */; };
@@ -91,7 +92,8 @@
 		CA5CD0212546B60500290225 /* Shop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shop.swift; sourceTree = "<group>"; };
 		CA5CD0262546DD4100290225 /* ShopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopTableViewCell.swift; sourceTree = "<group>"; };
 		CA88A4C225584B8600CEA1D2 /* FilterBookingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterBookingTableViewCell.swift; sourceTree = "<group>"; };
-		CA88A4C725584C5300CEA1D2 /* Booking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Booking.swift; sourceTree = "<group>"; };
+		CA88A4C725584C5300CEA1D2 /* Bookings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookings.swift; sourceTree = "<group>"; };
+		CA8F3798255E7F710045DC01 /* Booking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Booking.swift; sourceTree = "<group>"; };
 		CAA5BE57254D68960080B2CE /* GSImageViewerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GSImageViewerController.swift; path = ../../../../../Downloads/GSImageViewerController.swift; sourceTree = "<group>"; };
 		CAA5BE70254E8F290080B2CE /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
 		CAA5BE75254EBF090080B2CE /* CheckoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutTableViewCell.swift; sourceTree = "<group>"; };
@@ -185,7 +187,8 @@
 				CA5CD0212546B60500290225 /* Shop.swift */,
 				CAE9C79225494C5F004D2AC1 /* Service.swift */,
 				CAA5BE70254E8F290080B2CE /* Cart.swift */,
-				CA88A4C725584C5300CEA1D2 /* Booking.swift */,
+				CA88A4C725584C5300CEA1D2 /* Bookings.swift */,
+				CA8F3798255E7F710045DC01 /* Booking.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -454,6 +457,7 @@
 				CA5A5DA6253C946A00A268C2 /* SceneDelegate.swift in Sources */,
 				CAA811232557CC6F00E9558F /* BookingTableViewCell.swift in Sources */,
 				CAA5BE76254EBF0A0080B2CE /* CheckoutTableViewCell.swift in Sources */,
+				CA8F3799255E7F710045DC01 /* Booking.swift in Sources */,
 				CAE9C79B25494D64004D2AC1 /* ServiceTableViewCell.swift in Sources */,
 				CA5A5DEB253E1D5200A268C2 /* ServiceDetailsViewController.swift in Sources */,
 				CA5C3B832541B788008D6DA7 /* CustomerAccountViewController.swift in Sources */,
@@ -463,7 +467,7 @@
 				CA5C3B7925417936008D6DA7 /* LoginViewController.swift in Sources */,
 				CA4456742559401E00E96E62 /* BookingViewController.swift in Sources */,
 				CAC06ED92559D6F200E15284 /* CheckoutViewController.swift in Sources */,
-				CA88A4C825584C5300CEA1D2 /* Booking.swift in Sources */,
+				CA88A4C825584C5300CEA1D2 /* Bookings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,6 +14,7 @@ class ServiceDetailsViewController: UIViewController {
     @IBOutlet weak var lbServiceName: UILabel!
     @IBOutlet weak var lbServiceShortDescription: UILabel!
     @IBOutlet weak var lbServicePrice: UILabel!
+    
     var service: Service?
     var shop: Shop?
     var urls = [String]()

@@ -29,7 +29,7 @@ class Shop {
         self.logo = json["logo"].string
         self.instagram = json["instagram"].string
         self.facebook = json["facebook"].string
-        self.totalRating = json["totalRating"].float
-        self.numberOfRatings = json["numberOfRatings"].float
+        self.totalRating = json["total_rating"].float
+        self.numberOfRatings = json["number_of_ratings"].float
     }
 }

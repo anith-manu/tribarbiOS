@@ -286,4 +286,19 @@ class APIManager {
     
         requestServer(.post, path, params,  URLEncoding(), completionHandler)
     }
+    
+    
+    
+    // API for getting shop service list
+    func customerUpdateRating(bookingID: Int, rating: Int,completionHandler: @escaping (JSON?) -> Void) {
+        let path = "api/customer/shop/updaterating/"
+        let params: [String: Any] = [
+            "access_token": self.accessToken,
+            "booking_id" : bookingID,
+            "rating": rating
+        ]
+    
+        requestServer(.post, path, params,  URLEncoding(), completionHandler)
+    }
+    
 }

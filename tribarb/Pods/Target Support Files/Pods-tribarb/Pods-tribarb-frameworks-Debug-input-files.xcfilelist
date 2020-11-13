@@ -1,4 +1,6 @@
 ${PODS_ROOT}/Target Support Files/Pods-tribarb/Pods-tribarb-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
+${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework
 ${BUILT_PRODUCTS_DIR}/Stripe/Stripe.framework
 ${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework
+${BUILT_PRODUCTS_DIR}/TinyConstraints/TinyConstraints.framework

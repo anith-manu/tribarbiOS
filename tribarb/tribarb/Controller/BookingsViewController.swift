@@ -13,7 +13,7 @@ class BookingsViewController: UIViewController {
     @IBOutlet weak var tbvBookings: UITableView!
     var filter_bookings_var = 0
     let activityIndicator = UIActivityIndicatorView()
-    var bookings = [Booking]()
+    var bookings = [Bookings]()
     
     @IBOutlet weak var filterBookings: UISegmentedControl!
     
@@ -57,7 +57,7 @@ class BookingsViewController: UIViewController {
                     if let listBarber = json?["bookings"].array {
                         for item in listBarber {
     
-                            let booking = Booking(json: item)
+                            let booking = Bookings(json: item)
                             self.bookings.append(booking)
                         }
                         self.tbvBookings.reloadData()
@@ -74,7 +74,7 @@ class BookingsViewController: UIViewController {
                     
                     if let listBarber = json?["bookings"].array {
                         for item in listBarber {
-                            let booking = Booking(json: item)
+                            let booking = Bookings(json: item)
                             self.bookings.append(booking)
                         }
                         self.tbvBookings.reloadData()
@@ -95,7 +95,7 @@ class BookingsViewController: UIViewController {
         
         if segue.identifier == "BookingDetail" {
             let controller = segue.destination as! BookingViewController
-            controller.booking = bookings[(tbvBookings.indexPathForSelectedRow?.row)!]
+            controller.bookingId = bookings[(tbvBookings.indexPathForSelectedRow?.row)!].id
         }
     }
 }
@@ -115,7 +115,7 @@ extension BookingsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BookingCell", for: indexPath) as! FilterBookingTableViewCell
         
-        let booking: Booking
+        let booking: Bookings
         
        
         booking = bookings[indexPath.row]
@@ -146,6 +146,7 @@ extension BookingsViewController: UITableViewDelegate, UITableViewDataSource {
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:SSZ"
         let date = dateFormatter.date(from: booking.date!)
         dateFormatter.dateFormat = "d MMM y, HH:mm"
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
         
         cell.lbBookingDate.text = dateFormatter.string(from: date!)
         

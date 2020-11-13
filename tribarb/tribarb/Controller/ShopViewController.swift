@@ -81,7 +81,6 @@ class ShopViewController: UIViewController {
         
         if ShopViewController.BOOKING_TYPE_VAR == 0 {
             APIManager.shared.get_shop_booking_shops { (json) in
-                print(json)
                 if json != nil {
                     self.shops = []
                     

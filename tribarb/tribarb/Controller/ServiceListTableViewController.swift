@@ -17,6 +17,11 @@ class ServiceListTableViewController: UITableViewController {
     @IBOutlet weak var btShopPhone: UIButton!
     @IBOutlet var tbvServices: UITableView!
     
+    @IBOutlet weak var lbRating: UILabel!
+    @IBOutlet weak var lbNewlyAdded: UILabel!
+    @IBOutlet weak var ratingView: UIView!
+    @IBOutlet weak var lbNumberOfRatings: UILabel!
+    
     var shop: Shop?
     var ig = ""
     var fb = ""
@@ -51,6 +56,18 @@ class ServiceListTableViewController: UITableViewController {
         
         if fb == "" {
             btShopFb.isHidden = true
+        }
+        
+        
+        if shop?.totalRating! == 0 {
+            ratingView.isHidden = true
+            lbNewlyAdded.isHidden = false
+        } else {
+            ratingView.isHidden = false
+            lbNewlyAdded.isHidden = true
+            let rating = ((shop?.totalRating)!/(shop?.numberOfRatings)!)
+            lbRating.text = String(format: "%.1f", rating)
+            lbNumberOfRatings.text = "(\(Int((shop?.numberOfRatings)!)))"
         }
         
         loadServices()

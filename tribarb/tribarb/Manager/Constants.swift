@@ -10,8 +10,8 @@ import Foundation
 
 let BASE_URL: String = "http://localhost:8000"
 
-let CLIENT_ID: String = "US76E932F3CtfpfrVLgvzkgDAr8byidjjrwaq100"
-let CLIENT_SECRET: String = "q4dWwhRie37TnWGgypunbRvsv2AqBX7aVVgScL0EPeBtqMsEmPpimxpn7jmxTyUH4mw5ILaYL6R2J1xCLDtrFeOzv9NId3sHL3tGwEGOKyefZV5wUNeaqZcZdWpwpnNu"
+let CLIENT_ID: String = "cJq5TJRpORliT2DSnG9ommf2bBkjDOzE1u2YBJdB"
+let CLIENT_SECRET: String = "plIaiuNmV1m5LYwO4oMWukSapz77RR9fORoWDbOIFMCclavBglR8o97c6Or8haXPqGdb6eMxdZJiz9aTkYsYwW7OaPK2frSOkEpji5r9OIxSX0xhlsg8PykvCUW73hRA"
 
 
 
