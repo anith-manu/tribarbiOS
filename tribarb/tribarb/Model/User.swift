@@ -19,18 +19,21 @@ class User {
     
     static let currentUser = User()
     
-    func setInfo(json: JSON) {
-        self.name = json["name"].string
-        self.email = json["email"].string
+    func setCustomerInfo(json: JSON) {
 
-        let image = json["picture"].dictionary
-        let imageData = image?["data"]?.dictionary
-        self.pictureURL = imageData?["url"]?.string
+        self.name = json["customer"]["name"].string
+        self.email = json["customer"]["email"].string
+        self.phone = json["customer"]["phone"].string
+        self.address = json["customer"]["address"].string
+        self.pictureURL = json["customer"]["avatar"].string
+    
     }
     
-    func resetInfo() {
+    func resetCustomerInfo() {
         self.name = nil
         self.email = nil
+        self.phone = nil
+        self.address = nil
         self.pictureURL = nil
     }
 }

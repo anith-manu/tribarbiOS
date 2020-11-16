@@ -28,10 +28,15 @@
 		CA5CD01D254447CC00290225 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5CD01C254447CC00290225 /* Constants.swift */; };
 		CA5CD0222546B60600290225 /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5CD0212546B60500290225 /* Shop.swift */; };
 		CA5CD0272546DD4100290225 /* ShopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5CD0262546DD4100290225 /* ShopTableViewCell.swift */; };
+		CA78C04325616D5300AFD776 /* Shops.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA78C04225616D5200AFD776 /* Shops.storyboard */; };
+		CA78C04825616FCE00AFD776 /* Checkout.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA78C04725616FCE00AFD776 /* Checkout.storyboard */; };
+		CA78C04D2561715200AFD776 /* Bookings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA78C04C2561715200AFD776 /* Bookings.storyboard */; };
+		CA78C052256172A100AFD776 /* Account.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA78C051256172A100AFD776 /* Account.storyboard */; };
+		CA78C0742562661600AFD776 /* GSImageViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA78C0732562661600AFD776 /* GSImageViewerController.swift */; };
+		CA78C084256267B100AFD776 /* EmployeeVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA78C083256267B100AFD776 /* EmployeeVerificationViewController.swift */; };
 		CA88A4C325584B8600CEA1D2 /* FilterBookingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA88A4C225584B8600CEA1D2 /* FilterBookingTableViewCell.swift */; };
 		CA88A4C825584C5300CEA1D2 /* Bookings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA88A4C725584C5300CEA1D2 /* Bookings.swift */; };
 		CA8F3799255E7F710045DC01 /* Booking.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8F3798255E7F710045DC01 /* Booking.swift */; };
-		CAA5BE58254D68970080B2CE /* GSImageViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA5BE57254D68960080B2CE /* GSImageViewerController.swift */; };
 		CAA5BE71254E8F290080B2CE /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA5BE70254E8F290080B2CE /* Cart.swift */; };
 		CAA5BE76254EBF0A0080B2CE /* CheckoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA5BE75254EBF090080B2CE /* CheckoutTableViewCell.swift */; };
 		CAA5BE7B25500F1F0080B2CE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA5BE7A25500F1F0080B2CE /* CoreLocation.framework */; };
@@ -91,10 +96,16 @@
 		CA5CD01C254447CC00290225 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CA5CD0212546B60500290225 /* Shop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shop.swift; sourceTree = "<group>"; };
 		CA5CD0262546DD4100290225 /* ShopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopTableViewCell.swift; sourceTree = "<group>"; };
+		CA78C04225616D5200AFD776 /* Shops.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Shops.storyboard; sourceTree = "<group>"; };
+		CA78C04725616FCE00AFD776 /* Checkout.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Checkout.storyboard; sourceTree = "<group>"; };
+		CA78C04C2561715200AFD776 /* Bookings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Bookings.storyboard; sourceTree = "<group>"; };
+		CA78C051256172A100AFD776 /* Account.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Account.storyboard; sourceTree = "<group>"; };
+		CA78C0652562656600AFD776 /* GSImageViewerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSImageViewerController.swift; sourceTree = "<group>"; };
+		CA78C0732562661600AFD776 /* GSImageViewerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GSImageViewerController.swift; path = ../../../../../../.Trash/GSImageViewerController.swift; sourceTree = "<group>"; };
+		CA78C083256267B100AFD776 /* EmployeeVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeVerificationViewController.swift; sourceTree = "<group>"; };
 		CA88A4C225584B8600CEA1D2 /* FilterBookingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterBookingTableViewCell.swift; sourceTree = "<group>"; };
 		CA88A4C725584C5300CEA1D2 /* Bookings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookings.swift; sourceTree = "<group>"; };
 		CA8F3798255E7F710045DC01 /* Booking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Booking.swift; sourceTree = "<group>"; };
-		CAA5BE57254D68960080B2CE /* GSImageViewerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GSImageViewerController.swift; path = ../../../../../Downloads/GSImageViewerController.swift; sourceTree = "<group>"; };
 		CAA5BE70254E8F290080B2CE /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
 		CAA5BE75254EBF090080B2CE /* CheckoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutTableViewCell.swift; sourceTree = "<group>"; };
 		CAA5BE7A25500F1F0080B2CE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -165,6 +176,7 @@
 		CA5A5DA2253C946A00A268C2 /* tribarb */ = {
 			isa = PBXGroup;
 			children = (
+				CA78C03E25616B8E00AFD776 /* Storyboards */,
 				CA5CD0082544458A00290225 /* Manager */,
 				CA5CD0072544457000290225 /* Controller */,
 				CA5CD0062544456B00290225 /* View */,
@@ -172,7 +184,6 @@
 				CA5C3B4825416855008D6DA7 /* tribarb.entitlements */,
 				CA5A5DA3253C946A00A268C2 /* AppDelegate.swift */,
 				CA5A5DA5253C946A00A268C2 /* SceneDelegate.swift */,
-				CA5A5DA9253C946A00A268C2 /* Main.storyboard */,
 				CA5A5DAC253C947000A268C2 /* Assets.xcassets */,
 				CA5A5DAE253C947000A268C2 /* LaunchScreen.storyboard */,
 				CA5A5DB1253C947000A268C2 /* Info.plist */,
@@ -196,11 +207,8 @@
 		CA5CD0062544456B00290225 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CA5CD0262546DD4100290225 /* ShopTableViewCell.swift */,
-				CAE9C79A25494D64004D2AC1 /* ServiceTableViewCell.swift */,
-				CAA5BE75254EBF090080B2CE /* CheckoutTableViewCell.swift */,
-				CAA811222557CC6F00E9558F /* BookingTableViewCell.swift */,
-				CA88A4C225584B8600CEA1D2 /* FilterBookingTableViewCell.swift */,
+				CA78C0642562654600AFD776 /* Employee */,
+				CA78C0632562653F00AFD776 /* Customer */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -209,17 +217,8 @@
 			isa = PBXGroup;
 			children = (
 				CA5C3B7825417936008D6DA7 /* LoginViewController.swift */,
-				CA5A5DE0253D888B00A268C2 /* ShopViewController.swift */,
-				CA5A5DE5253DAA9100A268C2 /* ServiceListTableViewController.swift */,
-				CA5A5DEA253E1D5100A268C2 /* ServiceDetailsViewController.swift */,
-				CAA5BE57254D68960080B2CE /* GSImageViewerController.swift */,
-				CAC2D420253EF1E000E16536 /* AddressViewController.swift */,
-				CAEA6ECE254040A40075E5C2 /* PreviousBookingsTableViewController.swift */,
-				CA5C3B822541B788008D6DA7 /* CustomerAccountViewController.swift */,
-				CAEA6EC125401A590075E5C2 /* BookingsViewController.swift */,
-				CA4456732559401D00E96E62 /* BookingViewController.swift */,
-				CAC06ED82559D6F200E15284 /* CheckoutViewController.swift */,
-				CAA5BE8725519FD90080B2CE /* PaymentViewController.swift */,
+				CA78C0622562653800AFD776 /* Employee */,
+				CA78C0612562653100AFD776 /* Customer */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -234,6 +233,80 @@
 				CAA5BE7F255163280080B2CE /* StripeAPIManager.swift */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		CA78C03E25616B8E00AFD776 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				CA5A5DA9253C946A00A268C2 /* Main.storyboard */,
+				CA78C0602562651400AFD776 /* Employee */,
+				CA78C056256173A600AFD776 /* Customer */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		CA78C056256173A600AFD776 /* Customer */ = {
+			isa = PBXGroup;
+			children = (
+				CA78C04225616D5200AFD776 /* Shops.storyboard */,
+				CA78C04725616FCE00AFD776 /* Checkout.storyboard */,
+				CA78C04C2561715200AFD776 /* Bookings.storyboard */,
+				CA78C051256172A100AFD776 /* Account.storyboard */,
+			);
+			path = Customer;
+			sourceTree = "<group>";
+		};
+		CA78C0602562651400AFD776 /* Employee */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Employee;
+			sourceTree = "<group>";
+		};
+		CA78C0612562653100AFD776 /* Customer */ = {
+			isa = PBXGroup;
+			children = (
+				CA5A5DE0253D888B00A268C2 /* ShopViewController.swift */,
+				CA5A5DE5253DAA9100A268C2 /* ServiceListTableViewController.swift */,
+				CA5A5DEA253E1D5100A268C2 /* ServiceDetailsViewController.swift */,
+				CA78C0652562656600AFD776 /* GSImageViewerController.swift */,
+				CAC06ED82559D6F200E15284 /* CheckoutViewController.swift */,
+				CAEA6ECE254040A40075E5C2 /* PreviousBookingsTableViewController.swift */,
+				CAEA6EC125401A590075E5C2 /* BookingsViewController.swift */,
+				CAA5BE8725519FD90080B2CE /* PaymentViewController.swift */,
+				CA4456732559401D00E96E62 /* BookingViewController.swift */,
+				CA5C3B822541B788008D6DA7 /* CustomerAccountViewController.swift */,
+				CA78C0732562661600AFD776 /* GSImageViewerController.swift */,
+				CAC2D420253EF1E000E16536 /* AddressViewController.swift */,
+			);
+			path = Customer;
+			sourceTree = "<group>";
+		};
+		CA78C0622562653800AFD776 /* Employee */ = {
+			isa = PBXGroup;
+			children = (
+				CA78C083256267B100AFD776 /* EmployeeVerificationViewController.swift */,
+			);
+			path = Employee;
+			sourceTree = "<group>";
+		};
+		CA78C0632562653F00AFD776 /* Customer */ = {
+			isa = PBXGroup;
+			children = (
+				CA5CD0262546DD4100290225 /* ShopTableViewCell.swift */,
+				CAE9C79A25494D64004D2AC1 /* ServiceTableViewCell.swift */,
+				CAA5BE75254EBF090080B2CE /* CheckoutTableViewCell.swift */,
+				CAA811222557CC6F00E9558F /* BookingTableViewCell.swift */,
+				CA88A4C225584B8600CEA1D2 /* FilterBookingTableViewCell.swift */,
+			);
+			path = Customer;
+			sourceTree = "<group>";
+		};
+		CA78C0642562654600AFD776 /* Employee */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Employee;
 			sourceTree = "<group>";
 		};
 		CAC2D41D253EF18E00E16536 /* Frameworks */ = {
@@ -369,9 +442,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA78C04825616FCE00AFD776 /* Checkout.storyboard in Resources */,
+				CA78C04325616D5300AFD776 /* Shops.storyboard in Resources */,
 				CA5A5DB0253C947000A268C2 /* LaunchScreen.storyboard in Resources */,
 				CA5A5DAD253C947000A268C2 /* Assets.xcassets in Resources */,
+				CA78C04D2561715200AFD776 /* Bookings.storyboard in Resources */,
 				CA5A5DAB253C946A00A268C2 /* Main.storyboard in Resources */,
+				CA78C052256172A100AFD776 /* Account.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,9 +522,9 @@
 				CA5A5DE6253DAA9100A268C2 /* ServiceListTableViewController.swift in Sources */,
 				CAEA6ECF254040A40075E5C2 /* PreviousBookingsTableViewController.swift in Sources */,
 				CAA5BE802551632C0080B2CE /* StripeAPIManager.swift in Sources */,
-				CAA5BE58254D68970080B2CE /* GSImageViewerController.swift in Sources */,
 				CAC2D421253EF1E000E16536 /* AddressViewController.swift in Sources */,
 				CA5C3B7E25418DF7008D6DA7 /* User.swift in Sources */,
+				CA78C084256267B100AFD776 /* EmployeeVerificationViewController.swift in Sources */,
 				CA5A5DA4253C946A00A268C2 /* AppDelegate.swift in Sources */,
 				CA5CD0222546B60600290225 /* Shop.swift in Sources */,
 				CA5CD01D254447CC00290225 /* Constants.swift in Sources */,
@@ -464,6 +541,7 @@
 				CA5CD00D254446AC00290225 /* APIManager.swift in Sources */,
 				CA5CD0272546DD4100290225 /* ShopTableViewCell.swift in Sources */,
 				CAE9C79325494C5F004D2AC1 /* Service.swift in Sources */,
+				CA78C0742562661600AFD776 /* GSImageViewerController.swift in Sources */,
 				CA5C3B7925417936008D6DA7 /* LoginViewController.swift in Sources */,
 				CA4456742559401E00E96E62 /* BookingViewController.swift in Sources */,
 				CAC06ED92559D6F200E15284 /* CheckoutViewController.swift in Sources */,

@@ -36,6 +36,7 @@ class LoginViewController: UIViewController {
     
     
     override func viewDidAppear(_ animated: Bool) {
+        
         if (AccessToken.current != nil){
             performSegue(withIdentifier: "CustomerView", sender: self)
         }

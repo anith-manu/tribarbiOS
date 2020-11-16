@@ -44,6 +44,7 @@ class ShopViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     
+        
         navigationController?.setNavigationBarHidden(true, animated: false)
         
         if Cart.currentCart.items.isEmpty {
@@ -52,8 +53,8 @@ class ShopViewController: UIViewController {
         }
         
     
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { // Change `2.0` to the desired number of seconds.
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { // Change `2.0` to the desired number of seconds.
             APIManager.shared.getUpcomingBookings { (json) in
     
                 if json == nil || json!["bookings"].isEmpty {
@@ -61,16 +62,11 @@ class ShopViewController: UIViewController {
                 } else {
                     self.tabBarController?.tabBar.items?[2].badgeValue = ""
                 }
-            }
-            
-            APIManager.shared.customerGetDetails { (json) in
-                
-                if json != nil {
-                    User.currentUser.phone = json!["customer"]["phone"].string
-                    User.currentUser.address = json!["customer"]["address"].string
-                }
+        
             }
         }
+        
+
     }
     
     

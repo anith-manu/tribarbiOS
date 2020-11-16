@@ -7,11 +7,12 @@
 
 import UIKit
 
-class CheckoutViewController: UIViewController {
+class CheckoutViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var lbShopName: UILabel!
     @IBOutlet weak var lbBookingType: UILabel!
     
+    @IBOutlet weak var checkoutScroll: UIScrollView!
     
     @IBOutlet weak var shopView: UIView!
     @IBOutlet weak var tbvServices: UITableView!
@@ -34,8 +35,21 @@ class CheckoutViewController: UIViewController {
         super.viewDidLoad()
 
         self.bookingDate.minimumDate = Date()
+        
+        checkoutScroll.keyboardDismissMode = .onDrag
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
     
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
@@ -93,6 +107,22 @@ class CheckoutViewController: UIViewController {
         return false
     }
     
+    
+    
+    @objc func keyboardWillChange(notification: Notification) {
+
+        guard let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+
+        if notification.name == UIResponder.keyboardWillShowNotification || notification.name == UIResponder.keyboardWillChangeFrameNotification {
+            
+            print((tabBarController?.tabBar.bounds.height)!)
+            checkoutScroll.frame.origin.y = -keyboardRect.height+(tabBarController?.tabBar.bounds.height)!
+        } else {
+            checkoutScroll.frame.origin.y = 0
+        }
+    }
     
     
     @IBAction func next(_ sender: Any) {

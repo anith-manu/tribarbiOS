@@ -26,6 +26,8 @@ class Booking {
     var shop_phone: String?
     var request: String?
     var total: Float?
+    var from: String?
+    var to: String?
     
     init(json: JSON) {
         self.id = json["id"].int
@@ -43,6 +45,8 @@ class Booking {
         self.shop_phone = json["shop"]["phone"].string
         self.request = json["requests"].string
         self.total = json["total"].float
+        self.from = json["shop"]["address"].string
+        self.to = json["address"].string
     }
 }
 

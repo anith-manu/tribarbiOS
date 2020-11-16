@@ -9,6 +9,7 @@ import UIKit
 import SwiftyJSON
 import Cosmos
 import TinyConstraints
+import MapKit
 
 class BookingViewController: UIViewController {
     
@@ -57,6 +58,11 @@ class BookingViewController: UIViewController {
     
     let activityIndicator = UIActivityIndicatorView()
     
+    var destination: MKPlacemark?
+    var source: MKPlacemark?
+    var driverPin: MKPointAnnotation!
+    var timer = Timer()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,20 +98,10 @@ class BookingViewController: UIViewController {
             
             self.setUIElements(booking: booking)
             
-//                self.setUIElements(json: json!)
             Helpers.hideActivityIndicator(self.activityIndicator)
         }
-        
     }
     
-//
-//    func getLatestBooking() {
-//
-//        APIManager.shared.getLatestBooking { (json) in
-//
-//            self.setUIElements(json: json!)
-//        }
-//    }
     
     
     func bookingCancelledMessage() {
@@ -245,6 +241,15 @@ class BookingViewController: UIViewController {
             }
         } else {
             self.mapView.isHidden = false
+            self.getLocation(booking.home_address!, "You") { (dest) in
+                self.destination = dest
+                
+                self.getLocation(booking.shop_address!, "Shop") { (sou) in
+                    self.source = sou
+                    self.getDirections()
+                }
+            }
+            
         }
         
         // SERVICE FEE MODIFY HERE
@@ -282,6 +287,21 @@ class BookingViewController: UIViewController {
             }
         }
     }
+    
+    func autoZoom() {
+        var zoomRect = MKMapRect.null
+        for annotation in self.map.annotations {
+            let annotationPoint = MKMapPoint.init(annotation.coordinate)
+            let pointRect = MKMapRect.init(x: annotationPoint.x, y: annotationPoint.y, width: 0.1, height: 0.1)
+            zoomRect = zoomRect.union(pointRect)
+        }
+        
+        let insetWidth = -zoomRect.size.width * 0.2
+        let insetHeight = -zoomRect.size.height * 0.2
+        let insetRect = zoomRect.insetBy(dx: insetWidth, dy: insetHeight)
+        
+        self.map.setVisibleMapRect(insetRect, animated: true)
+    }
 }
 
 
@@ -308,6 +328,74 @@ extension BookingViewController: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
+}
+
+
+extension BookingViewController: MKMapViewDelegate {
+    
+    // #1 - Delegate method of MKMapViewDelegate
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKPolylineRenderer(overlay: overlay)
+        renderer.strokeColor = UIColor.lightGray
+        renderer.lineWidth = 3.0
+        
+        return renderer
+    }
+    
+    
+    // #2 - Convert an address string to a location on the map
+    func getLocation(_ address: String,_ title: String,_ completionHandler: @escaping (MKPlacemark) -> Void) {
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(address) { (placemarks, error) in
+            
+            if (error != nil) {
+                print("Error: ", error)
+            }
+            
+            if let placemark = placemarks?.first {
+                let coordinates: CLLocationCoordinate2D = placemark.location!.coordinate
+                // Create pin
+                let dropPin = MKPointAnnotation()
+                dropPin.coordinate = coordinates
+                dropPin.title = title
+                self.map.addAnnotation(dropPin)
+                completionHandler(MKPlacemark.init(placemark: placemark))
+            }
+        }
+    }
+    
+    
+    // #3 - Get direction and zoom to address
+    func getDirections() {
+        
+        let request = MKDirections.Request()
+        request.source = MKMapItem.init(placemark: source!)
+        request.destination = MKMapItem.init(placemark: destination!)
+        request.requestsAlternateRoutes = false
+        
+        let directions = MKDirections(request: request)
+        directions.calculate { (response, error) in
+            
+            if error != nil {
+                print("Error:", error)
+            } else {
+                // Show route
+                self.showRoute(response: response!)
+                self.autoZoom()
+            }
+        }
+    }
+    
+    // #4 - Show route between locations and make zoom
+    func showRoute(response: MKDirections.Response) {
+        
+        for route in response.routes {
+            self.map.addOverlay(route.polyline, level: MKOverlayLevel.aboveRoads)
+        }
+        
+        
+    }
+    
 }
 
 

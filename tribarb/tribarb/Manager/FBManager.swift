@@ -21,14 +21,21 @@ class FBManager {
             GraphRequest(graphPath: "me", parameters: ["fields": "name, email, picture.type(normal)"]).start { (connection, result, error) in
                 
                 if (error ==  nil) {
-                    let json = JSON(result!)
-
-                    User.currentUser.setInfo(json: json)
-                    
+            
                     completionHandler()
+                    
+                    // Set customer info
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        
+                        APIManager.shared.customerGetDetails { (json) in
+                            if json != nil {
+                                User.currentUser.setCustomerInfo(json: json!)
+                                print("DONE")
+                            }
+                        }
+                    }
                 }
             }
         }
     }
-    
 }

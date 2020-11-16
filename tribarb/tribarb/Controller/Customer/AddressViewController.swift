@@ -14,12 +14,10 @@ class AddressViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var savedAddress: UIView!
     @IBOutlet weak var lbSavedAddress: UILabel!
     @IBOutlet weak var newAddress: UIView!
-    @IBOutlet weak var tbLine1: UITextField!
-    @IBOutlet weak var tbLine2: UITextField!
-    @IBOutlet weak var tbCity: UITextField!
-    @IBOutlet weak var tbPostcode: UITextField!
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var btDifferentAddress: UIButton!
+    
+    @IBOutlet weak var addressTextView: UITextView!
     
     var locationManager: CLLocationManager!
     var ADDRESS_SET = false
@@ -27,6 +25,20 @@ class AddressViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: #selector(doneClicked))
+        
+        toolbar.setItems([doneButton], animated: false)
+        
+        addressTextView.inputAccessoryView = toolbar
+        
+        addressTextView.layer.cornerRadius = 5
+        addressTextView.layer.borderColor = UIColor.lightGray.cgColor
+        addressTextView.layer.borderWidth = 0.30
+        addressTextView.layer.masksToBounds = true
+        
         if CLLocationManager.locationServicesEnabled() {
             locationManager = CLLocationManager()
             locationManager.delegate = self
@@ -49,14 +61,22 @@ class AddressViewController: UIViewController, UITextFieldDelegate {
             self.newAddress.isHidden = false
             self.btDifferentAddress.isHidden = true
         }
+        
 
     }
+    
+    
+  
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
+    
+    @objc func doneClicked() {
+        view.endEditing(true)
+    }
     
     @IBAction func addPayment(_ sender: Any) {
         
@@ -76,43 +96,17 @@ class AddressViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func searchAddress(_ sender: Any) {
         
-        if tbCity.text == "" || tbPostcode.text == "" {
-            // Showing alert that the field is required
-            let alertController = UIAlertController(title: "Incomplete Address", message: "Town/City and Postcode fields are required.", preferredStyle: .alert)
-    
-            let okAction = UIAlertAction(title: "OK", style: .default)
-            
-            alertController.addAction(okAction)
-            self.present(alertController, animated: true, completion: nil)
-            
-        } else {
-            
-            map.removeAnnotations(map.annotations)
-            
-            var address = ""
-            
-            if tbLine1.hasText {
-                address = address + tbLine1.text! + ", "
-            }
-            
-            if tbLine2.hasText {
-                address = address + tbLine2.text! + ", "
-            }
-            
-            if tbCity.hasText {
-                address = address + tbCity.text! + ", "
-            }
-            
-            if tbPostcode.hasText {
-                address = address + tbPostcode.text!
-            }
-            
-            if address == "" {
-                address = User.currentUser.address!
-            }
-            
-            self.pinAddress(address: address)
+        map.removeAnnotations(map.annotations)
+        
+        var address = ""
+        
+        address = addressTextView.text!
+        
+        if address == "" {
+            address = User.currentUser.address!
         }
+        
+        self.pinAddress(address: address)
     }
     
     
@@ -153,6 +147,7 @@ class AddressViewController: UIViewController, UITextFieldDelegate {
     
 
     @IBAction func chooseDifferentAddress(_ sender: Any) {
+        self.btDifferentAddress.isHidden = true
         self.newAddress.isHidden = false
         self.viewWillAppear(true)
     }
@@ -163,9 +158,6 @@ class AddressViewController: UIViewController, UITextFieldDelegate {
         self.view.endEditing(true)
         return false
     }
-    
-  
-    
  
 }
 
