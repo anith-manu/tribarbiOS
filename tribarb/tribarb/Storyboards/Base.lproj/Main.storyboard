@@ -43,6 +43,9 @@
                                     <segment title="Client"/>
                                     <segment title="Barber"/>
                                 </segments>
+                                <connections>
+                                    <action selector="switchAccount:" destination="BYZ-38-t0r" eventType="valueChanged" id="RgG-Ds-Enh"/>
+                                </connections>
                             </segmentedControl>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="caveman" translatesAutoresizingMaskIntoConstraints="NO" id="ndt-LL-dLK">
                                 <rect key="frame" x="87" y="476" width="240" height="130"/>
@@ -72,8 +75,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="3rn-yY-0xC"/>
                     <connections>
+                        <outlet property="switchUser" destination="cg0-RD-Q5V" id="Mu5-5R-EHK"/>
+                        <outlet property="userTypeImage" destination="ndt-LL-dLK" id="5C9-Ax-5kz"/>
                         <segue destination="2ck-7B-zyQ" kind="presentation" identifier="CustomerView" modalPresentationStyle="fullScreen" id="rfz-ge-a0a"/>
                         <segue destination="O5k-ad-7qE" kind="showDetail" identifier="EmployeeVerification" id="A2x-LU-e13"/>
+                        <segue destination="VX5-qo-2PV" kind="presentation" identifier="EmployeeView" modalPresentationStyle="fullScreen" id="fHO-cq-3v3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -100,10 +106,10 @@
             </objects>
             <point key="canvasLocation" x="138" y="879"/>
         </scene>
-        <!--View Controller-->
+        <!--Employee Verification View Controller-->
         <scene sceneID="zss-RL-r9R">
             <objects>
-                <viewController id="O5k-ad-7qE" sceneMemberID="viewController">
+                <viewController id="O5k-ad-7qE" customClass="EmployeeVerificationViewController" customModule="tribarb" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NNw-sk-vct">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -146,6 +152,9 @@
                                 <state key="normal" title="Submit">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="submit:" destination="O5k-ad-7qE" eventType="touchUpInside" id="6dl-RC-dRX"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="jr8-ls-Het"/>
@@ -168,10 +177,65 @@
                             <constraint firstItem="fFA-YO-M67" firstAttribute="top" secondItem="jr8-ls-Het" secondAttribute="top" constant="20" id="kcg-13-15W"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tbShopId" destination="OrF-hw-lrz" id="HJp-BI-dpK"/>
+                        <outlet property="tbToken" destination="sqp-mw-xQi" id="vu8-gc-uPm"/>
+                        <segue destination="VX5-qo-2PV" kind="presentation" identifier="EmployeeView" modalPresentationStyle="fullScreen" id="cIu-kj-zry"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dwQ-Z7-zxV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1443" y="171"/>
+            <point key="canvasLocation" x="1445" y="-218"/>
+        </scene>
+        <!--Item 2-->
+        <scene sceneID="TYG-43-c1p">
+            <objects>
+                <viewController id="cb1-QJ-Vve" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7rW-6T-KYQ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="zGC-dw-Rcz"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 2" id="S2B-rP-ho1"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g6f-kF-CPu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3528" y="474"/>
+        </scene>
+        <!--Item 1-->
+        <scene sceneID="Re7-8X-08X">
+            <objects>
+                <viewController id="ObE-v1-TgX" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nHL-gI-EmR">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="JTh-k2-fy4"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 1" id="MPz-VG-0av"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Ud-IA-Bqe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3528" y="-133"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="U2d-kn-1W2">
+            <objects>
+                <tabBarController id="VX5-qo-2PV" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bzY-Pm-PfW">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="ObE-v1-TgX" kind="relationship" relationship="viewControllers" id="Kgd-SK-c0b"/>
+                        <segue destination="cb1-QJ-Vve" kind="relationship" relationship="viewControllers" id="jmd-Dp-kkg"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qvm-08-mjC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2639" y="169"/>
         </scene>
         <!--Shops-->
         <scene sceneID="wxc-E7-s1p">
@@ -214,6 +278,9 @@
             <point key="canvasLocation" x="379" y="1296"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="fHO-cq-3v3"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="caveman" width="512" height="512"/>
         <systemColor name="systemBackgroundColor">

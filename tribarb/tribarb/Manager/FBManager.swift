@@ -30,7 +30,6 @@ class FBManager {
                         APIManager.shared.customerGetDetails { (json) in
                             if json != nil {
                                 User.currentUser.setCustomerInfo(json: json!)
-                                print("DONE")
                             }
                         }
                     }

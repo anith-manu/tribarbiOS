@@ -290,7 +290,7 @@ class APIManager {
     
     
     // API for getting shop service list
-    func customerUpdateRating(bookingID: Int, rating: Int,completionHandler: @escaping (JSON?) -> Void) {
+    func customerUpdateRating(bookingID: Int, rating: Int, completionHandler: @escaping (JSON?) -> Void) {
         let path = "api/customer/shop/updaterating/"
         let params: [String: Any] = [
             "access_token": self.accessToken,
@@ -300,5 +300,45 @@ class APIManager {
     
         requestServer(.post, path, params,  URLEncoding(), completionHandler)
     }
+    
+    
+    // API for getting shop service list
+    func employeeVerification(shopID: Int, token: String, completionHandler: @escaping (JSON?) -> Void) {
+        let path = "api/employee/verify/"
+        let params: [String: Any] = [
+            "access_token": self.accessToken,
+            "shop_id" : shopID,
+            "token": token
+        ]
+    
+        requestServer(.post, path, params,  URLEncoding(), completionHandler)
+    }
+    
+    
+    
+    // API for getting shop service list
+    func getLastLoggedInAs(completionHandler: @escaping (JSON?) -> Void) {
+        let path = "api/check/last-logged-in-as/"
+        let params: [String: Any] = [
+            "access_token": self.accessToken
+        ]
+    
+        requestServer(.get, path, params,  URLEncoding(), completionHandler)
+    }
+    
+    
+    
+    // API for getting shop service list
+    func setLastLoggedInAs(user_type: String, completionHandler: @escaping (JSON?) -> Void) {
+        let path = "api/set/last-logged-in-as/"
+        let params: [String: Any] = [
+            "access_token": self.accessToken,
+            "user_type" : user_type
+        ]
+    
+        requestServer(.post, path, params,  URLEncoding(), completionHandler)
+    }
+    
+    
     
 }

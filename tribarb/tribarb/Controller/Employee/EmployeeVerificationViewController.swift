@@ -8,7 +8,9 @@
 import UIKit
 
 class EmployeeVerificationViewController: UIViewController {
-
+    @IBOutlet weak var tbShopId: UITextField!
+    @IBOutlet weak var tbToken: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -16,14 +18,26 @@ class EmployeeVerificationViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func submit(_ sender: Any) {
+        let shop_id = Int(tbShopId.text!)
+        let token = tbToken.text!
+        
+        APIManager.shared.employeeVerification(shopID: shop_id!, token: token) { (json) in
+            
+            let status = json!["status"]
+            
+            if status == "success"{
+                //Perform segue
+                self.performSegue(withIdentifier: "EmployeeView", sender: self)
+            } else {
+                let alertController = UIAlertController(title: "Incorrect Credentials", message: "Please enter valid credentials.", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "Cancel", style: .cancel)
+                alertController.addAction(okAction)
+                self.present(alertController, animated: true, completion: nil)
+            }
+            
+        }
+        
     }
-    */
-
+    
 }
