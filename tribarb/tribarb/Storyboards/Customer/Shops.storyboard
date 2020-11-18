@@ -584,7 +584,7 @@
         <scene sceneID="LVJ-D9-Jap">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zep-If-nZY" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Barbershops" image="barber_pole" id="yr8-hb-KT4"/>
+                    <tabBarItem key="tabBarItem" title="Barbershops" image="icon_barber_pole" id="yr8-hb-KT4"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="2la-vL-HLa">
@@ -606,8 +606,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="barber_pole" width="32" height="32"/>
         <image name="facebook" width="32" height="32"/>
+        <image name="icon_barber_pole" width="29" height="29"/>
         <image name="instagram" width="32" height="32"/>
         <image name="loading" width="185" height="185"/>
         <image name="phone" width="32" height="32"/>

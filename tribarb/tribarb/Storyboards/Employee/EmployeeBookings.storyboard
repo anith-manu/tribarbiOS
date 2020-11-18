@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DyA-QR-zkb">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Bookings-->
+        <scene sceneID="OHc-Eg-aZI">
+            <objects>
+                <viewController id="oeh-TL-LEU" customClass="EmployeeBookingsViewController" customModule="tribarb" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VPJ-55-O9Q">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ETh-p9-Sol">
+                                <rect key="frame" x="0.0" y="88" width="414" height="51"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="csO-WW-3fT"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Placed"/>
+                                    <segment title="Accepted"/>
+                                    <segment title="Previous"/>
+                                </segments>
+                                <color key="selectedSegmentTintColor" red="0.9989349246" green="0.764754355" blue="0.4312785864" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </segmentedControl>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XBi-ok-Dy8">
+                                <rect key="frame" x="0.0" y="138" width="414" height="675"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Biw-xq-y7e"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ETh-p9-Sol" firstAttribute="top" secondItem="Biw-xq-y7e" secondAttribute="top" id="Bjf-bG-41C"/>
+                            <constraint firstItem="XBi-ok-Dy8" firstAttribute="leading" secondItem="Biw-xq-y7e" secondAttribute="leading" id="KxQ-Ms-vat"/>
+                            <constraint firstItem="Biw-xq-y7e" firstAttribute="bottom" secondItem="XBi-ok-Dy8" secondAttribute="bottom" id="Ol2-ut-nYB"/>
+                            <constraint firstItem="ETh-p9-Sol" firstAttribute="leading" secondItem="Biw-xq-y7e" secondAttribute="leading" id="Wcc-JG-nnw"/>
+                            <constraint firstItem="Biw-xq-y7e" firstAttribute="trailing" secondItem="ETh-p9-Sol" secondAttribute="trailing" id="X9a-96-BrX"/>
+                            <constraint firstItem="Biw-xq-y7e" firstAttribute="trailing" secondItem="XBi-ok-Dy8" secondAttribute="trailing" id="pS0-Yl-DDk"/>
+                            <constraint firstItem="XBi-ok-Dy8" firstAttribute="top" secondItem="ETh-p9-Sol" secondAttribute="bottom" id="qHl-77-HDE"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Bookings" id="H25-d8-vnd"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uq6-Fv-MoX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4437.68115942029" y="-133.25892857142856"/>
+        </scene>
+        <!--Bookings-->
+        <scene sceneID="XDz-ei-Ba8">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DyA-QR-zkb" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Bookings" image="icon_booking" id="VPj-VC-MmA"/>
+                    <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2qe-FC-BA5">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="oeh-TL-LEU" kind="relationship" relationship="rootViewController" id="Z4z-dj-1O7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sGn-lM-luG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3527.5362318840585" y="-133.25892857142856"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icon_booking" width="29" height="29"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

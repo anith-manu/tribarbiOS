@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		3CF9EE9A9D1D0FD7B65E3F4C /* Pods_tribarb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2A0D4D9CB703AE73A796819 /* Pods_tribarb.framework */; };
+		CA11B90C256505E40040FD2F /* EmployeeBookings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA11B90B256505E40040FD2F /* EmployeeBookings.storyboard */; };
+		CA11B911256507D10040FD2F /* EmployeeAccount.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA11B910256507D10040FD2F /* EmployeeAccount.storyboard */; };
+		CA11B91625650E6C0040FD2F /* EmployeeAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA11B91525650E6C0040FD2F /* EmployeeAccountViewController.swift */; };
+		CA11B91B25650F900040FD2F /* EmployeeBookingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA11B91A25650F900040FD2F /* EmployeeBookingsViewController.swift */; };
 		CA4456742559401E00E96E62 /* BookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4456732559401D00E96E62 /* BookingViewController.swift */; };
 		CA5A5DA4253C946A00A268C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5A5DA3253C946A00A268C2 /* AppDelegate.swift */; };
 		CA5A5DA6253C946A00A268C2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5A5DA5253C946A00A268C2 /* SceneDelegate.swift */; };
@@ -74,6 +78,10 @@
 		09A1E9E7E507A1FFD2EF7859 /* Pods-tribarb.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tribarb.release.xcconfig"; path = "Target Support Files/Pods-tribarb/Pods-tribarb.release.xcconfig"; sourceTree = "<group>"; };
 		A2A0D4D9CB703AE73A796819 /* Pods_tribarb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tribarb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C68D426DEADD15ABF96CC5A4 /* Pods-tribarb.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tribarb.debug.xcconfig"; path = "Target Support Files/Pods-tribarb/Pods-tribarb.debug.xcconfig"; sourceTree = "<group>"; };
+		CA11B90B256505E40040FD2F /* EmployeeBookings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EmployeeBookings.storyboard; sourceTree = "<group>"; };
+		CA11B910256507D10040FD2F /* EmployeeAccount.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EmployeeAccount.storyboard; sourceTree = "<group>"; };
+		CA11B91525650E6C0040FD2F /* EmployeeAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeAccountViewController.swift; sourceTree = "<group>"; };
+		CA11B91A25650F900040FD2F /* EmployeeBookingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeBookingsViewController.swift; sourceTree = "<group>"; };
 		CA4456732559401D00E96E62 /* BookingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingViewController.swift; sourceTree = "<group>"; };
 		CA5A5DA0253C946A00A268C2 /* tribarb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tribarb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA5A5DA3253C946A00A268C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -259,6 +267,8 @@
 		CA78C0602562651400AFD776 /* Employee */ = {
 			isa = PBXGroup;
 			children = (
+				CA11B90B256505E40040FD2F /* EmployeeBookings.storyboard */,
+				CA11B910256507D10040FD2F /* EmployeeAccount.storyboard */,
 			);
 			path = Employee;
 			sourceTree = "<group>";
@@ -270,14 +280,14 @@
 				CA5A5DE5253DAA9100A268C2 /* ServiceListTableViewController.swift */,
 				CA5A5DEA253E1D5100A268C2 /* ServiceDetailsViewController.swift */,
 				CA78C0652562656600AFD776 /* GSImageViewerController.swift */,
-				CAC06ED82559D6F200E15284 /* CheckoutViewController.swift */,
 				CAEA6ECE254040A40075E5C2 /* PreviousBookingsTableViewController.swift */,
 				CAEA6EC125401A590075E5C2 /* BookingsViewController.swift */,
 				CAA5BE8725519FD90080B2CE /* PaymentViewController.swift */,
 				CA4456732559401D00E96E62 /* BookingViewController.swift */,
-				CA5C3B822541B788008D6DA7 /* CustomerAccountViewController.swift */,
 				CA78C0732562661600AFD776 /* GSImageViewerController.swift */,
 				CAC2D420253EF1E000E16536 /* AddressViewController.swift */,
+				CAC06ED82559D6F200E15284 /* CheckoutViewController.swift */,
+				CA5C3B822541B788008D6DA7 /* CustomerAccountViewController.swift */,
 			);
 			path = Customer;
 			sourceTree = "<group>";
@@ -286,6 +296,8 @@
 			isa = PBXGroup;
 			children = (
 				CA78C083256267B100AFD776 /* EmployeeVerificationViewController.swift */,
+				CA11B91525650E6C0040FD2F /* EmployeeAccountViewController.swift */,
+				CA11B91A25650F900040FD2F /* EmployeeBookingsViewController.swift */,
 			);
 			path = Employee;
 			sourceTree = "<group>";
@@ -445,9 +457,11 @@
 				CA78C04825616FCE00AFD776 /* Checkout.storyboard in Resources */,
 				CA78C04325616D5300AFD776 /* Shops.storyboard in Resources */,
 				CA5A5DB0253C947000A268C2 /* LaunchScreen.storyboard in Resources */,
+				CA11B911256507D10040FD2F /* EmployeeAccount.storyboard in Resources */,
 				CA5A5DAD253C947000A268C2 /* Assets.xcassets in Resources */,
 				CA78C04D2561715200AFD776 /* Bookings.storyboard in Resources */,
 				CA5A5DAB253C946A00A268C2 /* Main.storyboard in Resources */,
+				CA11B90C256505E40040FD2F /* EmployeeBookings.storyboard in Resources */,
 				CA78C052256172A100AFD776 /* Account.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -540,7 +554,9 @@
 				CA5C3B832541B788008D6DA7 /* CustomerAccountViewController.swift in Sources */,
 				CA5CD00D254446AC00290225 /* APIManager.swift in Sources */,
 				CA5CD0272546DD4100290225 /* ShopTableViewCell.swift in Sources */,
+				CA11B91B25650F900040FD2F /* EmployeeBookingsViewController.swift in Sources */,
 				CAE9C79325494C5F004D2AC1 /* Service.swift in Sources */,
+				CA11B91625650E6C0040FD2F /* EmployeeAccountViewController.swift in Sources */,
 				CA78C0742562661600AFD776 /* GSImageViewerController.swift in Sources */,
 				CA5C3B7925417936008D6DA7 /* LoginViewController.swift in Sources */,
 				CA4456742559401E00E96E62 /* BookingViewController.swift in Sources */,

@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6Qn-fi-Dhu">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1445"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1151"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z5E-rM-fwL">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
@@ -55,8 +55,8 @@
                                                     <constraint firstAttribute="height" constant="120" id="rWV-SU-zsh"/>
                                                 </constraints>
                                             </view>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="400" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="D7y-3s-Lht" customClass="ContentSizedTableView" customModule="tribarb" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="120" width="414" height="400"/>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="136" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="D7y-3s-Lht" customClass="ContentSizedTableView" customModule="tribarb" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="120" width="414" height="136"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CheckoutCell" id="iEp-HO-aJu" customClass="CheckoutTableViewCell" customModule="tribarb" customModuleProvider="target">
@@ -113,7 +113,7 @@
                                                 </connections>
                                             </tableView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JrZ-0x-ABz">
-                                                <rect key="frame" x="0.0" y="520" width="414" height="500"/>
+                                                <rect key="frame" x="0.0" y="256" width="414" height="470"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtotal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Pr-5Y-Grj">
                                                         <rect key="frame" x="20" y="15" width="57.5" height="18"/>
@@ -217,7 +217,7 @@
                                                     <constraint firstAttribute="trailing" secondItem="IrI-rj-8SX" secondAttribute="trailing" constant="20" id="Nzg-Mp-puM"/>
                                                     <constraint firstAttribute="trailing" secondItem="SFX-cI-nCr" secondAttribute="trailing" constant="20" id="PTx-KB-ZBz"/>
                                                     <constraint firstItem="FGH-xJ-ziF" firstAttribute="leading" secondItem="JrZ-0x-ABz" secondAttribute="leading" constant="20" id="Q2I-hO-3oj"/>
-                                                    <constraint firstAttribute="height" constant="500" id="TVI-ms-Tyk"/>
+                                                    <constraint firstAttribute="height" constant="470" id="TVI-ms-Tyk"/>
                                                     <constraint firstAttribute="trailing" secondItem="9oh-kX-Mov" secondAttribute="trailing" constant="20" id="TWt-ty-HDC"/>
                                                     <constraint firstItem="mva-5Y-kdE" firstAttribute="centerX" secondItem="JrZ-0x-ABz" secondAttribute="centerX" id="WWS-3U-Ugq"/>
                                                     <constraint firstItem="9oh-kX-Mov" firstAttribute="top" secondItem="FGH-xJ-ziF" secondAttribute="bottom" constant="10" id="fG3-3U-P2F"/>
@@ -236,7 +236,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B4e-b5-6sN">
-                                                <rect key="frame" x="0.0" y="1020" width="414" height="250"/>
+                                                <rect key="frame" x="0.0" y="726" width="414" height="250"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your booking has been sent to " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ddc-nc-LMT">
                                                         <rect key="frame" x="20" y="120" width="374" height="25.5"/>
@@ -280,7 +280,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AQ0-M9-t3N">
-                                                <rect key="frame" x="0.0" y="1270" width="414" height="175"/>
+                                                <rect key="frame" x="0.0" y="976" width="414" height="175"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty-cat" translatesAutoresizingMaskIntoConstraints="NO" id="fMp-98-78G">
                                                         <rect key="frame" x="177" y="40" width="60" height="60"/>
@@ -335,6 +335,7 @@
                         <outlet property="bookingPlacedView" destination="B4e-b5-6sN" id="fiw-xJ-vkS"/>
                         <outlet property="btNext" destination="rby-SO-dWH" id="mPe-Uw-xqs"/>
                         <outlet property="checkoutScroll" destination="Wzx-Sl-TQd" id="2Ge-nH-Yt7"/>
+                        <outlet property="checkoutStackView" destination="6Qn-fi-Dhu" id="Yqh-oR-ssW"/>
                         <outlet property="emptyCartView" destination="AQ0-M9-t3N" id="Xd7-yX-Le5"/>
                         <outlet property="lbBookingType" destination="TzH-vK-cDy" id="WwJ-l5-N20"/>
                         <outlet property="lbShopName" destination="5wZ-ST-o89" id="Hvw-i2-vQc"/>
@@ -351,7 +352,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z7I-e9-BOG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-65" y="1209"/>
+            <point key="canvasLocation" x="-65.217391304347828" y="1208.7053571428571"/>
         </scene>
         <!--Address-->
         <scene sceneID="Wb8-Rf-8Tn">
@@ -361,7 +362,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f0F-AL-pqG">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="f0F-AL-pqG">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="asN-0a-3Il">
@@ -502,6 +503,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="Address" id="gWc-Ya-lm9"/>
                     <connections>
+                        <outlet property="addressScrollView" destination="f0F-AL-pqG" id="X2V-1Z-pix"/>
+                        <outlet property="addressStackView" destination="asN-0a-3Il" id="1ji-lk-zSG"/>
                         <outlet property="addressTextView" destination="yeb-WG-0QC" id="8q0-yu-XvW"/>
                         <outlet property="btDifferentAddress" destination="RLn-Nk-I6m" id="fAM-vC-Vla"/>
                         <outlet property="lbSavedAddress" destination="Arx-54-cyO" id="6Pe-UO-c0p"/>
@@ -618,7 +621,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="6sP-uZ-zRg"/>
+        <segue reference="Cc2-dz-asQ"/>
         <segue reference="rh6-2c-w7c"/>
     </inferredMetricsTieBreakers>
     <resources>
@@ -627,7 +630,7 @@
         <image name="credit_card" width="40" height="40"/>
         <image name="delete" width="512" height="512"/>
         <image name="empty-cat" width="450.3909912109375" height="450.3909912109375"/>
-        <image name="icon_cart" width="32" height="32"/>
+        <image name="icon_cart" width="29" height="29"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

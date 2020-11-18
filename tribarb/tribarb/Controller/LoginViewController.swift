@@ -11,7 +11,7 @@ import FBSDKLoginKit
 
 class LoginViewController: UIViewController {
     
-    
+    static var USER_TYPE = 0
     var fbLoginSuccess = false
     var userType: String = USERTYPE_CUSTOMER
     @IBOutlet weak var switchUser: UISegmentedControl!
@@ -42,8 +42,10 @@ class LoginViewController: UIViewController {
             APIManager.shared.getLastLoggedInAs { (json) in
                 if json != nil {
                     if json!["last_logged_in_as"] ==  "customer" {
+                        LoginViewController.USER_TYPE = 0
                         self.performSegue(withIdentifier: "CustomerView", sender: self)
                     } else if json!["last_logged_in_as"] ==  "employee" {
+                        LoginViewController.USER_TYPE = 1
                         if json!["verified"] == false {
                             self.performSegue(withIdentifier: "EmployeeVerification", sender: self)
                         } else {

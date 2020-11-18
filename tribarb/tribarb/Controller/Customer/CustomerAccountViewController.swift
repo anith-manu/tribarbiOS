@@ -13,6 +13,7 @@ import CoreLocation
 class CustomerAccountViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var accountScroll: UIScrollView!
+    @IBOutlet weak var accountStackView: UIStackView!
     
     @IBOutlet weak var addressTextView: UITextView!
     @IBOutlet weak var lbName: UILabel!
@@ -23,9 +24,14 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate {
     
     var locationManager: CLLocationManager!
     
+    @IBOutlet weak var btLogout: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        btLogout.layer.cornerRadius = 5
+        btLogout.layer.masksToBounds = true
+        
         
         if CLLocationManager.locationServicesEnabled() {
             print("TRUE")
@@ -45,7 +51,10 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate {
         lbName.text = User.currentUser.name
         lbEmail.text = User.currentUser.email
         
-        imgAvatar.image = try! UIImage(data: Data(contentsOf: URL(string: User.currentUser.pictureURL!)!))
+        if User.currentUser.pictureURL != nil {
+            imgAvatar.image = try! UIImage(data: Data(contentsOf: URL(string: User.currentUser.pictureURL!)!))
+        }
+        
         
         imgAvatar.layer.cornerRadius = 100/2
         imgAvatar.layer.borderWidth = 1.0
@@ -143,54 +152,27 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate {
     
     
     
-    var isExpand : Bool = false
+
     @objc func keyboardAppear(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
             
             
-            if !isExpand {
-                self.accountScroll.contentSize = CGSize(width: self.view.frame.width, height: self.accountScroll.frame.height+keyboardHeight)
-                isExpand = true
+            if tabBarController?.tabBar.bounds.height != nil {
+                self.accountScroll.contentSize = CGSize(width: self.view.frame.width, height: self.accountStackView.frame.height+keyboardHeight-(tabBarController?.tabBar.bounds.height)!)
             }
         }
          
     }
     
+    
     @objc func keyboardDisappear(_ notification: Notification) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardRectangle = keyboardFrame.cgRectValue
-            let keyboardHeight = keyboardRectangle.height
-            
-            if !isExpand {
-                self.accountScroll.contentSize = CGSize(width: self.view.frame.width, height: self.accountScroll.frame.height-keyboardHeight)
-                isExpand = false
-            }
-        }
-        
+        self.accountScroll.contentSize = CGSize(width: self.view.frame.width, height: self.accountStackView.frame.height)
     }
     
     
     
-//    @objc func keyboardWillShow(_ notification: Notification) {
-//        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-//            let keyboardRectangle = keyboardFrame.cgRectValue
-//            let keyboardHeight = keyboardRectangle.height
-//            print(keyboardHeight)
-//            print("scroll view height before")
-//            print(self.accountScroll.frame.height)
-//            if notification.name == UIResponder.keyboardWillShowNotification {
-//                self.accountScroll.contentSize = CGSize(width: self.view.frame.width, height: self.accountScroll.frame.height+keyboardHeight)
-//
-//            } else {
-//                self.accountScroll.contentSize = CGSize(width: self.view.frame.width, height: self.accountScroll.frame.height-keyboardHeight)
-//                print("scroll view height after")
-//                print(self.accountScroll.frame.height)
-//            }
-//
-//        }
-//    }
     
     @objc func keyboardWillChange(notification: Notification) {
 
@@ -199,10 +181,11 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate {
         }
 
         if notification.name == UIResponder.keyboardWillShowNotification || notification.name == UIResponder.keyboardWillChangeFrameNotification {
-
-            view.frame.origin.y = -keyboardRect.height
+            print("here")
+            accountScroll.frame.origin.y = -keyboardRect.height+(tabBarController?.tabBar.bounds.height)!
         } else {
-            view.frame.origin.y = 0
+            print("CALLED")
+            accountScroll.frame.origin.y = 0
         }
     }
     
@@ -273,7 +256,6 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate {
                 } else {
                     
                     APIManager.shared.customerUpdateDetails(phone: phone, address: address) { (json) in
-                        print(json)
                         User.currentUser.address = address
                         self.viewWillAppear(true)
                     }
@@ -286,11 +268,9 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate {
         
         if phone != User.currentUser.phone! {
             APIManager.shared.customerUpdateDetails(phone: phone, address: address) { (json) in
-                print(json)
                 User.currentUser.phone = phone
                 self.viewWillAppear(true)
             }
-            
         }
         
     }

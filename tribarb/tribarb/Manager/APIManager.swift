@@ -24,7 +24,7 @@ class APIManager {
     var expired = Date()
     
     
-    // API to login user
+
     func login(userType: String, completionHandler: @escaping (NSError?) -> Void) {
         
         let path = "api/social/convert-token/"
@@ -64,7 +64,7 @@ class APIManager {
 
     
     
-    // API to logout user
+
     func logout(completionHandler: @escaping (NSError?) -> Void) {
 
         let path = "api/social/revoke-token/"
@@ -93,7 +93,7 @@ class APIManager {
 
     
     
-    // Request server function
+ 
     func requestServer(_ method: Alamofire.HTTPMethod,_ path: String,_ params: [String: Any]?,_ encoding: ParameterEncoding,_ completionHandler: @escaping (JSON?) -> Void) {
         
         
@@ -119,7 +119,7 @@ class APIManager {
     
     /** CUSTOMER **/
     
-    // API for getting Barbershop list that offers shop bookings
+   
     func get_shop_booking_shops(completionHandler: @escaping (JSON?) -> Void) {
         let path = "api/customer/shops/shop-booking/"
         requestServer(.get, path, nil, JSONEncoding.default, completionHandler)
@@ -127,35 +127,35 @@ class APIManager {
     
     
     
-    // API for getting Barbershop list that offers home bookings
+
     func get_home_booking_shops(completionHandler: @escaping (JSON?) -> Void) {
         let path = "api/customer/shops/home-booking/"
         requestServer(.get, path, nil, JSONEncoding.default, completionHandler)
     }
     
     
-    // API for getting shop service list
+
     func getShopServices(shopID: Int, completionHandler: @escaping (JSON?) -> Void) {
         let path = "api/customer/shop-services/\(shopID)"
         requestServer(.get, path, nil,  JSONEncoding.default, completionHandler)
     }
     
     
-    // API for getting home service list
+ 
     func getHomeServices(shopID: Int, completionHandler: @escaping (JSON?) -> Void) {
         let path = "api/customer/home-services/\(shopID)"
         requestServer(.get, path, nil,  JSONEncoding.default, completionHandler)
     }
     
     
-    // API for getting home service list
+
     func getServiceAlbum(serviceID: Int, completionHandler: @escaping (JSON?) -> Void) {
         let path = "api/customer/service/album/\(serviceID)"
         requestServer(.get, path, nil,  JSONEncoding.default, completionHandler)
     }
     
     
-    // API - Create new booking
+
     func createBooking(completionHandler: @escaping (JSON?) -> Void) {
         
         let path = "api/customer/booking/add/"
@@ -196,7 +196,7 @@ class APIManager {
     }
     
     
-    // API - Getting the latest booking (Customer)
+    
     func getStripeSecret(completionHandler: @escaping (JSON?) -> Void) {
         
         let path = "api/customer/stripe/secret/"
@@ -208,7 +208,7 @@ class APIManager {
     }
     
     
-    // API - Getting the latest booking (Customer)
+
     func getLatestBooking(completionHandler: @escaping (JSON?) -> Void) {
         
         let path = "api/customer/booking/latest/"
@@ -219,7 +219,7 @@ class APIManager {
     }
     
     
-    // API - Getting the latest booking (Customer)
+
     func getUpcomingBookings(completionHandler: @escaping (JSON?) -> Void) {
         
         let path = "api/customer/bookings/upcoming/"
@@ -230,7 +230,7 @@ class APIManager {
     }
     
     
-    // API - Getting the latest booking (Customer)
+
     func getPastBookings(completionHandler: @escaping (JSON?) -> Void) {
         
         let path = "api/customer/bookings/past/"
@@ -241,7 +241,7 @@ class APIManager {
     }
     
     
-    // API for getting shop service list
+   
     func getBooking(bookingID: Int, completionHandler: @escaping (JSON?) -> Void) {
         let path = "api/customer/booking/get/\(bookingID)/"
         let params: [String: Any] = [
@@ -252,7 +252,7 @@ class APIManager {
     }
     
     
-    // API for getting shop service list
+   
     func cancelBooking(bookingID: Int, completionHandler: @escaping (JSON?) -> Void) {
         let path = "api/customer/booking/cancel/\(bookingID)/"
         let params: [String: Any] = [
@@ -263,7 +263,7 @@ class APIManager {
     }
     
     
-    // API for getting shop service list
+ 
     func customerGetDetails(completionHandler: @escaping (JSON?) -> Void) {
         let path = "api/customer/getinfo/"
         let params: [String: Any] = [
@@ -275,7 +275,6 @@ class APIManager {
     
     
     
-    // API for getting shop service list
     func customerUpdateDetails(phone: String, address: String, completionHandler: @escaping (JSON?) -> Void) {
         let path = "api/customer/updateinfo/"
         let params: [String: Any] = [
@@ -289,7 +288,6 @@ class APIManager {
     
     
     
-    // API for getting shop service list
     func customerUpdateRating(bookingID: Int, rating: Int, completionHandler: @escaping (JSON?) -> Void) {
         let path = "api/customer/shop/updaterating/"
         let params: [String: Any] = [
@@ -302,7 +300,7 @@ class APIManager {
     }
     
     
-    // API for getting shop service list
+    
     func employeeVerification(shopID: Int, token: String, completionHandler: @escaping (JSON?) -> Void) {
         let path = "api/employee/verify/"
         let params: [String: Any] = [
@@ -316,7 +314,6 @@ class APIManager {
     
     
     
-    // API for getting shop service list
     func getLastLoggedInAs(completionHandler: @escaping (JSON?) -> Void) {
         let path = "api/check/last-logged-in-as/"
         let params: [String: Any] = [
@@ -328,7 +325,6 @@ class APIManager {
     
     
     
-    // API for getting shop service list
     func setLastLoggedInAs(user_type: String, completionHandler: @escaping (JSON?) -> Void) {
         let path = "api/set/last-logged-in-as/"
         let params: [String: Any] = [
@@ -339,6 +335,28 @@ class APIManager {
         requestServer(.post, path, params,  URLEncoding(), completionHandler)
     }
     
+    
+    
+    func employeeGetDetails(completionHandler: @escaping (JSON?) -> Void) {
+        let path = "api/employee/getinfo/"
+        let params: [String: Any] = [
+            "access_token": self.accessToken
+        ]
+    
+        requestServer(.get, path, params,  URLEncoding(), completionHandler)
+    }
+    
+    
+    
+    func employeeUpdateDetails(phone: String, completionHandler: @escaping (JSON?) -> Void) {
+        let path = "api/employee/updateinfo/"
+        let params: [String: Any] = [
+            "access_token": self.accessToken,
+            "phone": phone
+        ]
+    
+        requestServer(.post, path, params,  URLEncoding(), completionHandler)
+    }
     
     
 }

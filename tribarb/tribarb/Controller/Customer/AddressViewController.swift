@@ -11,6 +11,8 @@ import CoreLocation
 
 class AddressViewController: UIViewController, UITextFieldDelegate {
 
+    @IBOutlet weak var addressStackView: UIStackView!
+    @IBOutlet weak var addressScrollView: UIScrollView!
     @IBOutlet weak var savedAddress: UIView!
     @IBOutlet weak var lbSavedAddress: UILabel!
     @IBOutlet weak var newAddress: UIView!
@@ -62,6 +64,11 @@ class AddressViewController: UIViewController, UITextFieldDelegate {
             self.btDifferentAddress.isHidden = true
         }
         
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardAppear(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDisappear(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
 
     }
     
@@ -72,6 +79,27 @@ class AddressViewController: UIViewController, UITextFieldDelegate {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: false)
     }
+    
+    
+   
+    @objc func keyboardAppear(_ notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+          
+            if tabBarController?.tabBar.bounds.height != nil {
+                self.addressScrollView.contentSize = CGSize(width: self.view.frame.width, height: self.addressStackView.frame.height+keyboardHeight-(tabBarController?.tabBar.bounds.height)!)
+                
+            }
+        }
+         
+    }
+    
+    
+    @objc func keyboardDisappear(_ notification: Notification) {
+        self.addressScrollView.contentSize = CGSize(width: self.view.frame.width, height: self.addressStackView.frame.height)
+    }
+    
     
     
     @objc func doneClicked() {

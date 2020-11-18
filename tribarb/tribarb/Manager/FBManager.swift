@@ -27,9 +27,17 @@ class FBManager {
                     // Set customer info
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                         
-                        APIManager.shared.customerGetDetails { (json) in
-                            if json != nil {
-                                User.currentUser.setCustomerInfo(json: json!)
+                        if LoginViewController.USER_TYPE == 0 {
+                            APIManager.shared.customerGetDetails { (json) in
+                                if json != nil {
+                                    User.currentUser.setCustomerInfo(json: json!)
+                                }
+                            }
+                        } else {
+                            APIManager.shared.employeeGetDetails { (json) in
+                                if json != nil {
+                                    User.currentUser.setEmployeeInfo(json: json!)
+                                }
                             }
                         }
                     }
