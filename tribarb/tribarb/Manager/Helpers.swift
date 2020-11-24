@@ -45,5 +45,21 @@ class Helpers {
     static func hideActivityIndicator(_ activityIndicator: UIActivityIndicatorView) {
         activityIndicator.stopAnimating()
     }
+    
+    
+    // Helper to show activity indicator
+    static func showBookingActivityIndicator(_ activityIndicator: UIActivityIndicatorView,_ view: UIView) {
+        print(view.frame.width)
+        activityIndicator.frame = CGRect(x: 0.0, y: 0.0, width: view.frame.width, height: view.frame.height)
+        activityIndicator.center = view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.style = UIActivityIndicatorView.Style.large
+        activityIndicator.color = UIColor.black
+        activityIndicator.backgroundColor = .white
+        
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        
+    }
    
 }

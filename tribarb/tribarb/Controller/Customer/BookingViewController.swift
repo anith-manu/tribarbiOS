@@ -19,8 +19,8 @@ class BookingViewController: UIViewController {
         view.settings.starSize = 40
         view.settings.fillMode = .full
         view.settings.filledColor = UIColor(red: 1.00, green: 0.76, blue: 0.43, alpha: 1.00)
-        view.settings.filledBorderColor = .black
-        view.settings.emptyBorderColor = .black
+        view.settings.filledBorderColor = UIColor(red: 1.00, green: 0.76, blue: 0.43, alpha: 1.00)
+        view.settings.emptyBorderColor = .lightGray
         view.settings.filledBorderWidth = 1.5
         view.settings.emptyBorderWidth = 1.5
         view.rating = 0
@@ -49,7 +49,7 @@ class BookingViewController: UIViewController {
     @IBOutlet weak var ratingView: UIView!
     @IBOutlet weak var starsView: UIView!
     
-    var cart = [JSON]()
+    var bookedServices = [JSON]()
     var phone = ""
     
     var bookingId: Int?
@@ -71,24 +71,21 @@ class BookingViewController: UIViewController {
         starsView.addSubview(cosmosView)
         cosmosView.centerInSuperview()
         btSubmitRating.layer.cornerRadius = 10
-        btSubmitRating.layer.borderColor = UIColor.black.cgColor
-        btSubmitRating.layer.borderWidth = 1
         btSubmitRating.layer.masksToBounds = true
       
-        getBooking()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
         self.navigationController?.setNavigationBarHidden(false, animated: false)
+        getBooking()
     }
     
     
 
     
     func getBooking() {
-        Helpers.showActivityIndicator(activityIndicator, view)
+        Helpers.showBookingActivityIndicator(activityIndicator, view)
     
 
         APIManager.shared.getBooking(bookingID: bookingId!) { (json) in
@@ -121,7 +118,7 @@ class BookingViewController: UIViewController {
     func bookingCancelledFailedMessage() {
         let alertView = UIAlertController(
             title: "Unable To Cancel",
-            message: "This booking has already been accepeted. If you would like to cancel, please call the barber.",
+            message: "This booking has already been accepted. If you would like to cancel, please call the barber.",
             preferredStyle: .alert)
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
@@ -141,16 +138,14 @@ class BookingViewController: UIViewController {
         let okAction = UIAlertAction(title: "Yes", style: .default) { (action: UIAlertAction!) in
             if let bookingID = self.bookingId {
                 APIManager.shared.cancelBooking(bookingID: bookingID) { (json) in
-                    
-                    
+            
                     if json!["status"] == "success" {
-                        self.bookingCancelledMessage()
+                        self.viewWillAppear(true)
                     } else {
                         self.bookingCancelledFailedMessage()
                     }
                 }
             }
-            self.navigationController?.popToRootViewController(animated: true)
         }
         
         let cancelAction = UIAlertAction(title: "No", style: .cancel)
@@ -203,7 +198,7 @@ class BookingViewController: UIViewController {
         }
         
         if let bookingDetails = booking.booking_details {
-            self.cart = bookingDetails
+            self.bookedServices = bookingDetails
             self.tbvServices.reloadData()
         }
         
@@ -241,14 +236,14 @@ class BookingViewController: UIViewController {
             }
         } else {
             self.mapView.isHidden = false
-            self.getLocation(booking.home_address!, "You") { (dest) in
-                self.destination = dest
-                
-                self.getLocation(booking.shop_address!, "Shop") { (sou) in
-                    self.source = sou
-                    self.getDirections()
-                }
-            }
+//            self.getLocation(booking.home_address!, "You") { (dest) in
+//                self.destination = dest
+//                
+//                self.getLocation(booking.shop_address!, "Shop") { (sou) in
+//                    self.source = sou
+//                    self.getDirections()
+//                }
+//            }
             
         }
         
@@ -283,7 +278,6 @@ class BookingViewController: UIViewController {
 
         if let bookingID = self.bookingId {
             APIManager.shared.customerUpdateRating(bookingID: bookingID, rating: rating) { (json) in
-                print(json)
             }
         }
     }
@@ -314,14 +308,14 @@ extension BookingViewController: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cart.count
+        return bookedServices.count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ServiceCell", for: indexPath) as! BookingTableViewCell
         
-        let item = cart[indexPath.row]
+        let item = bookedServices[indexPath.row]
 
         cell.lbServiceName.text = item["service"]["service_name"].string
         cell.lbServicePrice.text = "£\(String(item["service"]["price"].float!))"
@@ -412,3 +406,4 @@ final class ContentSizedTableView: UITableView {
         return CGSize(width: UIView.noIntrinsicMetric, height: contentSize.height)
     }
 }
+

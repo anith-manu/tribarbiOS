@@ -119,31 +119,15 @@ class APIManager {
     
     /** CUSTOMER **/
     
+    func get_shops(filterID: Int, completionHandler: @escaping (JSON?) -> Void) {
+        let path = "api/customer/shops/\(filterID)/"
+        requestServer(.get, path, nil, JSONEncoding.default, completionHandler)
+    }
+    
+    
    
-    func get_shop_booking_shops(completionHandler: @escaping (JSON?) -> Void) {
-        let path = "api/customer/shops/shop-booking/"
-        requestServer(.get, path, nil, JSONEncoding.default, completionHandler)
-    }
-    
-    
-    
-
-    func get_home_booking_shops(completionHandler: @escaping (JSON?) -> Void) {
-        let path = "api/customer/shops/home-booking/"
-        requestServer(.get, path, nil, JSONEncoding.default, completionHandler)
-    }
-    
-    
-
-    func getShopServices(shopID: Int, completionHandler: @escaping (JSON?) -> Void) {
-        let path = "api/customer/shop-services/\(shopID)"
-        requestServer(.get, path, nil,  JSONEncoding.default, completionHandler)
-    }
-    
-    
- 
-    func getHomeServices(shopID: Int, completionHandler: @escaping (JSON?) -> Void) {
-        let path = "api/customer/home-services/\(shopID)"
+    func getServices(filterID: Int, shopID: Int, completionHandler: @escaping (JSON?) -> Void) {
+        let path = "api/customer/services/\(filterID)/\(shopID)"
         requestServer(.get, path, nil,  JSONEncoding.default, completionHandler)
     }
     
@@ -209,41 +193,32 @@ class APIManager {
     
     
 
-    func getLatestBooking(completionHandler: @escaping (JSON?) -> Void) {
-        
-        let path = "api/customer/booking/latest/"
-        let params: [String: Any] = [
-            "access_token": self.accessToken
-        ]
-        requestServer(.get, path, params, URLEncoding(), completionHandler)
-    }
-    
-    
+//    func getLatestBooking(completionHandler: @escaping (JSON?) -> Void) {
+//
+//        let path = "api/customer/booking/latest/"
+//        let params: [String: Any] = [
+//            "access_token": self.accessToken
+//        ]
+//        requestServer(.get, path, params, URLEncoding(), completionHandler)
+//    }
+//
+//
+//
 
-    func getUpcomingBookings(completionHandler: @escaping (JSON?) -> Void) {
-        
-        let path = "api/customer/bookings/upcoming/"
+    
+    func customerGetBookings(filterID: Int, completionHandler: @escaping (JSON?) -> Void) {
+        let path = "api/customer/bookings/\(filterID)/"
         let params: [String: Any] = [
             "access_token": self.accessToken
         ]
-        requestServer(.get, path, params, URLEncoding(), completionHandler)
-    }
     
-    
-
-    func getPastBookings(completionHandler: @escaping (JSON?) -> Void) {
-        
-        let path = "api/customer/bookings/past/"
-        let params: [String: Any] = [
-            "access_token": self.accessToken
-        ]
-        requestServer(.get, path, params, URLEncoding(), completionHandler)
+        requestServer(.get, path, params,  URLEncoding(), completionHandler)
     }
     
     
    
     func getBooking(bookingID: Int, completionHandler: @escaping (JSON?) -> Void) {
-        let path = "api/customer/booking/get/\(bookingID)/"
+        let path = "api/booking/get/\(bookingID)/"
         let params: [String: Any] = [
             "access_token": self.accessToken
         ]
@@ -353,6 +328,61 @@ class APIManager {
         let params: [String: Any] = [
             "access_token": self.accessToken,
             "phone": phone
+        ]
+    
+        requestServer(.post, path, params,  URLEncoding(), completionHandler)
+    }
+    
+    
+    func employeeGetBookings(filterID: Int, completionHandler: @escaping (JSON?) -> Void) {
+        let path = "api/employee/bookings/\(filterID)/"
+        let params: [String: Any] = [
+            "access_token": self.accessToken
+        ]
+    
+        requestServer(.get, path, params,  URLEncoding(), completionHandler)
+    }
+    
+    
+    func employeeAcceptBooking(bookingID: Int, completionHandler: @escaping (JSON?) -> Void) {
+        let path = "api/employee/booking/accept/"
+        let params: [String: Any] = [
+            "access_token": self.accessToken,
+            "booking_id": bookingID
+        ]
+    
+        requestServer(.post, path, params,  URLEncoding(), completionHandler)
+    }
+    
+    
+    func employeeDeclineBooking(bookingID: Int, completionHandler: @escaping (JSON?) -> Void) {
+        let path = "api/employee/booking/decline/"
+        let params: [String: Any] = [
+            "access_token": self.accessToken,
+            "booking_id": bookingID
+        ]
+    
+        requestServer(.post, path, params,  URLEncoding(), completionHandler)
+    }
+    
+    
+    func employeeEnroute(bookingID: Int, completionHandler: @escaping (JSON?) -> Void) {
+        let path = "api/employee/booking/enroute/"
+        let params: [String: Any] = [
+            "access_token": self.accessToken,
+            "booking_id": bookingID
+        ]
+    
+        requestServer(.post, path, params,  URLEncoding(), completionHandler)
+    }
+    
+    
+    
+    func employeeCompleteBooking(bookingID: Int, completionHandler: @escaping (JSON?) -> Void) {
+        let path = "api/employee/booking/complete/"
+        let params: [String: Any] = [
+            "access_token": self.accessToken,
+            "booking_id": bookingID
         ]
     
         requestServer(.post, path, params,  URLEncoding(), completionHandler)

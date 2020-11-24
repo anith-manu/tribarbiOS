@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EmployeeAccountViewController: UIViewController {
+class EmployeeAccountViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var imgAvatar: UIImageView!
     @IBOutlet weak var lbName: UILabel!
@@ -15,9 +15,12 @@ class EmployeeAccountViewController: UIViewController {
     @IBOutlet weak var lbShopName: UILabel!
     @IBOutlet weak var tfPhone: UITextField!
     @IBOutlet weak var btLogout: UIButton!
+    @IBOutlet weak var accountScroll: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        accountScroll.keyboardDismissMode = .interactive
         
         btLogout.layer.cornerRadius = 5
         btLogout.layer.masksToBounds = true
@@ -34,8 +37,24 @@ class EmployeeAccountViewController: UIViewController {
         imgAvatar.layer.borderWidth = 1.0
         imgAvatar.layer.borderColor = UIColor.white.cgColor
         imgAvatar.clipsToBounds = true
+        
+        
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: #selector(doneClicked))
+        doneButton.tintColor = UIColor(red: 1.00, green: 0.76, blue: 0.43, alpha: 1.00)
+        
+        toolbar.setItems([doneButton], animated: false)
+        
+        tfPhone.inputAccessoryView = toolbar
 
         // Do any additional setup after loading the view.
+    }
+    
+    
+    @objc func doneClicked() {
+        view.endEditing(true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -87,4 +106,9 @@ class EmployeeAccountViewController: UIViewController {
         alertView.addAction(okAction)
         self.present(alertView, animated: true, completion: nil)
     }
+    
+    
+
+    
+
 }

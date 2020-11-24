@@ -31,6 +31,7 @@ class AddressViewController: UIViewController, UITextFieldDelegate {
         toolbar.sizeToFit()
         
         let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: #selector(doneClicked))
+        doneButton.tintColor = UIColor(red: 1.00, green: 0.76, blue: 0.43, alpha: 1.00)
         
         toolbar.setItems([doneButton], animated: false)
         

@@ -181,7 +181,7 @@
                                                             <constraint firstAttribute="height" constant="40" id="3WM-n9-913"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardAppearance="alert"/>
                                                         <connections>
                                                             <outlet property="delegate" destination="rDh-SO-DXx" id="68G-Ym-S6M"/>
                                                         </connections>
@@ -429,7 +429,7 @@
                                                         </constraints>
                                                         <color key="textColor" systemColor="labelColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardAppearance="alert"/>
                                                     </textView>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -621,7 +621,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Cc2-dz-asQ"/>
+        <segue reference="6sP-uZ-zRg"/>
         <segue reference="rh6-2c-w7c"/>
     </inferredMetricsTieBreakers>
     <resources>

@@ -77,17 +77,20 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dua-lq-eqN">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Dua-lq-eqN">
                                                         <rect key="frame" x="20" y="126.5" width="374" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="1II-Vz-TfI"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="phonePad" keyboardAppearance="alert"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="aAi-qW-oIb" id="aPK-Wg-2de"/>
+                                                        </connections>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NYa-ta-eiz">
                                                         <rect key="frame" x="20" y="206.5" width="374" height="50"/>
-                                                        <color key="backgroundColor" red="0.9989349246" green="0.764754355" blue="0.4312785864" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <color key="backgroundColor" red="1" green="0.76470588235294112" blue="0.43137254901960786" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="1xI-lZ-Xfz"/>
                                                         </constraints>
@@ -160,6 +163,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="3nz-WR-37x"/>
                     <connections>
+                        <outlet property="accountScroll" destination="Mqx-vB-zFl" id="8QX-ID-msY"/>
                         <outlet property="btLogout" destination="foY-F1-Kmu" id="NqF-cB-wEx"/>
                         <outlet property="imgAvatar" destination="15g-l6-rSg" id="2TS-Dx-jiP"/>
                         <outlet property="lbEmail" destination="Nr5-Eh-XW6" id="2wi-aP-fG5"/>

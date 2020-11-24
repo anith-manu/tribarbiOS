@@ -79,39 +79,18 @@ class ServiceListTableViewController: UITableViewController {
         Helpers.showActivityIndicator(activityIndicator, view)
         
         if let shopId = shop?.id {
-            
-            if ShopViewController.BOOKING_TYPE_VAR == 0 {
-                APIManager.shared.getShopServices(shopID: shopId) { (json) in
+            APIManager.shared.getServices(filterID: ShopViewController.BOOKING_TYPE_VAR, shopID: shopId) { (json) in
+                if json != nil {
+                    self.services = []
                     
-                    if json != nil {
-                        self.services = []
+                    if let tempServices = json?["services"].array {
                         
-                        if let tempServices = json?["services"].array {
-                            
-                            for item in tempServices {
-                                let service = Service(json: item)
-                                self.services.append(service)
-                            }
-                            self.tableView.reloadData()
-                            Helpers.hideActivityIndicator(self.activityIndicator)
+                        for item in tempServices {
+                            let service = Service(json: item)
+                            self.services.append(service)
                         }
-                    }
-                }
-            } else {
-                APIManager.shared.getHomeServices(shopID: shopId) { (json) in
-                    
-                    if json != nil {
-                        self.services = []
-                        
-                        if let tempServices = json?["services"].array {
-                            
-                            for item in tempServices {
-                                let service = Service(json: item)
-                                self.services.append(service)
-                            }
-                            self.tableView.reloadData()
-                            Helpers.hideActivityIndicator(self.activityIndicator)
-                        }
+                        self.tableView.reloadData()
+                        Helpers.hideActivityIndicator(self.activityIndicator)
                     }
                 }
             }

@@ -54,15 +54,13 @@ class ShopViewController: UIViewController {
         
     
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { // Change `2.0` to the desired number of seconds.
-            APIManager.shared.getUpcomingBookings { (json) in
-    
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { // Change `2.0` to the desired number of seconds.
+            APIManager.shared.customerGetBookings(filterID: 0) { (json) in
                 if json == nil || json!["bookings"].isEmpty {
                     self.tabBarController?.tabBar.items?[2].badgeValue = nil
                 } else {
                     self.tabBarController?.tabBar.items?[2].badgeValue = ""
                 }
-        
             }
         }
         
@@ -75,37 +73,18 @@ class ShopViewController: UIViewController {
         Helpers.showActivityIndicator(activityIndicator, view)
         ShopViewController.BOOKING_TYPE_VAR = booking_type.selectedSegmentIndex
         
-        if ShopViewController.BOOKING_TYPE_VAR == 0 {
-            APIManager.shared.get_shop_booking_shops { (json) in
-                if json != nil {
-                    self.shops = []
-                    
-                    if let listBarber = json?["shops"].array {
-                        
-                        for item in listBarber {
-                            let shop = Shop(json: item)
-                            self.shops.append(shop)
-                        }
-                        self.tbvShops.reloadData()
-                        Helpers.hideActivityIndicator(self.activityIndicator)
-                    }
-                }
-            }
-        } else {
-            APIManager.shared.get_home_booking_shops { (json) in
+        APIManager.shared.get_shops(filterID:  ShopViewController.BOOKING_TYPE_VAR) { (json) in
+            if json != nil {
+                self.shops = []
                 
-                if json != nil {
-                    self.shops = []
+                if let listBarber = json?["shops"].array {
                     
-                    if let listBarber = json?["shops"].array {
-                        
-                        for item in listBarber {
-                            let shop = Shop(json: item)
-                            self.shops.append(shop)
-                        }
-                        self.tbvShops.reloadData()
-                        Helpers.hideActivityIndicator(self.activityIndicator)
+                    for item in listBarber {
+                        let shop = Shop(json: item)
+                        self.shops.append(shop)
                     }
+                    self.tbvShops.reloadData()
+                    Helpers.hideActivityIndicator(self.activityIndicator)
                 }
             }
         }
@@ -202,19 +181,10 @@ extension ShopViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ShopCell", for: indexPath) as! ShopTableViewCell
-        cell.mainBackground.layer.cornerRadius = 8
+        cell.mainBackground.layer.cornerRadius = 20
         cell.mainBackground.layer.masksToBounds = true
         cell.shadowLayer.setupShadow()
-        
-//        cell.shadowLayer.layer.cornerRadius = 8
-//        cell.shadowLayer.layer.shadowOffset = CGSize(width: 0, height: 3)
-//        cell.shadowLayer.layer.shadowRadius = 3
-//        cell.shadowLayer.layer.shadowColor = UIColor.black.cgColor
-//        cell.shadowLayer.layer.shadowOpacity = 0.3
-//        cell.shadowLayer.layer.shadowPath = UIBezierPath(roundedRect: cell.shadowLayer.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 8, height: 8)).cgPath
-//
-//        cell.shadowLayer.layer.shouldRasterize = true
-//        cell.shadowLayer.layer.rasterizationScale = UIScreen.main.scale
+
 
         let shop: Shop
       
@@ -248,13 +218,20 @@ extension ShopViewController: UITableViewDelegate, UITableViewDataSource {
 
 class ShadowView: UIView {
 
+    override var bounds: CGRect {
+        didSet {
+            setupShadow()
+        }
+    }
+    
+    
     func setupShadow() {
-        self.layer.cornerRadius = 8
+        self.layer.cornerRadius = 20
         self.layer.shadowOffset = CGSize(width: 0, height: 0)
-        self.layer.shadowRadius = 3
+        self.layer.shadowRadius = 4
         self.layer.shadowColor = UIColor.lightGray.cgColor
-        self.layer.shadowOpacity = 0.3
-        self.layer.shadowPath = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 8, height: 8)).cgPath
+        self.layer.shadowOpacity = 0.33
+        self.layer.shadowPath = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 20, height: 20)).cgPath
         self.layer.shouldRasterize = true
         self.layer.rasterizationScale = UIScreen.main.scale
     }

@@ -28,6 +28,9 @@ class Booking {
     var total: Float?
     var from: String?
     var to: String?
+    var customer: String?
+    var customer_phone: String?
+    var customer_avatar: String?
     
     init(json: JSON) {
         self.id = json["id"].int
@@ -47,6 +50,9 @@ class Booking {
         self.total = json["total"].float
         self.from = json["shop"]["address"].string
         self.to = json["address"].string
+        self.customer = json["customer"]["name"].string
+        self.customer_phone = json["customer"]["phone"].string
+        self.customer_avatar = json["customer"]["avatar"].string
     }
 }
 

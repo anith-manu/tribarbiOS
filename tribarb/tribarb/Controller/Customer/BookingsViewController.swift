@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class BookingsViewController: UIViewController {
 
     
@@ -27,8 +28,7 @@ class BookingsViewController: UIViewController {
         load_bookings()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { // Change `2.0` to the desired number of seconds.
-            APIManager.shared.getUpcomingBookings { (json) in
-    
+            APIManager.shared.customerGetBookings(filterID: 0) { (json) in
                 if json == nil || json!["bookings"].isEmpty {
                     self.tabBarController?.tabBar.items?[2].badgeValue = nil
                 } else {
@@ -47,39 +47,19 @@ class BookingsViewController: UIViewController {
         Helpers.showActivityIndicator(activityIndicator, view)
         filter_bookings_var = filterBookings.selectedSegmentIndex
         
-        if filter_bookings_var == 0 {
-            APIManager.shared.getUpcomingBookings { (json) in
-        
-                if json != nil {
-                    
-                    self.bookings = []
-                    
-                    if let listBarber = json?["bookings"].array {
-                        for item in listBarber {
-    
-                            let booking = Bookings(json: item)
-                            self.bookings.append(booking)
-                        }
-                        self.tbvBookings.reloadData()
-                        Helpers.hideActivityIndicator(self.activityIndicator)
-                    }
-                } 
-            }
-        } else {
-            APIManager.shared.getPastBookings { (json) in
+        APIManager.shared.customerGetBookings(filterID: filter_bookings_var) { (json) in
+            if json != nil {
                 
-                if json != nil {
-                    
-                    self.bookings = []
-                    
-                    if let listBarber = json?["bookings"].array {
-                        for item in listBarber {
-                            let booking = Bookings(json: item)
-                            self.bookings.append(booking)
-                        }
-                        self.tbvBookings.reloadData()
-                        Helpers.hideActivityIndicator(self.activityIndicator)
+                self.bookings = []
+                
+                if let listBarber = json?["bookings"].array {
+                    for item in listBarber {
+
+                        let booking = Bookings(json: item)
+                        self.bookings.append(booking)
                     }
+                    self.tbvBookings.reloadData()
+                    Helpers.hideActivityIndicator(self.activityIndicator)
                 }
             }
         }
@@ -92,7 +72,6 @@ class BookingsViewController: UIViewController {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if segue.identifier == "BookingDetail" {
             let controller = segue.destination as! BookingViewController
             controller.bookingId = bookings[(tbvBookings.indexPathForSelectedRow?.row)!].id
@@ -142,7 +121,6 @@ extension BookingsViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let dateFormatter = DateFormatter()
-  //      dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:SSZ"
         let date = dateFormatter.date(from: booking.date!)
         dateFormatter.dateFormat = "d MMM y, HH:mm"

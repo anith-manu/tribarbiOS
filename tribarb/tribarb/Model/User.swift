@@ -17,6 +17,7 @@ class User {
     var email: String?
     var pictureURL: String?
     var shop: String?
+    var shopID: Int?
     
     static let currentUser = User()
     
@@ -34,7 +35,8 @@ class User {
         self.email = json["employee"]["email"].string
         self.phone = json["employee"]["phone"].string
         self.pictureURL = json["employee"]["avatar"].string
-        self.shop = json["employee"]["shop"].string
+        self.shop = json["employee"]["shop_name"].string
+        self.shopID = json["employee"]["shop"].int
     }
     
     func resetCustomerInfo() {
@@ -52,5 +54,6 @@ class User {
         self.phone = nil
         self.pictureURL = nil
         self.shop = nil
+        self.shopID = nil
     }
 }

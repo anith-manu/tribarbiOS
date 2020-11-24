@@ -33,8 +33,7 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate {
         btLogout.layer.masksToBounds = true
         
         
-        if CLLocationManager.locationServicesEnabled() {
-            print("TRUE")
+        if CLLocationManager.locationServicesEnabled() { 
             locationManager = CLLocationManager()
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -65,10 +64,11 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate {
         toolbar.sizeToFit()
         
         let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: #selector(doneClicked))
-        
+        doneButton.tintColor = UIColor(red: 1.00, green: 0.76, blue: 0.43, alpha: 1.00)
         toolbar.setItems([doneButton], animated: false)
         
         addressTextView.inputAccessoryView = toolbar
+        tbPhone.inputAccessoryView = toolbar
         
         addressTextView.layer.cornerRadius = 5
         addressTextView.layer.borderColor = UIColor.lightGray.cgColor
@@ -281,6 +281,7 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate {
         return false
     }
     
+
 }
 
 
