@@ -107,7 +107,7 @@ extension PaymentViewController: STPPaymentContextDelegate {
                     completion(.success, nil)
                 case .failed:
                 
-                    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+                    let cancelAction = UIAlertAction(title: "Cancel", style: .default)
                     let alertView = UIAlertController(
                         title: error.unsafelyUnwrapped.localizedDescription,
                         message: "Please try a different card or pay with cash.",

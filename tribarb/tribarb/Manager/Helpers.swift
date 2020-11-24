@@ -28,13 +28,13 @@ class Helpers {
     
     // Helper to show activity indicator
     static func showActivityIndicator(_ activityIndicator: UIActivityIndicatorView,_ view: UIView) {
-        
+
         activityIndicator.frame = CGRect(x: 0.0, y: 0.0, width: 40.0, height: 40.0)
         activityIndicator.center = view.center
         activityIndicator.hidesWhenStopped = true
         activityIndicator.style = UIActivityIndicatorView.Style.large
         activityIndicator.color = UIColor.black
-        
+    
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
         

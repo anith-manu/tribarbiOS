@@ -147,7 +147,7 @@ class AddressViewController: UIViewController, UITextFieldDelegate {
             
             if (error != nil) {
                 let alertController = UIAlertController(title: "Could Not Find Address", message: "Please enter a valid address.", preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "Cancel", style: .cancel)
+                let okAction = UIAlertAction(title: "Cancel", style: .default)
                 alertController.addAction(okAction)
                 self.present(alertController, animated: true, completion: nil)
             }

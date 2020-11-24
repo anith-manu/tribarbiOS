@@ -13,11 +13,11 @@
             <objects>
                 <viewController id="rDh-SO-DXx" customClass="CheckoutViewController" customModule="tribarb" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BpT-7F-YBw">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wzx-Sl-TQd">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6Qn-fi-Dhu">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1151"/>
@@ -186,7 +186,7 @@
                                                             <outlet property="delegate" destination="rDh-SO-DXx" id="68G-Ym-S6M"/>
                                                         </connections>
                                                     </textField>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rby-SO-dWH">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rby-SO-dWH" customClass="CurvedButton" customModule="tribarb" customModuleProvider="target">
                                                         <rect key="frame" x="20" y="383" width="374" height="50"/>
                                                         <color key="backgroundColor" red="0.9989349246" green="0.764754355" blue="0.4312785864" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <constraints>
@@ -359,11 +359,11 @@
             <objects>
                 <viewController id="ofH-WF-gqa" customClass="AddressViewController" customModule="tribarb" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kdH-AV-nWm">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="f0F-AL-pqG">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="asN-0a-3Il">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="640"/>
@@ -408,7 +408,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lZI-kx-S8c">
                                                 <rect key="frame" x="0.0" y="150" width="414" height="165"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dHd-pL-vCQ">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dHd-pL-vCQ" customClass="CurvedButton" customModule="tribarb" customModuleProvider="target">
                                                         <rect key="frame" x="20" y="120" width="374" height="25"/>
                                                         <color key="backgroundColor" red="0.9989349246" green="0.764754355" blue="0.4312785864" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <constraints>
@@ -452,7 +452,7 @@
                                                             <constraint firstAttribute="height" constant="200" id="liS-kE-gNu"/>
                                                         </constraints>
                                                     </mapView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LP4-HM-93f">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LP4-HM-93f" customClass="CurvedButton" customModule="tribarb" customModuleProvider="target">
                                                         <rect key="frame" x="20" y="240" width="374" height="50"/>
                                                         <color key="backgroundColor" red="0.9989349246" green="0.764754355" blue="0.4312785864" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <constraints>
@@ -523,7 +523,7 @@
             <objects>
                 <viewController id="IVL-Kd-iO6" customClass="PaymentViewController" customModule="tribarb" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FEL-64-SPb">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Payment Option" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DAZ-Qq-XBI">
@@ -538,8 +538,8 @@
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yU6-nO-ADz">
-                                <rect key="frame" x="20" y="655" width="374" height="50"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yU6-nO-ADz" customClass="CurvedButton" customModule="tribarb" customModuleProvider="target">
+                                <rect key="frame" x="20" y="738" width="374" height="50"/>
                                 <color key="backgroundColor" red="1" green="0.76470588240000004" blue="0.43137254899999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="N8T-up-d42"/>
@@ -622,7 +622,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="6sP-uZ-zRg"/>
-        <segue reference="rh6-2c-w7c"/>
+        <segue reference="FKI-9U-fdX"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="booking-placed" width="512" height="512"/>

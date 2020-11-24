@@ -14,7 +14,6 @@ class EmployeeAccountViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var lbEmail: UILabel!
     @IBOutlet weak var lbShopName: UILabel!
     @IBOutlet weak var tfPhone: UITextField!
-    @IBOutlet weak var btLogout: UIButton!
     @IBOutlet weak var accountScroll: UIScrollView!
     
     override func viewDidLoad() {
@@ -22,8 +21,6 @@ class EmployeeAccountViewController: UIViewController, UITextFieldDelegate {
         
         accountScroll.keyboardDismissMode = .interactive
         
-        btLogout.layer.cornerRadius = 5
-        btLogout.layer.masksToBounds = true
         
         lbName.text = User.currentUser.name
         lbEmail.text = User.currentUser.email
@@ -87,7 +84,7 @@ class EmployeeAccountViewController: UIViewController, UITextFieldDelegate {
             message: "Are you sure you want to logout?",
             preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: "Yes", style: .default) { (action: UIAlertAction!) in
+        let okAction = UIAlertAction(title: "Yes", style: .destructive) { (action: UIAlertAction!) in
             
             FBManager.shared.logOut()
             User.currentUser.resetEmployeeInfo()
@@ -100,7 +97,7 @@ class EmployeeAccountViewController: UIViewController, UITextFieldDelegate {
             self.performSegue(withIdentifier: "EmployeeLogout", sender: self)
         }
         
-        let cancelAction = UIAlertAction(title: "No", style: .cancel)
+        let cancelAction = UIAlertAction(title: "No", style: .default)
         
         alertView.addAction(cancelAction)
         alertView.addAction(okAction)

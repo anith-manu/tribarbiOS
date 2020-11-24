@@ -26,7 +26,7 @@ class APIManager {
     
 
     func login(userType: String, completionHandler: @escaping (NSError?) -> Void) {
-        
+
         let path = "api/social/convert-token/"
         let url = baseURL?.appendingPathComponent(path)
         let params: [String: Any] = [

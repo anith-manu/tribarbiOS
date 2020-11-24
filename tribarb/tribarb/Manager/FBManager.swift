@@ -18,10 +18,11 @@ class FBManager {
     public class func getFBUserData(completionHandler: @escaping () -> Void) {
         
         if (AccessToken.current != nil) {
+
             GraphRequest(graphPath: "me", parameters: ["fields": "name, email, picture.type(normal)"]).start { (connection, result, error) in
-                
+    
                 if (error ==  nil) {
-            
+                    
                     completionHandler()
                     
                     // Set customer info
@@ -41,6 +42,8 @@ class FBManager {
                             }
                         }
                     }
+                } else {
+                    print(error)
                 }
             }
         }

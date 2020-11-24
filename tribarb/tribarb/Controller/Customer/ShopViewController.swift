@@ -102,7 +102,7 @@ class ShopViewController: UIViewController {
                 message: "Would you like to clear current cart and start a new \(bookingTypeString)?",
                 preferredStyle: .alert)
             
-            let okAction = UIAlertAction(title: "Start \(bookingTypeString)", style: .default) { (action: UIAlertAction!) in
+            let okAction = UIAlertAction(title: "Start \(bookingTypeString)", style: .destructive) { (action: UIAlertAction!) in
                 Cart.currentCart.reset()
                 self.tabBarController?.tabBar.items?[1].isEnabled = false
                 self.tabBarController?.tabBar.items?[1].badgeValue = nil
@@ -111,7 +111,7 @@ class ShopViewController: UIViewController {
                 self.load_shops()
             }
             
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action: UIAlertAction!) in
+            let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (action: UIAlertAction!) in
                 self.booking_type.selectedSegmentIndex = ShopViewController.BOOKING_TYPE_VAR ;
             }
             

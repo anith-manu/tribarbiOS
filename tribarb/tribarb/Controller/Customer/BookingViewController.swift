@@ -121,7 +121,7 @@ class BookingViewController: UIViewController {
             message: "This booking has already been accepted. If you would like to cancel, please call the barber.",
             preferredStyle: .alert)
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default)
     
         alertView.addAction(cancelAction)
         self.present(alertView, animated: true, completion: nil)
@@ -135,7 +135,7 @@ class BookingViewController: UIViewController {
             message: "Are you sure you want to cancel this booking?",
             preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: "Yes", style: .default) { (action: UIAlertAction!) in
+        let okAction = UIAlertAction(title: "Yes", style: .destructive) { (action: UIAlertAction!) in
             if let bookingID = self.bookingId {
                 APIManager.shared.cancelBooking(bookingID: bookingID) { (json) in
             
@@ -148,7 +148,7 @@ class BookingViewController: UIViewController {
             }
         }
         
-        let cancelAction = UIAlertAction(title: "No", style: .cancel)
+        let cancelAction = UIAlertAction(title: "No", style: .default)
         
         alertView.addAction(cancelAction)
         alertView.addAction(okAction)

@@ -24,13 +24,10 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate {
     
     var locationManager: CLLocationManager!
     
-    @IBOutlet weak var btLogout: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        btLogout.layer.cornerRadius = 5
-        btLogout.layer.masksToBounds = true
         
         
         if CLLocationManager.locationServicesEnabled() { 
@@ -124,7 +121,7 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate {
             
             if (error != nil) {
                 let alertController = UIAlertController(title: "Could Not Find Address", message: "Please enter a valid address.", preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "Cancel", style: .cancel)
+                let okAction = UIAlertAction(title: "Cancel", style: .default)
                 alertController.addAction(okAction)
                 self.present(alertController, animated: true, completion: nil)
             }
@@ -200,7 +197,7 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate {
             message: "Are you sure you want to logout?",
             preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: "Yes", style: .default) { (action: UIAlertAction!) in
+        let okAction = UIAlertAction(title: "Yes", style: .destructive) { (action: UIAlertAction!) in
             
             FBManager.shared.logOut()
             User.currentUser.resetCustomerInfo()
@@ -213,7 +210,7 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate {
             self.performSegue(withIdentifier: "CustomerLogout", sender: self)
         }
         
-        let cancelAction = UIAlertAction(title: "No", style: .cancel)
+        let cancelAction = UIAlertAction(title: "No", style: .default)
         
         alertView.addAction(cancelAction)
         alertView.addAction(okAction)
@@ -250,7 +247,7 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate {
             geocoder.geocodeAddressString(address) { (placemarks, error) in
                 if (error != nil) {
                     let alertController = UIAlertController(title: "Invalid Address", message: "Please enter a valid address.", preferredStyle: .alert)
-                    let okAction = UIAlertAction(title: "Cancel", style: .cancel)
+                    let okAction = UIAlertAction(title: "Cancel", style: .default)
                     alertController.addAction(okAction)
                     self.present(alertController, animated: true, completion: nil)
                 } else {

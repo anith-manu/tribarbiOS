@@ -86,7 +86,7 @@ class ServiceDetailsViewController: UIViewController {
             return
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default)
         
         if cartShop.id == currentShop.id {
             let inCart = Cart.currentCart.items.firstIndex { (item) -> Bool in
@@ -111,7 +111,7 @@ class ServiceDetailsViewController: UIViewController {
                 message: "You were booking from another shop. Would you like to clear current cart and start a new booking?",
                 preferredStyle: .alert)
             
-            let okAction = UIAlertAction(title: "Start New Booking", style: .default) { (action: UIAlertAction!) in
+            let okAction = UIAlertAction(title: "Start New Booking", style: .destructive) { (action: UIAlertAction!) in
                 Cart.currentCart.items = []
                 Cart.currentCart.items.append(cartItem)
                 Cart.currentCart.shop = self.shop

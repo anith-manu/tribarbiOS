@@ -200,7 +200,7 @@ class EmployeeBookingViewController: UIViewController {
             message: alertMessage,
             preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: "Yes", style: .cancel) { (action: UIAlertAction!) in
+        let okAction = UIAlertAction(title: "Yes", style: .destructive) { (action: UIAlertAction!) in
             
             if bookingAction == 0 {
                 APIManager.shared.employeeAcceptBooking(bookingID: self.bookingId!) { (json) in
@@ -263,7 +263,7 @@ extension EmployeeBookingViewController: UITableViewDelegate, UITableViewDataSou
 
 
 
-class BookingControls : UIButton {
+class CurvedButton : UIButton {
 
    override init(frame: CGRect) {
         super.init(frame: frame)

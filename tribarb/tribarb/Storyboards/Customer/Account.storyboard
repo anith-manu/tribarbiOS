@@ -84,7 +84,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vsr-Pb-l3m">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vsr-Pb-l3m" customClass="CurvedButton" customModule="tribarb" customModuleProvider="target">
                                                         <rect key="frame" x="20" y="581" width="374" height="50"/>
                                                         <color key="backgroundColor" red="0.9989349246" green="0.764754355" blue="0.4312785864" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <constraints>
@@ -98,7 +98,7 @@
                                                             <action selector="updateInfo:" destination="ieW-4e-v7t" eventType="touchUpInside" id="J0c-Wx-sek"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TVU-nV-WoU">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TVU-nV-WoU" customClass="CurvedButton" customModule="tribarb" customModuleProvider="target">
                                                         <rect key="frame" x="160" y="661" width="94" height="40"/>
                                                         <color key="backgroundColor" systemColor="systemRedColor"/>
                                                         <constraints>
@@ -129,7 +129,7 @@
                                                             <constraint firstAttribute="height" constant="200" id="mmv-LW-3qv"/>
                                                         </constraints>
                                                     </mapView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MXw-fb-NIg">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MXw-fb-NIg" customClass="CurvedButton" customModule="tribarb" customModuleProvider="target">
                                                         <rect key="frame" x="20" y="296" width="374" height="25"/>
                                                         <color key="backgroundColor" red="0.9989349246" green="0.764754355" blue="0.4312785864" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <constraints>
@@ -199,7 +199,6 @@
                         <outlet property="accountScroll" destination="mDP-xm-AcP" id="99v-pL-qow"/>
                         <outlet property="accountStackView" destination="ZCD-EB-OqB" id="dQr-u9-XzW"/>
                         <outlet property="addressTextView" destination="HIS-7V-ufb" id="2Fh-Yb-X5h"/>
-                        <outlet property="btLogout" destination="TVU-nV-WoU" id="hsR-sH-4B7"/>
                         <outlet property="imgAvatar" destination="Itg-kq-NfJ" id="TSs-w3-e0A"/>
                         <outlet property="lbEmail" destination="Ed0-IZ-60n" id="wp0-Kc-G0s"/>
                         <outlet property="lbName" destination="arO-WF-yKi" id="dxu-Cj-bvd"/>
