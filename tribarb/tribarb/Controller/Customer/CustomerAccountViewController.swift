@@ -10,7 +10,7 @@ import FBSDKLoginKit
 import MapKit
 import CoreLocation
 
-class CustomerAccountViewController: UIViewController, UITextFieldDelegate {
+class CustomerAccountViewController: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var accountScroll: UIScrollView!
     @IBOutlet weak var accountStackView: UIStackView!
@@ -24,11 +24,16 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate {
     
     var locationManager: CLLocationManager!
     
+    var previousLocation: CLLocation?
+    let activityIndicator = UIActivityIndicatorView()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(touchMap(_:)))
+        gestureRecognizer.delegate = self
+        map.addGestureRecognizer(gestureRecognizer)
         
         if CLLocationManager.locationServicesEnabled() { 
             locationManager = CLLocationManager()
@@ -43,13 +48,6 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate {
         navigationController?.setNavigationBarHidden(true, animated: false)
         
         accountScroll.keyboardDismissMode = .interactive
-        
-        lbName.text = User.currentUser.name
-        lbEmail.text = User.currentUser.email
-        
-        if User.currentUser.pictureURL != nil {
-            imgAvatar.image = try! UIImage(data: Data(contentsOf: URL(string: User.currentUser.pictureURL!)!))
-        }
         
         
         imgAvatar.layer.cornerRadius = 100/2
@@ -80,20 +78,89 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+
     
-    
-    override func viewWillAppear(_ animated: Bool) {        
-        self.addressTextView.text = User.currentUser.address!
-        self.tbPhone.text =  User.currentUser.phone!
+    override func viewWillAppear(_ animated: Bool) {
+        if User.currentUser.name == nil {
+            accountScroll.isHidden = true
+            Helpers.showWhiteOutActivityIndicator(activityIndicator, view)
+            APIManager.shared.customerGetDetails { (json) in
+                if json != nil {
+                    User.currentUser.setCustomerInfo(json: json!)
+                    self.setCustomerInfo()
+                }
+                Helpers.hideActivityIndicator(self.activityIndicator)
+                self.accountScroll.isHidden = false
+            }
+        } else {
+            setCustomerInfo()
+        }
         
-        if User.currentUser.address! != "" {
-            self.pinAddress(address: User.currentUser.address!)
+    }
+    
+    
+    func setCustomerInfo() {
+        map.removeAnnotations(map.annotations)
+        lbName.text = User.currentUser.name
+        lbEmail.text = User.currentUser.email
+        
+        if User.currentUser.pictureURL != nil {
+            imgAvatar.image = try! UIImage(data: Data(contentsOf: URL(string: User.currentUser.pictureURL!)!))
+        }
+        
+        addressTextView.text = User.currentUser.address
+        tbPhone.text =  User.currentUser.phone
+        
+        if User.currentUser.address ?? "" != "" {
+            pinAddress(address: User.currentUser.address!)
         }
     }
     
     
+    @objc func touchMap(_ gestureRecognizer: UILongPressGestureRecognizer) {
+        map.removeAnnotations(map.annotations)
+        
+        let geoCoder = CLGeocoder()
+        
+        let location = gestureRecognizer.location(in: map)
+        let coordinate = map.convert(location, toCoordinateFrom: map)
+        let clLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+    
+        
+        geoCoder.reverseGeocodeLocation(clLocation) { (placemarks, error) in
+            
+            if let _ = error {
+                //TODO: Show alert informing the user
+                return
+            }
+            
+            guard let placemark = placemarks?.first else {
+                //TODO: Show alert informing the user
+                return
+            }
+        
+            let streetNumber = placemark.subThoroughfare ?? ""
+            let streetName = placemark.thoroughfare ?? ""
+            let postalCode = placemark.postalCode ?? ""
+            let city = placemark.locality ?? ""
+            let country = placemark.country ?? ""
+ 
+            DispatchQueue.main.async {
+                self.addressTextView.text = "\(streetNumber) \(streetName), \(postalCode), \(city), \(country)"
+            }
+        }
+       
+        // Add annotation:
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = coordinate
+        map.addAnnotation(annotation)
+    }
+    
+    
+    
+    
     @objc func doneClicked() {
-        view.endEditing(true)
+        self.view.endEditing(true)
     }
  
     
@@ -107,9 +174,7 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate {
         if address == "" {
             address = User.currentUser.address!
         }
-        
-      
-        self.pinAddress(address: address)
+        pinAddress(address: address)
     }
     
     
@@ -139,8 +204,6 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate {
                 dropPin.coordinate = coordinates
                 self.map.addAnnotation(dropPin)
 
-                
-
                 Cart.currentCart.address = address
             }
         }
@@ -157,7 +220,7 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate {
             
             
             if tabBarController?.tabBar.bounds.height != nil {
-                self.accountScroll.contentSize = CGSize(width: self.view.frame.width, height: self.accountStackView.frame.height+keyboardHeight-(tabBarController?.tabBar.bounds.height)!)
+                accountScroll.contentSize = CGSize(width: self.view.frame.width, height: accountStackView.frame.height+keyboardHeight-(tabBarController?.tabBar.bounds.height)!)
             }
         }
          
@@ -165,28 +228,8 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate {
     
     
     @objc func keyboardDisappear(_ notification: Notification) {
-        self.accountScroll.contentSize = CGSize(width: self.view.frame.width, height: self.accountStackView.frame.height)
+        accountScroll.contentSize = CGSize(width: self.view.frame.width, height: accountStackView.frame.height)
     }
-    
-    
-    
-    
-    @objc func keyboardWillChange(notification: Notification) {
-
-        guard let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
-            return
-        }
-
-        if notification.name == UIResponder.keyboardWillShowNotification || notification.name == UIResponder.keyboardWillChangeFrameNotification {
-            print("here")
-            accountScroll.frame.origin.y = -keyboardRect.height+(tabBarController?.tabBar.bounds.height)!
-        } else {
-            print("CALLED")
-            accountScroll.frame.origin.y = 0
-        }
-    }
-    
-    
     
     
 
@@ -255,6 +298,7 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate {
                     APIManager.shared.customerUpdateDetails(phone: phone, address: address) { (json) in
                         User.currentUser.address = address
                         self.viewWillAppear(true)
+                        self.updateCompleteMessage()
                     }
                     
                     
@@ -267,18 +311,27 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate {
             APIManager.shared.customerUpdateDetails(phone: phone, address: address) { (json) in
                 User.currentUser.phone = phone
                 self.viewWillAppear(true)
+                self.updateCompleteMessage()
             }
         }
         
     }
     
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return false
+    
+    func updateCompleteMessage() {
+        let message = "Successfully Updated"
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .actionSheet)
+        self.present(alert, animated: true)
+
+        // duration in seconds
+        let duration: Double = 1
+
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + duration) {
+            alert.dismiss(animated: true)
+        }
     }
     
-
 }
 
 
@@ -293,3 +346,4 @@ extension CustomerAccountViewController: CLLocationManagerDelegate {
         self.map.setRegion(region, animated: true)
     }
 }
+

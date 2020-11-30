@@ -9,6 +9,7 @@ import Foundation
 import SwiftyJSON
 
 
+
 class Helpers {
     
     // Helper to load image asynchronously
@@ -48,8 +49,8 @@ class Helpers {
     
     
     // Helper to show activity indicator
-    static func showBookingActivityIndicator(_ activityIndicator: UIActivityIndicatorView,_ view: UIView) {
-        print(view.frame.width)
+    static func showWhiteOutActivityIndicator(_ activityIndicator: UIActivityIndicatorView,_ view: UIView) {
+    
         activityIndicator.frame = CGRect(x: 0.0, y: 0.0, width: view.frame.width, height: view.frame.height)
         activityIndicator.center = view.center
         activityIndicator.hidesWhenStopped = true
@@ -61,5 +62,5 @@ class Helpers {
         activityIndicator.startAnimating()
         
     }
-   
+    
 }

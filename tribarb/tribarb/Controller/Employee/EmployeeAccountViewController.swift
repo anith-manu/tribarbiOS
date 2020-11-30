@@ -16,19 +16,15 @@ class EmployeeAccountViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var tfPhone: UITextField!
     @IBOutlet weak var accountScroll: UIScrollView!
     
+    let activityIndicator = UIActivityIndicatorView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         accountScroll.keyboardDismissMode = .interactive
         
         
-        lbName.text = User.currentUser.name
-        lbEmail.text = User.currentUser.email
-        lbShopName.text = User.currentUser.shop
         
-        if User.currentUser.pictureURL != nil {
-            imgAvatar.image = try! UIImage(data: Data(contentsOf: URL(string: User.currentUser.pictureURL!)!))
-        }
         
         imgAvatar.layer.cornerRadius = 100/2
         imgAvatar.layer.borderWidth = 1.0
@@ -55,8 +51,34 @@ class EmployeeAccountViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.tfPhone.text =  User.currentUser.phone
+        if User.currentUser.name == nil {
+            accountScroll.isHidden = true
+            Helpers.showWhiteOutActivityIndicator(activityIndicator, view)
+            APIManager.shared.customerGetDetails { (json) in
+                if json != nil {
+                    User.currentUser.setCustomerInfo(json: json!)
+                    self.setEmployeeInfo()
+                }
+                Helpers.hideActivityIndicator(self.activityIndicator)
+                self.accountScroll.isHidden = false
+            }
+        } else {
+            setEmployeeInfo()
+        }
+        
     }
+    
+    
+    func setEmployeeInfo() {
+        lbName.text = User.currentUser.name
+        lbEmail.text = User.currentUser.email
+        lbShopName.text = User.currentUser.shop
+        
+        if User.currentUser.pictureURL != nil {
+            imgAvatar.image = try! UIImage(data: Data(contentsOf: URL(string: User.currentUser.pictureURL!)!))
+        }
+    }
+    
 
     @IBAction func updateInfo(_ sender: Any) {
         
@@ -73,6 +95,7 @@ class EmployeeAccountViewController: UIViewController, UITextFieldDelegate {
             APIManager.shared.employeeUpdateDetails(phone: phone) { (json) in
                 User.currentUser.phone = phone
                 self.viewWillAppear(true)
+                self.updateCompleteMessage()
             }
         }
     }
@@ -106,6 +129,17 @@ class EmployeeAccountViewController: UIViewController, UITextFieldDelegate {
     
     
 
-    
+    func updateCompleteMessage() {
+        let message = "Successfully Updated"
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .actionSheet)
+        self.present(alert, animated: true)
+
+        // duration in seconds
+        let duration: Double = 1
+
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + duration) {
+            alert.dismiss(animated: true)
+        }
+    }
 
 }

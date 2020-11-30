@@ -1,13 +1,16 @@
 //
-//  ServiceListTableViewController.swift
+//  ServiceListViewController.swift
 //  tribarb
 //
-//  Created by Anith Manu on 19/10/2020.
+//  Created by Anith Manu on 29/11/2020.
 //
 
 import UIKit
+import CoreLocation
+import MapKit
 
-class ServiceListTableViewController: UITableViewController {
+
+class ServiceListViewController: UIViewController {
     
     @IBOutlet weak var shopLogo: UIImageView!
     @IBOutlet weak var lbShopName: UILabel!
@@ -16,9 +19,10 @@ class ServiceListTableViewController: UITableViewController {
     @IBOutlet weak var btShopFb: UIButton!
     @IBOutlet weak var btShopPhone: UIButton!
     @IBOutlet var tbvServices: UITableView!
+    @IBOutlet weak var serviceListScrollView: UIScrollView!
     
     @IBOutlet weak var lbRating: UILabel!
-    @IBOutlet weak var lbNewlyAdded: UILabel!
+    @IBOutlet weak var newlyAddedView: UIView!
     @IBOutlet weak var ratingView: UIView!
     @IBOutlet weak var lbNumberOfRatings: UILabel!
     
@@ -28,9 +32,7 @@ class ServiceListTableViewController: UITableViewController {
     var phone = ""
     var services = [Service]()
     let activityIndicator = UIActivityIndicatorView()
-    
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,10 +63,10 @@ class ServiceListTableViewController: UITableViewController {
         
         if shop?.totalRating! == 0 {
             ratingView.isHidden = true
-            lbNewlyAdded.isHidden = false
+            newlyAddedView.isHidden = false
         } else {
             ratingView.isHidden = false
-            lbNewlyAdded.isHidden = true
+            newlyAddedView.isHidden = true
             let rating = ((shop?.totalRating)!/(shop?.numberOfRatings)!)
             lbRating.text = String(format: "%.1f", rating)
             lbNumberOfRatings.text = "(\(Int((shop?.numberOfRatings)!)))"
@@ -74,9 +76,26 @@ class ServiceListTableViewController: UITableViewController {
     }
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "ServiceDetails" {
+            let controller = segue.destination as! ServiceDetailsViewController
+            controller.service = services[(tbvServices.indexPathForSelectedRow?.row)!]
+            controller.shop = shop
+        }
+    }
+    
+    
     
     func loadServices() {
-        Helpers.showActivityIndicator(activityIndicator, view)
+        serviceListScrollView.isHidden = true
+        Helpers.showWhiteOutActivityIndicator(activityIndicator, view)
         
         if let shopId = shop?.id {
             APIManager.shared.getServices(filterID: ShopViewController.BOOKING_TYPE_VAR, shopID: shopId) { (json) in
@@ -89,14 +108,14 @@ class ServiceListTableViewController: UITableViewController {
                             let service = Service(json: item)
                             self.services.append(service)
                         }
-                        self.tableView.reloadData()
-                        Helpers.hideActivityIndicator(self.activityIndicator)
+                        self.tbvServices.reloadData()
                     }
+                    Helpers.hideActivityIndicator(self.activityIndicator)
+                    self.serviceListScrollView.isHidden = false
                 }
             }
         }
     }
-    
     
     
     @IBAction func openIG(_ sender: Any) {
@@ -108,7 +127,6 @@ class ServiceListTableViewController: UITableViewController {
     @IBAction func openFB(_ sender: Any) {
         UIApplication.shared.open(URL(string: "https://www.facebook.com/\(fb)")!)
     }
-    
     
     
     @IBAction func call(_ sender: Any) {
@@ -123,38 +141,57 @@ class ServiceListTableViewController: UITableViewController {
     }
     
     
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    @IBAction func openMaps(_ sender: Any) {
         
-        if segue.identifier == "ServiceDetails" {
-            let controller = segue.destination as! ServiceDetailsViewController
-            controller.service = services[(tableView.indexPathForSelectedRow?.row)!]
-            controller.shop = shop
+        guard let address = shop?.address else {
+            return
+        }
+        
+        
+        let geoCoder = CLGeocoder()
+        geoCoder.geocodeAddressString(address) { (placemarks, error) in
+            guard
+                let placemarks = placemarks,
+                let location = placemarks.first?.location
+            else {
+                // handle no location found
+                return
+            }
+            
+            // Use your location
+            let regionDistance: CLLocationDistance = 1000
+            let coordinates = location.coordinate
+            let regionSpan = MKCoordinateRegion(center: coordinates, latitudinalMeters: regionDistance, longitudinalMeters: regionDistance)
+            
+            let options = [MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center), MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)]
+                
+            let placemark = MKPlacemark(coordinate: coordinates)
+            let mapItem = MKMapItem(placemark: placemark)
+            mapItem.name = self.shop?.name
+            mapItem.openInMaps(launchOptions: options)
         }
     }
     
+
+}
+
+
+
+extension ServiceListViewController: UITableViewDelegate, UITableViewDataSource {
     
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: false)
-    }
-    
-    
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return services.count
     }
     
     
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ServiceCell", for: indexPath) as! ServiceTableViewCell
         
         let service = services[indexPath.row]
@@ -165,12 +202,5 @@ class ServiceListTableViewController: UITableViewController {
             cell.lbServicePrice.text = "£\(price)"
         }
         return cell
-        
     }
-    
-
-    
-    
-    
-    
 }

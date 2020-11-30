@@ -7,6 +7,8 @@
 
 import UIKit
 import SwiftyJSON
+import CoreLocation
+import MapKit
 
 class EmployeeBookingViewController: UIViewController {
 
@@ -17,6 +19,7 @@ class EmployeeBookingViewController: UIViewController {
     @IBOutlet weak var lbStatus: UILabel!
     
     @IBOutlet weak var mapView: UIView!
+    @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var addressView: UIView!
     @IBOutlet weak var lbAddress: UILabel!
     @IBOutlet weak var lbSubtotal: UILabel!
@@ -33,9 +36,21 @@ class EmployeeBookingViewController: UIViewController {
     @IBOutlet weak var tbvServices: ContentSizedTableView!
     
     var bookingId: Int?
+    var bookingStatus: String?
+    
     var phone = ""
     var bookedServices = [JSON]()
     let activityIndicator = UIActivityIndicatorView()
+    
+    var destination: MKPlacemark?
+    var source: MKPlacemark?
+    var employeePin: MKPointAnnotation!
+    var lastLocation: CLLocationCoordinate2D!
+    
+    var locationManager: CLLocationManager!
+    var client_address: String?
+    
+    var timer = Timer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,19 +62,44 @@ class EmployeeBookingViewController: UIViewController {
         self.imgAvatar.layer.borderWidth = 1.0
         self.imgAvatar.layer.borderColor = UIColor.white.cgColor
         self.imgAvatar.clipsToBounds = true
-
+        
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager = CLLocationManager()
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.requestAlwaysAuthorization()
+            locationManager.startUpdatingLocation()
+            self.map.showsUserLocation = true
+        }
+        
+       
+        if bookingStatus! == "Barber En Route" {
+            timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(updateLocation(_:)), userInfo: nil, repeats: true)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         getBooking()
     }
     
+    override func viewWillLayoutSubviews() {
+        lbRequest.sizeToFit()
+    }
+    
+    @objc func updateLocation(_ sender: AnyObject) {
+        APIManager.shared.updateEmployeeLocation(location: self.lastLocation) { (json) in
+            
+        }
+    }
+    
+    
     
     func getBooking() {
-        Helpers.showBookingActivityIndicator(activityIndicator, view)
-        print(bookingId!)
+        Helpers.showWhiteOutActivityIndicator(activityIndicator, view)
+
         APIManager.shared.getBooking(bookingID: bookingId!) { (json) in
-            print(json)
+
             let booking = Booking(json: json!["booking"])
             
             self.setUIElements(booking: booking)
@@ -79,12 +119,23 @@ class EmployeeBookingViewController: UIViewController {
             self.mapView.isHidden = false
             self.addressView.isHidden = false
             self.lbAddress.text = booking.home_address!
+            self.client_address = booking.home_address!
+            
+            self.getLocation(booking.home_address!, "Client") { (dest) in
+                self.destination = dest
+
+            }
         }
         
 
         if booking.status == "Completed" || booking.status == "Cancelled" || booking.status == "Declined"  {
             self.mapView.isHidden = true
             self.buttonsView.isHidden = true
+            
+            if booking.status == "Completed" && booking.booking_type == 1 {
+                self.timer.invalidate()
+            }
+
         }
         
         if booking.status == "Placed" {
@@ -153,15 +204,49 @@ class EmployeeBookingViewController: UIViewController {
         }
         
         
-        
-        
         // SERVICE FEE MODIFY HERE
         self.lbSubtotal.text = "£\(booking.total! - 1.5)"
         self.lbTotal.text = "£\(booking.total!)"
 
     }
 
+
+    
     @IBAction func call(_ sender: Any) {
+        if let phoneCallURL = URL(string: "tel://\(phone)") {
+            let application:UIApplication = UIApplication.shared
+            
+            if (application.canOpenURL(phoneCallURL)) {
+                application.open(phoneCallURL, options: [:], completionHandler: nil)
+            }
+          }
+    }
+    
+    
+    @IBAction func openMaps(_ sender: Any) {
+    
+        let geoCoder = CLGeocoder()
+        geoCoder.geocodeAddressString(client_address!) { (placemarks, error) in
+            guard
+                let placemarks = placemarks,
+                let location = placemarks.first?.location
+            else {
+                // handle no location found
+                return
+            }
+            
+            // Use your location
+            let regionDistance: CLLocationDistance = 1000
+            let coordinates = location.coordinate
+            let regionSpan = MKCoordinateRegion(center: coordinates, latitudinalMeters: regionDistance, longitudinalMeters: regionDistance)
+            
+            let options = [MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center), MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)]
+                
+            let placemark = MKPlacemark(coordinate: coordinates)
+            let mapItem = MKMapItem(placemark: placemark)
+            mapItem.name = "Client"
+            mapItem.openInMaps(launchOptions: options)
+        }
     }
     
     
@@ -182,6 +267,8 @@ class EmployeeBookingViewController: UIViewController {
     
     
     @IBAction func enrouteBooking(_ sender: Any) {
+        timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(updateLocation(_:)), userInfo: nil, repeats: true)
+        
         let title = "En Route"
         let message = "Are you on your way to the clients house?"
         performAction(alertTitle: title, alertMessage: message, bookingAction: 2)
@@ -221,6 +308,7 @@ class EmployeeBookingViewController: UIViewController {
                 APIManager.shared.employeeCompleteBooking(bookingID: self.bookingId!) { (json) in
                     self.viewWillAppear(true)
                 }
+                
             }
         }
         
@@ -232,6 +320,8 @@ class EmployeeBookingViewController: UIViewController {
         
         
     }
+    
+    
 }
 
 
@@ -280,4 +370,75 @@ class CurvedButton : UIButton {
         self.layer.masksToBounds = true    
    }
 
+}
+
+
+extension EmployeeBookingViewController: CLLocationManagerDelegate {
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        let location = locations.last! as CLLocation
+        self.lastLocation = location.coordinate
+        
+//        // Creat pin annotation for employee
+//        if employeePin != nil {
+//            employeePin.coordinate = self.lastLocation
+//        } else {
+//            employeePin = MKPointAnnotation()
+//            employeePin.title = "You"
+//            employeePin.coordinate = self.lastLocation
+//            self.map.addAnnotation(employeePin)
+//        }
+        
+        // Reset zoom to cover the 3 locations
+        var zoomRect = MKMapRect.null
+
+        for annotation in self.map.annotations {
+            let annotationPoint = MKMapPoint.init(annotation.coordinate)
+            let pointRect = MKMapRect.init(x: annotationPoint.x, y: annotationPoint.y, width: 0.1, height: 0.1)
+            zoomRect = zoomRect.union(pointRect)
+        }
+        
+        let insetWidth = -zoomRect.size.width * 0.2
+        let insetHeight = -zoomRect.size.height * 0.2
+        let insetRect = zoomRect.insetBy(dx: insetWidth, dy: insetHeight)
+        
+        self.map.setVisibleMapRect(insetRect, animated: true)
+    }
+}
+
+
+
+extension EmployeeBookingViewController: MKMapViewDelegate {
+    
+    // #1 - Delegate method of MKMapViewDelegate
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKPolylineRenderer(overlay: overlay)
+        renderer.strokeColor = UIColor.lightGray
+        renderer.lineWidth = 3.0
+        
+        return renderer
+    }
+    
+    
+    // #2 - Convert an address string to a location on the map
+    func getLocation(_ address: String,_ title: String,_ completionHandler: @escaping (MKPlacemark) -> Void) {
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(address) { (placemarks, error) in
+            
+            if (error != nil) {
+                print("Error: ", error ?? "")
+            }
+            
+            if let placemark = placemarks?.first {
+                let coordinates: CLLocationCoordinate2D = placemark.location!.coordinate
+                // Create pin
+                let dropPin = MKPointAnnotation()
+                dropPin.coordinate = coordinates
+                dropPin.title = title
+                self.map.addAnnotation(dropPin)
+                completionHandler(MKPlacemark.init(placemark: placemark))
+            }
+        }
+    }
 }

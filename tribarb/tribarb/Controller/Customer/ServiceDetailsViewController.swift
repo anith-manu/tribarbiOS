@@ -31,8 +31,10 @@ class ServiceDetailsViewController: UIViewController {
         serviceImagesCV.translatesAutoresizingMaskIntoConstraints = false
         serviceImagesCV.register(CustomCell.self, forCellWithReuseIdentifier: "cell")
         serviceImagesCV.backgroundColor = .white
+        
         loadService()
         loadAlbum()
+       
     }
     
     
@@ -128,7 +130,7 @@ class ServiceDetailsViewController: UIViewController {
     
     func addedToCartMessage() {
         let message = "Added to cart"
-        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .actionSheet)
         self.present(alert, animated: true)
 
         // duration in seconds

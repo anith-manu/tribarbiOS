@@ -165,7 +165,8 @@ open class GSImageViewerController: UIViewController {
         setupImageHD()
         
         edgesForExtendedLayout = UIRectEdge()
-        automaticallyAdjustsScrollViewInsets = false
+        scrollView.contentInsetAdjustmentBehavior = .automatic
+//        automaticallyAdjustsScrollViewInsets = false
     }
     
     override open func viewWillLayoutSubviews() {

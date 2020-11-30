@@ -43,7 +43,7 @@ class FBManager {
                         }
                     }
                 } else {
-                    print(error)
+                    print(error ?? "")
                 }
             }
         }

@@ -22,12 +22,9 @@ class ShopViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-  
-
-    
+        
         load_shops()
         tabbarConfig()
-        
     }
     
     
@@ -131,7 +128,7 @@ class ShopViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "ServiceList" {
-            let controller = segue.destination as! ServiceListTableViewController
+            let controller = segue.destination as! ServiceListViewController
             controller.shop = shops[(tbvShops.indexPathForSelectedRow?.row)!]
         }
     }

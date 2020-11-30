@@ -9,7 +9,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class AddressViewController: UIViewController, UITextFieldDelegate {
+class AddressViewController: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var addressStackView: UIStackView!
     @IBOutlet weak var addressScrollView: UIScrollView!
@@ -52,7 +52,6 @@ class AddressViewController: UIViewController, UITextFieldDelegate {
         }
         
         if User.currentUser.address != nil && User.currentUser.address! != "" {
-            print("called")
             self.btDifferentAddress.isHidden = false
             self.newAddress.isHidden = true
             self.lbSavedAddress.text = User.currentUser.address!
@@ -64,7 +63,7 @@ class AddressViewController: UIViewController, UITextFieldDelegate {
             self.newAddress.isHidden = false
             self.btDifferentAddress.isHidden = true
         }
-        
+    
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardAppear(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         
@@ -74,6 +73,44 @@ class AddressViewController: UIViewController, UITextFieldDelegate {
     }
     
     
+    @objc func touchMap(_ gestureRecognizer: UILongPressGestureRecognizer) {
+        map.removeAnnotations(map.annotations)
+        
+        let geoCoder = CLGeocoder()
+        
+        let location = gestureRecognizer.location(in: map)
+        let coordinate = map.convert(location, toCoordinateFrom: map)
+        let clLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+    
+        
+        geoCoder.reverseGeocodeLocation(clLocation) { (placemarks, error) in
+            
+            if let _ = error {
+                //TODO: Show alert informing the user
+                return
+            }
+            
+            guard let placemark = placemarks?.first else {
+                //TODO: Show alert informing the user
+                return
+            }
+        
+            let streetNumber = placemark.subThoroughfare ?? ""
+            let streetName = placemark.thoroughfare ?? ""
+            let postalCode = placemark.postalCode ?? ""
+            let city = placemark.locality ?? ""
+            let country = placemark.country ?? ""
+ 
+            DispatchQueue.main.async {
+                self.addressTextView.text = "\(streetNumber) \(streetName), \(postalCode), \(city), \(country)"
+            }
+        }
+       
+        // Add annotation:
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = coordinate
+        map.addAnnotation(annotation)
+    }
   
     
     override func viewWillAppear(_ animated: Bool) {
@@ -173,9 +210,12 @@ class AddressViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    
 
     @IBAction func chooseDifferentAddress(_ sender: Any) {
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(touchMap(_:)))
+        gestureRecognizer.delegate = self
+        map.addGestureRecognizer(gestureRecognizer)
+        
         self.btDifferentAddress.isHidden = true
         self.newAddress.isHidden = false
         self.viewWillAppear(true)

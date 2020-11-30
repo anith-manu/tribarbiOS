@@ -9,6 +9,7 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 import FBSDKLoginKit
+import CoreLocation
 
 
 
@@ -275,6 +276,14 @@ class APIManager {
     }
     
     
+    func getEmployeeLocation(completionHandler: @escaping (JSON?) -> Void){
+        let path = "api/customer/employee/location/"
+        let params: [String: Any] = [
+            "access_token": self.accessToken
+        ]
+        requestServer(.get, path, params, URLEncoding(), completionHandler)
+    }
+    
     
     func employeeVerification(shopID: Int, token: String, completionHandler: @escaping (JSON?) -> Void) {
         let path = "api/employee/verify/"
@@ -385,6 +394,19 @@ class APIManager {
             "booking_id": bookingID
         ]
     
+        requestServer(.post, path, params,  URLEncoding(), completionHandler)
+    }
+    
+    
+    
+    func updateEmployeeLocation(location: CLLocationCoordinate2D, completionHandler: @escaping (JSON?) -> Void){
+        
+        let path = "api/employee/location/update/"
+        let params: [String: Any] = [
+            "access_token": self.accessToken,
+            "location": "\(location.latitude),\(location.longitude)"
+        ]
+        
         requestServer(.post, path, params,  URLEncoding(), completionHandler)
     }
     

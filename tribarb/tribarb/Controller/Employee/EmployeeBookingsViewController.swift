@@ -57,6 +57,7 @@ class EmployeeBookingsViewController: UIViewController {
         if segue.identifier == "BookingDetail" {
             let controller = segue.destination as! EmployeeBookingViewController
             controller.bookingId = bookings[(tbvBookings.indexPathForSelectedRow?.row)!].id
+            controller.bookingStatus = bookings[(tbvBookings.indexPathForSelectedRow?.row)!].status
         }
     }
     
@@ -118,7 +119,12 @@ extension EmployeeBookingsViewController: UITableViewDelegate, UITableViewDataSo
             cell.lbStatus.backgroundColor = UIColor(red: 0.23, green: 0.65, blue: 0.00, alpha: 1.00)
         } else if booking.status == "Cancelled" || booking.status == "Declined" {
             cell.lbStatus.backgroundColor = .systemRed
+            
+            if booking.status == "Cancelled" {
+                cell.barberView.isHidden = true
+            }
         }
+        
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:SSZ"

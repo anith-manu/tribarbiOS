@@ -40,6 +40,7 @@ class BookingViewController: UIViewController {
     @IBOutlet weak var lbThanksForRating: UILabel!
     @IBOutlet weak var btSubmitRating: UIButton!
     
+    @IBOutlet weak var bookingScrollView: UIScrollView!
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var mapView: UIView!
     @IBOutlet weak var requestView: UIView!
@@ -48,6 +49,7 @@ class BookingViewController: UIViewController {
     @IBOutlet weak var tbvServices: UITableView!
     @IBOutlet weak var ratingView: UIView!
     @IBOutlet weak var starsView: UIView!
+    @IBOutlet weak var btShopAddress: UIButton!
     
     var bookedServices = [JSON]()
     var phone = ""
@@ -60,8 +62,10 @@ class BookingViewController: UIViewController {
     
     var destination: MKPlacemark?
     var source: MKPlacemark?
-    var driverPin: MKPointAnnotation!
+    var employeePin: MKPointAnnotation!
     var timer = Timer()
+    var shop_address: String?
+    var shop_name: String?
     
     
     override func viewDidLoad() {
@@ -72,22 +76,25 @@ class BookingViewController: UIViewController {
         cosmosView.centerInSuperview()
         btSubmitRating.layer.cornerRadius = 10
         btSubmitRating.layer.masksToBounds = true
+        getBooking()
       
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
-        getBooking()
     }
     
     
+    override func viewWillLayoutSubviews() {
+        lbRequest.sizeToFit()
+    }
 
     
     func getBooking() {
-        Helpers.showBookingActivityIndicator(activityIndicator, view)
-    
-
+        bookingScrollView.isHidden = true
+        Helpers.showWhiteOutActivityIndicator(activityIndicator, view)
+        
         APIManager.shared.getBooking(bookingID: bookingId!) { (json) in
             
             
@@ -95,7 +102,47 @@ class BookingViewController: UIViewController {
             
             self.setUIElements(booking: booking)
             
+            if booking.status == "Barber En Route" {
+                self.setTimer()
+            }
             Helpers.hideActivityIndicator(self.activityIndicator)
+            self.bookingScrollView.isHidden = false
+        }
+    }
+    
+    
+    func setTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(getEmployeeLocation(_:)), userInfo: nil, repeats: true)
+    }
+    
+    
+    @objc func getEmployeeLocation(_ sender: AnyObject) {
+        APIManager.shared.getEmployeeLocation { (json) in
+            
+            if let location = json?["location"].string {
+                
+                let split = location.components(separatedBy: ",")
+                let lat = split[0]
+                let lng = split[1]
+                
+                let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(lat)!, longitude: CLLocationDegrees(lng)!)
+            
+                
+                // Creat pin annotation for employee
+                if self.employeePin != nil {
+                    self.employeePin.coordinate = coordinate
+                } else {
+                    self.employeePin = MKPointAnnotation()
+                    self.employeePin.coordinate = coordinate
+                    self.employeePin.title = "Barber"
+                    self.map.addAnnotation(self.employeePin)
+                }
+                
+                // Reset zoom to cover the 3 locations
+                self.autoZoom()
+            } else {
+                self.timer.invalidate()
+            }
         }
     }
     
@@ -140,7 +187,7 @@ class BookingViewController: UIViewController {
                 APIManager.shared.cancelBooking(bookingID: bookingID) { (json) in
             
                     if json!["status"] == "success" {
-                        self.viewWillAppear(true)
+                        self.getBooking()
                     } else {
                         self.bookingCancelledFailedMessage()
                     }
@@ -161,16 +208,20 @@ class BookingViewController: UIViewController {
     func setUIElements(booking: Booking) {
         self.title = "Booking #\(booking.id!)"
         self.lbShopName.text = booking.shopName!
+        self.shop_name = booking.shopName!
         
         var bookingType = ""
         if booking.booking_type == 0 {
             bookingType = "Shop booking"
-            self.lbAddressType.text = "Shop Address : "
+            self.lbAddressType.text = "Shop Address"
             self.lbAddress.text = booking.shop_address!
+            self.shop_address = booking.shop_address!
+            
         } else {
             bookingType = "Home booking"
-            self.lbAddressType.text = "Home Address : "
+            self.lbAddressType.text = "Home Address"
             self.lbAddress.text = booking.home_address!
+            self.btShopAddress.isHidden = true
         }
         
         let dateString = booking.date!
@@ -236,15 +287,19 @@ class BookingViewController: UIViewController {
             }
         } else {
             self.mapView.isHidden = false
-//            self.getLocation(booking.home_address!, "You") { (dest) in
-//                self.destination = dest
-//                
-//                self.getLocation(booking.shop_address!, "Shop") { (sou) in
-//                    self.source = sou
-//                    self.getDirections()
-//                }
-//            }
+        
             
+            if booking.booking_type == 0 {
+                self.getLocation(booking.shop_address!, "\(booking.shopName!)") { (sou) in
+                    self.source = sou
+                    self.setMapFocus(centerCoordinate: sou.coordinate, radiusInKm: 1)
+                }
+            } else {
+                self.getLocation(booking.home_address!, "Home") { (dest) in
+                    self.destination = dest
+                    self.setMapFocus(centerCoordinate: dest.coordinate, radiusInKm: 1)
+                }
+            }
         }
         
         // SERVICE FEE MODIFY HERE
@@ -266,7 +321,31 @@ class BookingViewController: UIViewController {
           }
     }
     
+    @IBAction func openMaps(_ sender: Any) {
     
+        let geoCoder = CLGeocoder()
+        geoCoder.geocodeAddressString(shop_address!) { (placemarks, error) in
+            guard
+                let placemarks = placemarks,
+                let location = placemarks.first?.location
+            else {
+                // handle no location found
+                return
+            }
+            
+            // Use your location
+            let regionDistance: CLLocationDistance = 1000
+            let coordinates = location.coordinate
+            let regionSpan = MKCoordinateRegion(center: coordinates, latitudinalMeters: regionDistance, longitudinalMeters: regionDistance)
+            
+            let options = [MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center), MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)]
+                
+            let placemark = MKPlacemark(coordinate: coordinates)
+            let mapItem = MKMapItem(placemark: placemark)
+            mapItem.name = self.shop_name
+            mapItem.openInMaps(launchOptions: options)
+        }
+    }
     
     @IBAction func submitRating(_ sender: Any) {
         self.lbThanksForRating.text = "Rating Submitted"
@@ -295,6 +374,15 @@ class BookingViewController: UIViewController {
         let insetRect = zoomRect.insetBy(dx: insetWidth, dy: insetHeight)
         
         self.map.setVisibleMapRect(insetRect, animated: true)
+    }
+    
+    
+
+    
+    func setMapFocus(centerCoordinate: CLLocationCoordinate2D, radiusInKm radius: CLLocationDistance) {
+        let diameter = radius * 2000
+        let region = MKCoordinateRegion(center: centerCoordinate, latitudinalMeters: diameter, longitudinalMeters: diameter)
+        self.map.setRegion(region, animated: false)
     }
 }
 
@@ -343,7 +431,7 @@ extension BookingViewController: MKMapViewDelegate {
         geocoder.geocodeAddressString(address) { (placemarks, error) in
             
             if (error != nil) {
-                print("Error: ", error)
+                print("Error: ", error ?? "")
             }
             
             if let placemark = placemarks?.first {
@@ -356,38 +444,6 @@ extension BookingViewController: MKMapViewDelegate {
                 completionHandler(MKPlacemark.init(placemark: placemark))
             }
         }
-    }
-    
-    
-    // #3 - Get direction and zoom to address
-    func getDirections() {
-        
-        let request = MKDirections.Request()
-        request.source = MKMapItem.init(placemark: source!)
-        request.destination = MKMapItem.init(placemark: destination!)
-        request.requestsAlternateRoutes = false
-        
-        let directions = MKDirections(request: request)
-        directions.calculate { (response, error) in
-            
-            if error != nil {
-                print("Error:", error)
-            } else {
-                // Show route
-                self.showRoute(response: response!)
-                self.autoZoom()
-            }
-        }
-    }
-    
-    // #4 - Show route between locations and make zoom
-    func showRoute(response: MKDirections.Response) {
-        
-        for route in response.routes {
-            self.map.addOverlay(route.polyline, level: MKOverlayLevel.aboveRoads)
-        }
-        
-        
     }
     
 }
