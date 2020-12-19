@@ -32,6 +32,7 @@ class ServiceDetailsViewController: UIViewController {
         serviceImagesCV.register(CustomCell.self, forCellWithReuseIdentifier: "cell")
         serviceImagesCV.backgroundColor = .white
         
+        
         loadService()
         loadAlbum()
        
@@ -117,6 +118,7 @@ class ServiceDetailsViewController: UIViewController {
                 Cart.currentCart.items = []
                 Cart.currentCart.items.append(cartItem)
                 Cart.currentCart.shop = self.shop
+                self.addedToCartMessage()
             }
             
             alertView.addAction(okAction)
@@ -129,7 +131,7 @@ class ServiceDetailsViewController: UIViewController {
     
     
     func addedToCartMessage() {
-        let message = "Added to cart"
+        let message = "Added to cart."
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .actionSheet)
         self.present(alert, animated: true)
 

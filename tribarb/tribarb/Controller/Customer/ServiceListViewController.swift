@@ -18,13 +18,22 @@ class ServiceListViewController: UIViewController {
     @IBOutlet weak var btShopIg: UIButton!
     @IBOutlet weak var btShopFb: UIButton!
     @IBOutlet weak var btShopPhone: UIButton!
+    @IBOutlet weak var btShopOnMap: UIButton!
     @IBOutlet var tbvServices: UITableView!
-    @IBOutlet weak var serviceListScrollView: UIScrollView!
+
+    @IBOutlet weak var shopInfoView: UIView!
+    @IBOutlet weak var blurView: UIVisualEffectView!
+    @IBOutlet weak var coverHeightConstraint: NSLayoutConstraint!
+    var previousOffsetState: CGFloat = 0
     
+
     @IBOutlet weak var lbRating: UILabel!
-    @IBOutlet weak var newlyAddedView: UIView!
     @IBOutlet weak var ratingView: UIView!
     @IBOutlet weak var lbNumberOfRatings: UILabel!
+    
+    static var lastFractionComplete: CGFloat = 0
+    
+    var comingFromRoot: Bool = false
     
     var shop: Shop?
     var ig = ""
@@ -35,6 +44,9 @@ class ServiceListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        ratingView.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        ratingView.layer.cornerRadius = 10
         
         if ShopViewController.BOOKING_TYPE_VAR == 0 {
             self.navigationItem.title = "Shop Services"
@@ -61,26 +73,53 @@ class ServiceListViewController: UIViewController {
         }
         
         
-        if shop?.totalRating! == 0 {
-            ratingView.isHidden = true
-            newlyAddedView.isHidden = false
-        } else {
-            ratingView.isHidden = false
-            newlyAddedView.isHidden = true
-            let rating = ((shop?.totalRating)!/(shop?.numberOfRatings)!)
-            lbRating.text = String(format: "%.1f", rating)
-            lbNumberOfRatings.text = "(\(Int((shop?.numberOfRatings)!)))"
+
+        var rating: Float = 0.0
+        if shop?.numberOfRatings! != 0 {
+            rating = ((shop?.totalRating)!/(shop?.numberOfRatings)!)
         }
+        lbRating.text = String(format: "%.1f", rating)
+        lbNumberOfRatings.text = "\(Int((shop?.numberOfRatings)!)) ratings"
+        
         
         loadServices()
+    }
+    
+    
+    
+    func addTopAndBottomBorders() {
+       let thickness: CGFloat = 0.3
+       let bottomBorder = CALayer()
+
+       bottomBorder.frame = CGRect(x:0, y: self.shopInfoView.frame.size.height - thickness, width: self.shopInfoView.frame.size.width, height:thickness)
+       bottomBorder.backgroundColor = UIColor.lightGray.cgColor
+
+        shopInfoView.layer.addSublayer(bottomBorder)
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: false)
+        addTopAndBottomBorders()
+        
+        
+        
+        blurView.effect = .none
+        setupBlur()
+
+
+
+        if comingFromRoot == true {
+            animator.fractionComplete = 0
+        } else {
+            animator.fractionComplete = ServiceListViewController.lastFractionComplete
+        }
+        comingFromRoot = false
     }
     
+    
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -89,12 +128,23 @@ class ServiceListViewController: UIViewController {
             controller.service = services[(tbvServices.indexPathForSelectedRow?.row)!]
             controller.shop = shop
         }
+        
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        animator.startAnimation()
+        animator?.stopAnimation(true)
+        animator?.finishAnimation(at: .current)
     }
     
     
     
+    
+    
+    
     func loadServices() {
-        serviceListScrollView.isHidden = true
+
         Helpers.showWhiteOutActivityIndicator(activityIndicator, view)
         
         if let shopId = shop?.id {
@@ -111,7 +161,7 @@ class ServiceListViewController: UIViewController {
                         self.tbvServices.reloadData()
                     }
                     Helpers.hideActivityIndicator(self.activityIndicator)
-                    self.serviceListScrollView.isHidden = false
+   
                 }
             }
         }
@@ -172,6 +222,17 @@ class ServiceListViewController: UIViewController {
         }
     }
     
+    
+    var animator: UIViewPropertyAnimator!
+    fileprivate func setupBlur() {
+        animator = UIViewPropertyAnimator(duration: 3.0, curve: .linear, animations: {
+            let blurEffect = UIBlurEffect(style: .regular)
+            self.blurView.effect = blurEffect
+
+        })
+    }
+    
+    
 
 }
 
@@ -201,6 +262,22 @@ extension ServiceListViewController: UITableViewDelegate, UITableViewDataSource 
         if let price = service.price {
             cell.lbServicePrice.text = "£\(price)"
         }
+    
         return cell
+    }
+    
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        animator.fractionComplete = abs(scrollView.contentOffset.y)/100
+        
+        ServiceListViewController.lastFractionComplete = animator.fractionComplete
+        
+        let offsetDiff = previousOffsetState - scrollView.contentOffset.y
+        previousOffsetState = scrollView.contentOffset.y
+        let newHeight = coverHeightConstraint.constant + offsetDiff
+        coverHeightConstraint.constant = newHeight
+        
+        
     }
 }

@@ -15,7 +15,6 @@ class ShopTableViewCell: UITableViewCell {
     @IBOutlet weak var shadowLayer: ShadowView!
     @IBOutlet weak var mainBackground: UIView!
     @IBOutlet weak var lbRating: UILabel!
-    @IBOutlet weak var lbNewlyAdded: UILabel!
     @IBOutlet weak var ratingView: UIView!
     @IBOutlet weak var lbNumberOfRatings: UILabel!
     

@@ -112,7 +112,7 @@ class LoginViewController: UIViewController {
         
         if type == 0 {
             userType = USERTYPE_CUSTOMER
-            userTypeImage.image = UIImage(named: "caveman")
+            userTypeImage.image = UIImage(named: "logo")
         } else {
             userType = USERTYPE_EMPLOYEE
             userTypeImage.image = UIImage(named: "barber")

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class ShopViewController: UIViewController {
     
@@ -15,9 +16,9 @@ class ShopViewController: UIViewController {
     var filteredShops = [Shop]()
     @IBOutlet weak var tbvShops: UITableView!
     @IBOutlet weak var booking_type: UISegmentedControl!
-    @IBOutlet weak var searchShops: UISearchBar!
     let activityIndicator = UIActivityIndicatorView()
     
+    let searchBar = UISearchBar()
     
     
     override func viewDidLoad() {
@@ -25,6 +26,41 @@ class ShopViewController: UIViewController {
         
         load_shops()
         tabbarConfig()
+        setupNavBar()
+        showSearchBarButton(show: true)
+    }
+    
+    
+    @objc func handleShowSearchBar() {
+        search(show: true)
+        searchBar.becomeFirstResponder()
+    }
+    
+    
+    fileprivate func setupNavBar() {
+        
+        searchBar.delegate = self
+        searchBar.sizeToFit()
+        
+        let width = view.frame.width - 120 - 16 - 60
+        
+        let fullLogoImageView = UIImageView(image: UIImage(named: "full_logo"))
+        fullLogoImageView.contentMode = .scaleAspectFit
+        fullLogoImageView.width(120)
+        
+        let searchBarView = UIView()
+        searchBarView.width(width)
+        searchBarView.backgroundColor = .clear
+        
+        
+
+        
+        let titleStackView = UIStackView(arrangedSubviews: [fullLogoImageView, searchBarView])
+        titleStackView.backgroundColor = .clear
+        titleStackView.frame = .init(x: 0, y: 0, width: width, height: 50)
+
+       
+        navigationItem.titleView = titleStackView
     }
     
     
@@ -40,17 +76,12 @@ class ShopViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-    
-        
-        navigationController?.setNavigationBarHidden(true, animated: false)
         
         if Cart.currentCart.items.isEmpty {
             self.tabBarController?.tabBar.items?[1].isEnabled = false
             self.tabBarController?.tabBar.items?[1].badgeValue = nil
         }
         
-    
-
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { // Change `2.0` to the desired number of seconds.
             APIManager.shared.customerGetBookings(filterID: 0) { (json) in
                 if json == nil || json!["bookings"].isEmpty {
@@ -60,8 +91,6 @@ class ShopViewController: UIViewController {
                 }
             }
         }
-        
-
     }
     
     
@@ -129,8 +158,34 @@ class ShopViewController: UIViewController {
         
         if segue.identifier == "ServiceList" {
             let controller = segue.destination as! ServiceListViewController
-            controller.shop = shops[(tbvShops.indexPathForSelectedRow?.row)!]
+            if searchBar.text != "" {
+                controller.shop = filteredShops[(tbvShops.indexPathForSelectedRow?.row)!]
+            } else {
+                controller.shop = shops[(tbvShops.indexPathForSelectedRow?.row)!]
+            }
+            controller.comingFromRoot = true
+    
         }
+    }
+    
+    
+    
+    func showSearchBarButton(show: Bool) {
+        if show {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(handleShowSearchBar))
+            
+        } else {
+            navigationItem.rightBarButtonItem = nil
+        }
+        
+    }
+    
+    
+    func search(show: Bool) {
+        showSearchBarButton(show: !show )
+        searchBar.showsCancelButton = show
+        searchBar.placeholder = "Search Barbershops"
+        navigationItem.titleView = show ? searchBar : nil
     }
  
 }
@@ -140,6 +195,11 @@ class ShopViewController: UIViewController {
 
 
 extension ShopViewController: UISearchBarDelegate {
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        search(show: false)
+        setupNavBar()
+    }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         filteredShops = self.shops.filter({ (bar: Shop) -> Bool in
@@ -168,7 +228,7 @@ extension ShopViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if searchShops.text != "" {
+        if searchBar.text != "" {
             return self.filteredShops.count
         }
         return self.shops.count
@@ -178,29 +238,31 @@ extension ShopViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ShopCell", for: indexPath) as! ShopTableViewCell
-        cell.mainBackground.layer.cornerRadius = 20
+        cell.mainBackground.layer.cornerRadius = 15
         cell.mainBackground.layer.masksToBounds = true
         cell.shadowLayer.setupShadow()
+        
+        cell.ratingView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        cell.ratingView.layer.cornerRadius = 15
 
 
         let shop: Shop
       
-        if searchShops.text != "" {
+        if searchBar.text != "" {
+            print("Search bar")
             shop = filteredShops[indexPath.row]
         } else {
             shop = shops[indexPath.row]
         }
         
-        if shop.totalRating! == 0 {
-            cell.ratingView.isHidden = true
-            cell.lbNewlyAdded.isHidden = false
-        } else {
-            cell.ratingView.isHidden = false
-            cell.lbNewlyAdded.isHidden = true
-            let rating = ((shop.totalRating!)/(shop.numberOfRatings!))
-            cell.lbRating.text = String(format: "%.1f", rating)
-            cell.lbNumberOfRatings.text = "(\(Int(shop.numberOfRatings!)))"
+       
+        var rating: Float = 0.0
+        if shop.numberOfRatings! != 0 {
+            rating = ((shop.totalRating!)/(shop.numberOfRatings!))
         }
+        cell.lbRating.text = String(format: "%.1f", rating)
+        cell.lbNumberOfRatings.text = "\(Int(shop.numberOfRatings!)) ratings"
+
         
         cell.lbShopName.text = shop.name!
         cell.lbShopAddress.text = shop.address!

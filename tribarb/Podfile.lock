@@ -1,6 +1,7 @@
 PODS:
   - Alamofire (5.3.0)
   - Cosmos (23.0.0)
+  - PushNotifications (3.0.4)
   - Stripe (19.3.0)
   - SwiftyJSON (5.0.0)
   - TinyConstraints (4.0.1)
@@ -8,6 +9,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (from `https://github.com/Alamofire/Alamofire.git`)
   - Cosmos
+  - PushNotifications
   - Stripe
   - SwiftyJSON (= 5.0.0)
   - TinyConstraints
@@ -15,6 +17,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Cosmos
+    - PushNotifications
     - Stripe
     - SwiftyJSON
     - TinyConstraints
@@ -31,10 +34,11 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: 2c792affbdc2f18016e08fdbcacd60aebe1ba593
   Cosmos: b5c6a9a637e28a061b54c8f8b1d8529d7d4db73f
+  PushNotifications: 6e3d148e5e129af9d4a9279b288c934f9a7f9066
   Stripe: dd5bfdd5f1daed4f9ddbfb47e9449ec302f9f708
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   TinyConstraints: 8dd91295e56797648c7bc335dd20e1d91ec4c192
 
-PODFILE CHECKSUM: b5340d6a068c7ffdd2c1939201243cfde38933b0
+PODFILE CHECKSUM: 4d4dc4c0178c1a90c92ef067512ce8c352be9ed3
 
 COCOAPODS: 1.9.3

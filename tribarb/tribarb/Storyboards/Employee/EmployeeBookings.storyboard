@@ -692,6 +692,7 @@
                         <outlet property="lbCustomer" destination="cWr-0e-eo6" id="P2y-Mf-ONk"/>
                         <outlet property="lbPaymentMode" destination="Vs3-7M-Vdu" id="Ger-EL-9kB"/>
                         <outlet property="lbRequest" destination="yx0-Pn-KXR" id="VOm-v8-1c4"/>
+                        <outlet property="lbServiceFee" destination="3Ld-jo-EdO" id="CfD-nC-t9c"/>
                         <outlet property="lbStatus" destination="8mg-w0-W2x" id="Qhm-JR-yc0"/>
                         <outlet property="lbSubtotal" destination="VBq-QD-D3B" id="NH3-UL-0X6"/>
                         <outlet property="lbTotal" destination="43M-oL-ZZQ" id="JSW-Ey-mMF"/>

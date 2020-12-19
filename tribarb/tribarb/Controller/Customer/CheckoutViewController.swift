@@ -18,6 +18,7 @@ class CheckoutViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var shopView: UIView!
     @IBOutlet weak var tbvServices: UITableView!
     @IBOutlet weak var totalView: UIView!
+    @IBOutlet weak var lbServiceFee: UILabel!
     @IBOutlet weak var lbSubTotal: UILabel!
     @IBOutlet weak var lbTotal: UILabel!
     @IBOutlet weak var bookingDate: UIDatePicker!
@@ -109,6 +110,7 @@ class CheckoutViewController: UIViewController, UITextFieldDelegate {
             self.lbBookingType.text = "Home Booking"
             self.btNext.setTitle("Address", for: .normal)
         }
+        self.lbServiceFee.text = "£\(Cart.currentCart.getServiceFee())"
         self.lbSubTotal.text = "£\(Cart.currentCart.getSubtotal())"
         self.lbTotal.text = "£\(Cart.currentCart.getTotal())"
     }

@@ -38,8 +38,8 @@ class BookingViewController: UIViewController {
     @IBOutlet weak var lbPaymentMethod: UILabel!
     @IBOutlet weak var lbRequest: UILabel!
     @IBOutlet weak var lbThanksForRating: UILabel!
+    @IBOutlet weak var lbServiceFee: UILabel!
     @IBOutlet weak var btSubmitRating: UIButton!
-    
     @IBOutlet weak var bookingScrollView: UIScrollView!
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var mapView: UIView!
@@ -53,31 +53,25 @@ class BookingViewController: UIViewController {
     
     var bookedServices = [JSON]()
     var phone = ""
-    
     var bookingId: Int?
-    
     var fromController: Int = 0
-    
-    let activityIndicator = UIActivityIndicatorView()
-    
     var destination: MKPlacemark?
     var source: MKPlacemark?
     var employeePin: MKPointAnnotation!
     var timer = Timer()
     var shop_address: String?
     var shop_name: String?
+    let activityIndicator = UIActivityIndicatorView()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         ratingView.isHidden = true
-        // Do any additional setup after loading the view.
         starsView.addSubview(cosmosView)
         cosmosView.centerInSuperview()
         btSubmitRating.layer.cornerRadius = 10
         btSubmitRating.layer.masksToBounds = true
         getBooking()
-      
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -92,11 +86,9 @@ class BookingViewController: UIViewController {
 
     
     func getBooking() {
-        bookingScrollView.isHidden = true
         Helpers.showWhiteOutActivityIndicator(activityIndicator, view)
         
         APIManager.shared.getBooking(bookingID: bookingId!) { (json) in
-            
             
             let booking = Booking(json: json!["booking"])
             
@@ -106,7 +98,6 @@ class BookingViewController: UIViewController {
                 self.setTimer()
             }
             Helpers.hideActivityIndicator(self.activityIndicator)
-            self.bookingScrollView.isHidden = false
         }
     }
     
@@ -301,9 +292,9 @@ class BookingViewController: UIViewController {
                 }
             }
         }
-        
-        // SERVICE FEE MODIFY HERE
-        self.lbSubTotal.text = "£\(booking.total! - 1.5)"
+                
+        self.lbSubTotal.text = "£\(booking.subtotal!)"
+        self.lbServiceFee.text = "£\(booking.service_fee!)"
         self.lbTotal.text = "£\(booking.total!)"
         
         

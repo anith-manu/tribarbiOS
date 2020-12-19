@@ -51,16 +51,16 @@ class EmployeeAccountViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if User.currentUser.name == nil {
-            accountScroll.isHidden = true
+        if User.currentUser.shop == nil {
+        
             Helpers.showWhiteOutActivityIndicator(activityIndicator, view)
-            APIManager.shared.customerGetDetails { (json) in
+            APIManager.shared.employeeGetDetails { (json) in
                 if json != nil {
-                    User.currentUser.setCustomerInfo(json: json!)
+                    User.currentUser.setEmployeeInfo(json: json!)
                     self.setEmployeeInfo()
                 }
                 Helpers.hideActivityIndicator(self.activityIndicator)
-                self.accountScroll.isHidden = false
+
             }
         } else {
             setEmployeeInfo()
@@ -130,7 +130,7 @@ class EmployeeAccountViewController: UIViewController, UITextFieldDelegate {
     
 
     func updateCompleteMessage() {
-        let message = "Successfully Updated"
+        let message = "Updated Successfully"
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .actionSheet)
         self.present(alert, animated: true)
 

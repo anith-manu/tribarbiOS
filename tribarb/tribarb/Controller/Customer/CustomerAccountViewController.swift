@@ -82,7 +82,7 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate, UIGe
     
     override func viewWillAppear(_ animated: Bool) {
         if User.currentUser.name == nil {
-            accountScroll.isHidden = true
+    
             Helpers.showWhiteOutActivityIndicator(activityIndicator, view)
             APIManager.shared.customerGetDetails { (json) in
                 if json != nil {
@@ -90,7 +90,7 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate, UIGe
                     self.setCustomerInfo()
                 }
                 Helpers.hideActivityIndicator(self.activityIndicator)
-                self.accountScroll.isHidden = false
+
             }
         } else {
             setCustomerInfo()
@@ -320,7 +320,7 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate, UIGe
     
     
     func updateCompleteMessage() {
-        let message = "Successfully Updated"
+        let message = "Updated Successfully"
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .actionSheet)
         self.present(alert, animated: true)
 

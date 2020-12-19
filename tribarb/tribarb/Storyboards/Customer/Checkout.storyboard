@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BMV-aY-hDy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BMV-aY-hDy">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -44,7 +44,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" red="0.92157477139999999" green="0.92155748609999999" blue="0.92156922819999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="MQp-L1-qWh" firstAttribute="centerX" secondItem="Z5E-rM-fwL" secondAttribute="centerX" id="0o6-U6-ktm"/>
                                                     <constraint firstItem="TzH-vK-cDy" firstAttribute="centerX" secondItem="Z5E-rM-fwL" secondAttribute="centerX" id="2XH-nF-A2A"/>
@@ -67,7 +67,7 @@
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Service Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rZ9-Yb-Qcl">
-                                                                    <rect key="frame" x="20" y="25" width="154.5" height="20.5"/>
+                                                                    <rect key="frame" x="20" y="25" width="152.5" height="20.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -79,10 +79,10 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nT6-BO-Zcg">
-                                                                    <rect key="frame" x="194.5" y="22.5" width="25" height="25"/>
+                                                                    <rect key="frame" x="192.5" y="20.5" width="29" height="29"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="height" constant="25" id="5Pa-5r-YOq"/>
-                                                                        <constraint firstAttribute="width" constant="25" id="aJY-2F-T5C"/>
+                                                                        <constraint firstAttribute="height" constant="29" id="5Pa-5r-YOq"/>
+                                                                        <constraint firstAttribute="width" constant="29" id="aJY-2F-T5C"/>
                                                                     </constraints>
                                                                     <state key="normal" image="delete"/>
                                                                     <connections>
@@ -164,19 +164,19 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="9oh-kX-Mov">
-                                                        <rect key="frame" x="20" y="182.5" width="374" height="70"/>
+                                                        <rect key="frame" x="20" y="172.5" width="374" height="50"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="70" id="YI4-WD-z3V"/>
+                                                            <constraint firstAttribute="height" constant="50" id="YI4-WD-z3V"/>
                                                         </constraints>
                                                     </datePicker>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Requests (optional)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F2W-ej-7KE">
-                                                        <rect key="frame" x="20" y="272.5" width="374" height="20.5"/>
+                                                        <rect key="frame" x="20" y="242.5" width="374" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Request for specific barber, etc" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OiM-fk-0Qn">
-                                                        <rect key="frame" x="20" y="303" width="374" height="40"/>
+                                                        <rect key="frame" x="20" y="273" width="374" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="3WM-n9-913"/>
                                                         </constraints>
@@ -187,7 +187,7 @@
                                                         </connections>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rby-SO-dWH" customClass="CurvedButton" customModule="tribarb" customModuleProvider="target">
-                                                        <rect key="frame" x="20" y="383" width="374" height="50"/>
+                                                        <rect key="frame" x="20" y="353" width="374" height="50"/>
                                                         <color key="backgroundColor" red="0.9989349246" green="0.764754355" blue="0.4312785864" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="PjI-sB-5bR"/>
@@ -220,7 +220,7 @@
                                                     <constraint firstAttribute="height" constant="470" id="TVI-ms-Tyk"/>
                                                     <constraint firstAttribute="trailing" secondItem="9oh-kX-Mov" secondAttribute="trailing" constant="20" id="TWt-ty-HDC"/>
                                                     <constraint firstItem="mva-5Y-kdE" firstAttribute="centerX" secondItem="JrZ-0x-ABz" secondAttribute="centerX" id="WWS-3U-Ugq"/>
-                                                    <constraint firstItem="9oh-kX-Mov" firstAttribute="top" secondItem="FGH-xJ-ziF" secondAttribute="bottom" constant="10" id="fG3-3U-P2F"/>
+                                                    <constraint firstItem="9oh-kX-Mov" firstAttribute="top" secondItem="FGH-xJ-ziF" secondAttribute="bottom" id="fG3-3U-P2F"/>
                                                     <constraint firstAttribute="trailing" secondItem="OiM-fk-0Qn" secondAttribute="trailing" constant="20" id="fbm-0J-JA0"/>
                                                     <constraint firstItem="OiM-fk-0Qn" firstAttribute="leading" secondItem="JrZ-0x-ABz" secondAttribute="leading" constant="20" id="iHK-JA-I9S"/>
                                                     <constraint firstItem="qvK-Rn-LEO" firstAttribute="top" secondItem="JrZ-0x-ABz" secondAttribute="top" constant="15" id="jG9-gx-50f"/>
@@ -338,6 +338,7 @@
                         <outlet property="checkoutStackView" destination="6Qn-fi-Dhu" id="Yqh-oR-ssW"/>
                         <outlet property="emptyCartView" destination="AQ0-M9-t3N" id="Xd7-yX-Le5"/>
                         <outlet property="lbBookingType" destination="TzH-vK-cDy" id="WwJ-l5-N20"/>
+                        <outlet property="lbServiceFee" destination="SFX-cI-nCr" id="Ofk-kK-VNa"/>
                         <outlet property="lbShopName" destination="5wZ-ST-o89" id="Hvw-i2-vQc"/>
                         <outlet property="lbShopNameBooked" destination="GbI-b1-AeR" id="JXL-AA-jud"/>
                         <outlet property="lbSubTotal" destination="qvK-Rn-LEO" id="d4g-QN-Gdk"/>
@@ -359,7 +360,7 @@
             <objects>
                 <viewController id="ofH-WF-gqa" customClass="AddressViewController" customModule="tribarb" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kdH-AV-nWm">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="f0F-AL-pqG">
@@ -603,10 +604,9 @@
                     <tabBarItem key="tabBarItem" title="Checkout" image="icon_cart" id="bBP-by-95D"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="oqP-n2-zba">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="oqP-n2-zba">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
@@ -622,16 +622,16 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="6sP-uZ-zRg"/>
+        <segue reference="Cc2-dz-asQ"/>
         <segue reference="FKI-9U-fdX"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="booking-placed" width="512" height="512"/>
-        <image name="cash" width="40" height="40"/>
-        <image name="credit_card" width="40" height="40"/>
-        <image name="delete" width="512" height="512"/>
+        <image name="cash" width="52" height="31.530000686645508"/>
+        <image name="credit_card" width="47.049999237060547" height="31.530000686645508"/>
+        <image name="delete" width="29" height="29"/>
         <image name="empty-cat" width="450.3909912109375" height="450.3909912109375"/>
-        <image name="icon_cart" width="29" height="29"/>
+        <image name="icon_cart" width="26.020000457763672" height="24"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

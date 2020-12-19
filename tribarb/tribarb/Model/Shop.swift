@@ -19,6 +19,7 @@ class Shop {
     var facebook: String?
     var totalRating: Float?
     var numberOfRatings: Float?
+    var service_fee: Float?
     
     
     init(json: JSON) {
@@ -31,5 +32,6 @@ class Shop {
         self.facebook = json["facebook"].string
         self.totalRating = json["total_rating"].float
         self.numberOfRatings = json["number_of_ratings"].float
+        self.service_fee = json["service_fee"].float
     }
 }

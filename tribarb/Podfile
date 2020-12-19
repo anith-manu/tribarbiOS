@@ -11,6 +11,7 @@ target 'tribarb' do
   pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git'
   pod 'Cosmos'
   pod 'TinyConstraints'
+  pod 'PushNotifications'
 
 
 #  target 'tribarbTests' do

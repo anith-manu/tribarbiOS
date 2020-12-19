@@ -27,6 +27,7 @@ class EmployeeBookingViewController: UIViewController {
     @IBOutlet weak var lbPaymentMode: UILabel!
     @IBOutlet weak var requestView: UIView!
     @IBOutlet weak var lbRequest: UILabel!
+    @IBOutlet weak var lbServiceFee: UILabel!
     
     @IBOutlet weak var buttonsView: UIView!
     @IBOutlet weak var acceptView: UIView!
@@ -204,8 +205,8 @@ class EmployeeBookingViewController: UIViewController {
         }
         
         
-        // SERVICE FEE MODIFY HERE
-        self.lbSubtotal.text = "£\(booking.total! - 1.5)"
+        self.lbSubtotal.text = "£\(booking.subtotal!)"
+        self.lbServiceFee.text = "£\(booking.service_fee!)"
         self.lbTotal.text = "£\(booking.total!)"
 
     }

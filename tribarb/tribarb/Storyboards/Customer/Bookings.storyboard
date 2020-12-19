@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Rqp-rx-QHc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Rqp-rx-QHc">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,12 +12,12 @@
         <scene sceneID="LEQ-tF-eUX">
             <objects>
                 <viewController id="L0u-V0-6qy" customClass="BookingViewController" customModule="tribarb" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="2ld-3I-pwD">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                    <view key="view" autoresizesSubviews="NO" contentMode="scaleToFill" id="2ld-3I-pwD">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mzg-UX-AWd">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="yq5-lH-SnG">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1465"/>
@@ -44,7 +44,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" red="0.92157477139999999" green="0.92155748609999999" blue="0.92156922819999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="I0C-Of-FMt" firstAttribute="top" secondItem="dzE-3A-Ttb" secondAttribute="bottom" constant="15" id="7To-gd-qcq"/>
                                                     <constraint firstItem="dzE-3A-Ttb" firstAttribute="top" secondItem="SBF-Mc-UoY" secondAttribute="bottom" id="XiI-aB-8Ng"/>
@@ -425,13 +425,13 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="5uS-2z-pw8"/>
                             </scrollView>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="IZO-rB-nVq"/>
+                        <viewLayoutGuide key="safeArea" id="1ZX-z1-VDy"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Mzg-UX-AWd" firstAttribute="bottom" secondItem="IZO-rB-nVq" secondAttribute="bottom" id="7a7-IQ-jOh"/>
-                            <constraint firstItem="Mzg-UX-AWd" firstAttribute="trailing" secondItem="IZO-rB-nVq" secondAttribute="trailing" id="9Df-y9-spq"/>
-                            <constraint firstItem="Mzg-UX-AWd" firstAttribute="leading" secondItem="IZO-rB-nVq" secondAttribute="leading" id="9d9-iX-otJ"/>
-                            <constraint firstItem="Mzg-UX-AWd" firstAttribute="top" secondItem="IZO-rB-nVq" secondAttribute="top" id="lWx-8B-AVa"/>
+                            <constraint firstItem="Mzg-UX-AWd" firstAttribute="bottom" secondItem="1ZX-z1-VDy" secondAttribute="bottom" id="7a7-IQ-jOh"/>
+                            <constraint firstItem="Mzg-UX-AWd" firstAttribute="trailing" secondItem="1ZX-z1-VDy" secondAttribute="trailing" id="9Df-y9-spq"/>
+                            <constraint firstItem="Mzg-UX-AWd" firstAttribute="leading" secondItem="1ZX-z1-VDy" secondAttribute="leading" id="9d9-iX-otJ"/>
+                            <constraint firstItem="Mzg-UX-AWd" firstAttribute="top" secondItem="1ZX-z1-VDy" secondAttribute="top" id="lWx-8B-AVa"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="xJL-aA-edc"/>
@@ -447,6 +447,7 @@
                         <outlet property="lbBookingType" destination="I0C-Of-FMt" id="w6a-Y1-KWr"/>
                         <outlet property="lbPaymentMethod" destination="WRj-YQ-dF5" id="QgC-oF-wMl"/>
                         <outlet property="lbRequest" destination="uhv-kw-fve" id="VBQ-AZ-Ttq"/>
+                        <outlet property="lbServiceFee" destination="9UY-i3-gdj" id="nsk-19-vJO"/>
                         <outlet property="lbShopName" destination="SBF-Mc-UoY" id="fc7-eq-qPE"/>
                         <outlet property="lbStatus" destination="3wy-KG-Q3C" id="5RB-7e-XXF"/>
                         <outlet property="lbSubTotal" destination="NgE-W7-ExA" id="IXL-ia-2nU"/>
@@ -471,10 +472,9 @@
                     <tabBarItem key="tabBarItem" title="Bookings" image="icon_booking" id="ztR-pl-M81"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="Sol-bc-YBV">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Sol-bc-YBV">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
@@ -493,11 +493,11 @@
             <objects>
                 <viewController id="Nm5-EH-hnO" customClass="BookingsViewController" customModule="tribarb" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6SU-QV-uU0">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BnV-md-Pq1">
-                                <rect key="frame" x="0.0" y="50" width="414" height="758"/>
+                                <rect key="frame" x="0.0" y="138" width="414" height="758"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -569,7 +569,7 @@
                                 </connections>
                             </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="eSk-cd-hrp">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="51"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="51"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="h7l-z7-WZ5"/>
@@ -584,17 +584,17 @@
                                 </connections>
                             </segmentedControl>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="Bh4-KU-dHN"/>
+                        <viewLayoutGuide key="safeArea" id="pbE-nO-RBo"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Bh4-KU-dHN" firstAttribute="trailing" secondItem="eSk-cd-hrp" secondAttribute="trailing" id="FJA-mX-9fL"/>
-                            <constraint firstItem="eSk-cd-hrp" firstAttribute="leading" secondItem="Bh4-KU-dHN" secondAttribute="leading" id="FlT-63-2i7"/>
-                            <constraint firstItem="BnV-md-Pq1" firstAttribute="leading" secondItem="Bh4-KU-dHN" secondAttribute="leading" id="cJ5-Za-3SQ"/>
-                            <constraint firstItem="eSk-cd-hrp" firstAttribute="top" secondItem="Bh4-KU-dHN" secondAttribute="top" id="eI4-fa-8sz"/>
+                            <constraint firstItem="pbE-nO-RBo" firstAttribute="trailing" secondItem="eSk-cd-hrp" secondAttribute="trailing" id="FJA-mX-9fL"/>
+                            <constraint firstItem="eSk-cd-hrp" firstAttribute="leading" secondItem="pbE-nO-RBo" secondAttribute="leading" id="FlT-63-2i7"/>
+                            <constraint firstItem="BnV-md-Pq1" firstAttribute="leading" secondItem="pbE-nO-RBo" secondAttribute="leading" id="cJ5-Za-3SQ"/>
+                            <constraint firstItem="eSk-cd-hrp" firstAttribute="top" secondItem="pbE-nO-RBo" secondAttribute="top" id="eI4-fa-8sz"/>
                             <constraint firstItem="BnV-md-Pq1" firstAttribute="top" secondItem="eSk-cd-hrp" secondAttribute="bottom" id="hG5-1A-CPR"/>
                             <constraint firstAttribute="bottom" secondItem="BnV-md-Pq1" secondAttribute="bottom" id="ios-jO-Yso"/>
-                            <constraint firstItem="BnV-md-Pq1" firstAttribute="trailing" secondItem="Bh4-KU-dHN" secondAttribute="trailing" id="l3d-Dw-yAg"/>
+                            <constraint firstItem="BnV-md-Pq1" firstAttribute="trailing" secondItem="pbE-nO-RBo" secondAttribute="trailing" id="l3d-Dw-yAg"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Bookings" id="JMM-rc-fWU"/>
@@ -609,9 +609,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icon_booking" width="29" height="29"/>
-        <image name="phone" width="32" height="32"/>
-        <image name="pin_icon" width="32" height="32"/>
+        <image name="icon_booking" width="24" height="24"/>
+        <image name="phone" width="35" height="35"/>
+        <image name="pin_icon" width="35" height="35"/>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

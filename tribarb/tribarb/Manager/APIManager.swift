@@ -167,7 +167,9 @@ class APIManager {
                     "requests": "\(Cart.currentCart.request!)",
                     "payment_mode": "\(Cart.currentCart.paymentMode!)",
                     "address": Cart.currentCart.address,
-                    "total": Cart.currentCart.getTotal()
+                    "total": Cart.currentCart.getTotal(),
+                    "service_fee": Cart.currentCart.getServiceFee(),
+                    "subtotal": Cart.currentCart.getSubtotal()
                 ]
                 
                 requestServer(.post, path, params, URLEncoding(), completionHandler)

@@ -745,7 +745,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = tribarb/tribarb.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QV3TMVS67M;
+				DEVELOPMENT_TEAM = DV8Q9AN5T7;
 				INFOPLIST_FILE = tribarb/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -768,7 +768,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = tribarb/tribarb.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QV3TMVS67M;
+				DEVELOPMENT_TEAM = DV8Q9AN5T7;
 				INFOPLIST_FILE = tribarb/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -15,8 +15,6 @@ class EmployeeBookingsViewController: UIViewController {
     var bookings = [EmployeeBookings]()
 
     override func viewDidLoad() {
-        navigationController?.setNavigationBarHidden(true, animated: false)
-        
         super.viewDidLoad()
         tabbarConfig()
         // Do any additional setup after loading the view.
