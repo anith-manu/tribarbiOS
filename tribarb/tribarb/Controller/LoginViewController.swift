@@ -21,6 +21,8 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+   
+        
         self.switchUser.isHidden = true
         self.facebookLogin.isHidden = true
         self.activityIndicator.isHidden = true
@@ -112,7 +114,7 @@ class LoginViewController: UIViewController {
         
         if type == 0 {
             userType = USERTYPE_CUSTOMER
-            userTypeImage.image = UIImage(named: "logo")
+            userTypeImage.image = UIImage(named: "tribarb-logo")
         } else {
             userType = USERTYPE_EMPLOYEE
             userTypeImage.image = UIImage(named: "barber")

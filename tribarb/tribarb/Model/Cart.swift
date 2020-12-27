@@ -29,9 +29,6 @@ class Cart {
     var paymentMode: Int?
     var bookingTime: String?
     
-    
-    
-    
     func getSubtotal() -> Float {
         var subtotal: Float = 0
         

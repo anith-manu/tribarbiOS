@@ -17,7 +17,6 @@
 		CA5A5DA6253C946A00A268C2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5A5DA5253C946A00A268C2 /* SceneDelegate.swift */; };
 		CA5A5DAB253C946A00A268C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA5A5DA9253C946A00A268C2 /* Main.storyboard */; };
 		CA5A5DAD253C947000A268C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA5A5DAC253C947000A268C2 /* Assets.xcassets */; };
-		CA5A5DB0253C947000A268C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA5A5DAE253C947000A268C2 /* LaunchScreen.storyboard */; };
 		CA5A5DE1253D888B00A268C2 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5A5DE0253D888B00A268C2 /* ShopViewController.swift */; };
 		CA5A5DEB253E1D5200A268C2 /* ServiceDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5A5DEA253E1D5100A268C2 /* ServiceDetailsViewController.swift */; };
 		CA5C3B5625416A5A008D6DA7 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = CA5C3B5525416A5A008D6DA7 /* FacebookCore */; };
@@ -57,6 +56,8 @@
 		CAE9C79B25494D64004D2AC1 /* ServiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE9C79A25494D64004D2AC1 /* ServiceTableViewCell.swift */; };
 		CAE9C7A025495FEF004D2AC1 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE9C79F25495FEF004D2AC1 /* Helpers.swift */; };
 		CAEA6EC225401A5A0075E5C2 /* BookingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEA6EC125401A590075E5C2 /* BookingsViewController.swift */; };
+		CAEE6002258F3E870028021C /* CustomUIElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEE6001258F3E870028021C /* CustomUIElements.swift */; };
+		CAF726ED2593362E00BBBC5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAF726EC2593362E00BBBC5B /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,7 +91,6 @@
 		CA5A5DA5253C946A00A268C2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		CA5A5DAA253C946A00A268C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CA5A5DAC253C947000A268C2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		CA5A5DAF253C947000A268C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CA5A5DB1253C947000A268C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA5A5DB6253C947000A268C2 /* tribarbTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tribarbTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA5A5DC1253C947000A268C2 /* tribarbUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tribarbUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,6 +131,8 @@
 		CAE9C79A25494D64004D2AC1 /* ServiceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTableViewCell.swift; sourceTree = "<group>"; };
 		CAE9C79F25495FEF004D2AC1 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		CAEA6EC125401A590075E5C2 /* BookingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingsViewController.swift; sourceTree = "<group>"; };
+		CAEE6001258F3E870028021C /* CustomUIElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIElements.swift; sourceTree = "<group>"; };
+		CAF726EC2593362E00BBBC5B /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ../../../../.Trash/LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,9 +196,9 @@
 				CA5CD0052544456400290225 /* Model */,
 				CA5C3B4825416855008D6DA7 /* tribarb.entitlements */,
 				CA5A5DA3253C946A00A268C2 /* AppDelegate.swift */,
+				CAF726EC2593362E00BBBC5B /* LaunchScreen.storyboard */,
 				CA5A5DA5253C946A00A268C2 /* SceneDelegate.swift */,
 				CA5A5DAC253C947000A268C2 /* Assets.xcassets */,
-				CA5A5DAE253C947000A268C2 /* LaunchScreen.storyboard */,
 				CA5A5DB1253C947000A268C2 /* Info.plist */,
 			);
 			path = tribarb;
@@ -229,6 +231,7 @@
 		CA5CD0072544457000290225 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				CAEE6001258F3E870028021C /* CustomUIElements.swift */,
 				CA5C3B7825417936008D6DA7 /* LoginViewController.swift */,
 				CA78C0622562653800AFD776 /* Employee */,
 				CA78C0612562653100AFD776 /* Customer */,
@@ -458,9 +461,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAF726ED2593362E00BBBC5B /* LaunchScreen.storyboard in Resources */,
 				CA78C04825616FCE00AFD776 /* Checkout.storyboard in Resources */,
 				CA78C04325616D5300AFD776 /* Shops.storyboard in Resources */,
-				CA5A5DB0253C947000A268C2 /* LaunchScreen.storyboard in Resources */,
 				CA11B911256507D10040FD2F /* EmployeeAccount.storyboard in Resources */,
 				CA5A5DAD253C947000A268C2 /* Assets.xcassets in Resources */,
 				CA78C04D2561715200AFD776 /* Bookings.storyboard in Resources */,
@@ -544,6 +547,7 @@
 				CA5C3B7E25418DF7008D6DA7 /* User.swift in Sources */,
 				CA78C084256267B100AFD776 /* EmployeeVerificationViewController.swift in Sources */,
 				CA5A5DA4253C946A00A268C2 /* AppDelegate.swift in Sources */,
+				CAEE6002258F3E870028021C /* CustomUIElements.swift in Sources */,
 				CA5CD0222546B60600290225 /* Shop.swift in Sources */,
 				CA5CD01D254447CC00290225 /* Constants.swift in Sources */,
 				CAEA6EC225401A5A0075E5C2 /* BookingsViewController.swift in Sources */,
@@ -607,14 +611,6 @@
 				CA5A5DAA253C946A00A268C2 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		CA5A5DAE253C947000A268C2 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CA5A5DAF253C947000A268C2 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

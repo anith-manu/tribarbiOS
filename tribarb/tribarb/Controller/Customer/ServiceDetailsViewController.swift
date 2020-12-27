@@ -14,6 +14,7 @@ class ServiceDetailsViewController: UIViewController {
     @IBOutlet weak var lbServiceName: UILabel!
     @IBOutlet weak var lbServiceShortDescription: UILabel!
     @IBOutlet weak var lbServicePrice: UILabel!
+    @IBOutlet weak var addService: CurvedButton!
     
     var service: Service?
     var shop: Shop?
@@ -32,14 +33,37 @@ class ServiceDetailsViewController: UIViewController {
         serviceImagesCV.register(CustomCell.self, forCellWithReuseIdentifier: "cell")
         serviceImagesCV.backgroundColor = .white
         
-        
+        if checkServiceInCart() {
+            setAddedToCartButton()
+        }
         loadService()
         loadAlbum()
        
     }
     
     
- 
+    func checkServiceInCart() -> Bool {
+        let cartItem = CartItem(service: self.service!)
+        
+        let inCart = Cart.currentCart.items.firstIndex { (item) -> Bool in
+            return item.service.id! == cartItem.service.id!
+        }
+        
+        if inCart != nil {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func setAddedToCartButton() {
+        addService.setTitle("Booked", for: .normal)
+        addService.isEnabled = false
+        addService.layer.opacity = 0.55
+    }
+    
+    
+    
     func loadService() {
         lbServiceName.text = service?.name
         lbServiceShortDescription.text = service?.short_description
@@ -78,36 +102,23 @@ class ServiceDetailsViewController: UIViewController {
     @IBAction func addToCart(_ sender: Any) {
         tabBarController?.tabBar.items?[1].isEnabled = true
         tabBarController?.tabBar.items?[1].badgeValue = ""
+        
 
         Cart.currentCart.bookingType = ShopViewController.BOOKING_TYPE_VAR
         let cartItem = CartItem(service: self.service!)
         
         guard let cartShop = Cart.currentCart.shop, let currentShop = self.shop else {
+            setAddedToCartButton()
             Cart.currentCart.shop = self.shop
             Cart.currentCart.items.append(cartItem)
-            addedToCartMessage()
             return
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .default)
         
-        if cartShop.id == currentShop.id {
-            let inCart = Cart.currentCart.items.firstIndex { (item) -> Bool in
-                return item.service.id! == cartItem.service.id!
-            }
-            
-            if inCart != nil {
-                let alertView = UIAlertController(
-                    title: "Service Already Added",
-                    message: "Your cart already has this service.",
-                    preferredStyle: .alert)
-                alertView.addAction(cancelAction)
-                self.present(alertView, animated: true, completion: nil)
-
-            } else {
-                Cart.currentCart.items.append(cartItem)
-                addedToCartMessage()
-            }
+        if cartShop.id == currentShop.id && !checkServiceInCart() {
+            setAddedToCartButton()
+            Cart.currentCart.items.append(cartItem)
         } else { 
             let alertView = UIAlertController(
                 title: "Clear Cart?",
@@ -115,10 +126,10 @@ class ServiceDetailsViewController: UIViewController {
                 preferredStyle: .alert)
             
             let okAction = UIAlertAction(title: "Start New Booking", style: .destructive) { (action: UIAlertAction!) in
+                self.setAddedToCartButton()
                 Cart.currentCart.items = []
                 Cart.currentCart.items.append(cartItem)
                 Cart.currentCart.shop = self.shop
-                self.addedToCartMessage()
             }
             
             alertView.addAction(okAction)
@@ -126,23 +137,7 @@ class ServiceDetailsViewController: UIViewController {
             
             self.present(alertView, animated: true, completion: nil)
         }
-        
     }
-    
-    
-    func addedToCartMessage() {
-        let message = "Added to cart."
-        let alert = UIAlertController(title: nil, message: message, preferredStyle: .actionSheet)
-        self.present(alert, animated: true)
-
-        // duration in seconds
-        let duration: Double = 1
-
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + duration) {
-            alert.dismiss(animated: true)
-        }
-    }
-    
 }
 
 
@@ -191,42 +186,6 @@ extension ServiceDetailsViewController: UICollectionViewDelegateFlowLayout, UICo
 
 
 
-class CustomCell: UICollectionViewCell {
-    
-    var data: String? {
-        didSet {
-            guard let data = data else { return }
 
-            Helpers.loadImage(bg, data)
-        }
-    }
-    
-    
-    fileprivate let bg: UIImageView = {
-        let iv = UIImageView()
-        iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.contentMode = .scaleAspectFill
-        iv.clipsToBounds = true
-        iv.layer.cornerRadius = 12
-        return iv
-    }()
-    
-    
-    override init(frame: CGRect) {
-        super.init(frame: .zero)
-        
-        contentView.addSubview(bg)
-        bg.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        bg.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
-        bg.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
-        bg.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-    }
-    
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-}
 
 

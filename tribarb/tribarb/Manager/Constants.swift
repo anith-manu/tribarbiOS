@@ -24,6 +24,11 @@ let USERTYPE_EMPLOYEE = "employee"
 
 
 
+// COLORS
+// Primary Hex: #FFC15D
+// Primary UIColor: UIColor(red: 1.00, green: 0.76, blue: 0.36, alpha: 1.00)
+
+
 
 
 

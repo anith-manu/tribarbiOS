@@ -8,9 +8,11 @@
 import UIKit
 import SwiftUI
 
-class ShopViewController: UIViewController {
-    
 
+class ShopViewController: UIViewController, UISearchResultsUpdating {
+    
+    
+    
     static var BOOKING_TYPE_VAR = 0
     var shops = [Shop]()
     var filteredShops = [Shop]()
@@ -18,49 +20,35 @@ class ShopViewController: UIViewController {
     @IBOutlet weak var booking_type: UISegmentedControl!
     let activityIndicator = UIActivityIndicatorView()
     
-    let searchBar = UISearchBar()
+    let searchController = UISearchController(searchResultsController: nil)
+
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+            
         load_shops()
         tabbarConfig()
         setupNavBar()
-        showSearchBarButton(show: true)
     }
     
     
-    @objc func handleShowSearchBar() {
-        search(show: true)
-        searchBar.becomeFirstResponder()
-    }
     
     
     fileprivate func setupNavBar() {
         
-        searchBar.delegate = self
-        searchBar.sizeToFit()
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Barbershops"
+        navigationItem.hidesSearchBarWhenScrolling = true
+        navigationItem.searchController = searchController
         
-        let width = view.frame.width - 120 - 16 - 60
         
         let fullLogoImageView = UIImageView(image: UIImage(named: "full_logo"))
         fullLogoImageView.contentMode = .scaleAspectFit
-        fullLogoImageView.width(120)
-        
-        let searchBarView = UIView()
-        searchBarView.width(width)
-        searchBarView.backgroundColor = .clear
-        
-        
-
-        
-        let titleStackView = UIStackView(arrangedSubviews: [fullLogoImageView, searchBarView])
-        titleStackView.backgroundColor = .clear
-        titleStackView.frame = .init(x: 0, y: 0, width: width, height: 50)
-
-       
-        navigationItem.titleView = titleStackView
+        fullLogoImageView.width(130)
+    
+        navigationItem.titleView = fullLogoImageView
     }
     
     
@@ -76,7 +64,7 @@ class ShopViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         if Cart.currentCart.items.isEmpty {
             self.tabBarController?.tabBar.items?[1].isEnabled = false
             self.tabBarController?.tabBar.items?[1].badgeValue = nil
@@ -135,6 +123,7 @@ class ShopViewController: UIViewController {
                 self.shops.removeAll()
                 self.tbvShops.reloadData()
                 self.load_shops()
+                self.viewWillAppear(true)
             }
             
             let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (action: UIAlertAction!) in
@@ -158,7 +147,7 @@ class ShopViewController: UIViewController {
         
         if segue.identifier == "ServiceList" {
             let controller = segue.destination as! ServiceListViewController
-            if searchBar.text != "" {
+            if searchController.searchBar.text != "" {
                 controller.shop = filteredShops[(tbvShops.indexPathForSelectedRow?.row)!]
             } else {
                 controller.shop = shops[(tbvShops.indexPathForSelectedRow?.row)!]
@@ -170,49 +159,21 @@ class ShopViewController: UIViewController {
     
     
     
-    func showSearchBarButton(show: Bool) {
-        if show {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(handleShowSearchBar))
-            
-        } else {
-            navigationItem.rightBarButtonItem = nil
-        }
-        
-    }
     
-    
-    func search(show: Bool) {
-        showSearchBarButton(show: !show )
-        searchBar.showsCancelButton = show
-        searchBar.placeholder = "Search Barbershops"
-        navigationItem.titleView = show ? searchBar : nil
-    }
- 
-}
-
-
-
-
-
-extension ShopViewController: UISearchBarDelegate {
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        search(show: false)
-        setupNavBar()
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else { return }
         filteredShops = self.shops.filter({ (bar: Shop) -> Bool in
-            return bar.name?.lowercased().range(of: searchText.lowercased()) != nil
+            return bar.name?.lowercased().range(of: text.lowercased()) != nil
         })
         self.tbvShops.reloadData()
     }
     
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-    }
+ 
 }
+
+
+
 
 
 
@@ -228,7 +189,7 @@ extension ShopViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if searchBar.text != "" {
+        if searchController.searchBar.text != "" {
             return self.filteredShops.count
         }
         return self.shops.count
@@ -248,7 +209,7 @@ extension ShopViewController: UITableViewDelegate, UITableViewDataSource {
 
         let shop: Shop
       
-        if searchBar.text != "" {
+        if searchController.searchBar.text != "" {
             print("Search bar")
             shop = filteredShops[indexPath.row]
         } else {
@@ -275,23 +236,4 @@ extension ShopViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 
-class ShadowView: UIView {
 
-    override var bounds: CGRect {
-        didSet {
-            setupShadow()
-        }
-    }
-    
-    
-    func setupShadow() {
-        self.layer.cornerRadius = 20
-        self.layer.shadowOffset = CGSize(width: 0, height: 0)
-        self.layer.shadowRadius = 4
-        self.layer.shadowColor = UIColor.lightGray.cgColor
-        self.layer.shadowOpacity = 0.33
-        self.layer.shadowPath = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 20, height: 20)).cgPath
-        self.layer.shouldRasterize = true
-        self.layer.rasterizationScale = UIScreen.main.scale
-    }
-}

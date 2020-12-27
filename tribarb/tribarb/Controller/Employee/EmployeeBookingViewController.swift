@@ -354,24 +354,6 @@ extension EmployeeBookingViewController: UITableViewDelegate, UITableViewDataSou
 
 
 
-class CurvedButton : UIButton {
-
-   override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
-   }
-
-   required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
-   }
-
-   private func setup() {
-        self.layer.cornerRadius = 10
-        self.layer.masksToBounds = true    
-   }
-
-}
 
 
 extension EmployeeBookingViewController: CLLocationManagerDelegate {

@@ -41,7 +41,7 @@ class ServiceListViewController: UIViewController {
     var phone = ""
     var services = [Service]()
     let activityIndicator = UIActivityIndicatorView()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -258,6 +258,7 @@ extension ServiceListViewController: UITableViewDelegate, UITableViewDataSource 
         let service = services[indexPath.row]
         cell.lbServiceName.text = service.name
         cell.lbServiceShortDescription.text = service.short_description
+    
         
         if let price = service.price {
             cell.lbServicePrice.text = "£\(price)"

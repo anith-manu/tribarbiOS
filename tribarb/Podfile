@@ -12,6 +12,7 @@ target 'tribarb' do
   pod 'Cosmos'
   pod 'TinyConstraints'
   pod 'PushNotifications'
+  pod 'Floaty', '~> 4.2.0'
 
 
 #  target 'tribarbTests' do
