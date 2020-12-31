@@ -19,9 +19,13 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var facebookLogin: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-   
+        
+        setGradientBackground()
+        
         
         self.switchUser.isHidden = true
         self.facebookLogin.isHidden = true
@@ -47,6 +51,16 @@ class LoginViewController: UIViewController {
 
     }
     
+    
+    
+    func setGradientBackground() {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.view.bounds
+        gradientLayer.colors = [UIColor(rgb: 0xFFC15D).cgColor, UIColor(rgb: 0xFFC15D).cgColor, UIColor(rgb: 0xFFC15D).cgColor, UIColor(rgb: 0xffd590).cgColor, UIColor(rgb: 0xffdeaa).cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 1)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
+        self.view.layer.insertSublayer(gradientLayer, at: 0)
+    }
     
     
     override func viewDidAppear(_ animated: Bool) {
@@ -124,6 +138,7 @@ class LoginViewController: UIViewController {
     
     
 }
+
 
 
 

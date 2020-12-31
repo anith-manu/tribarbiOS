@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         try? self.pushNotifications.addDeviceInterest(interest: "hello")
           
         Stripe.setDefaultPublishableKey("pk_test_51GwZcgJGRtokdLfWGTP34rmIWR1Rzqb2rx7KruKurcBeRD6mglqetEFuUdRwCdLNtm93siuUqtgV24mvS3yDcHdG00Mvjovux2")
+        STPPaymentConfiguration.shared().appleMerchantIdentifier = "merchant.com.tribarb"
         ApplicationDelegate.shared.application(
             application,
             didFinishLaunchingWithOptions: launchOptions

@@ -8,9 +8,7 @@
 import UIKit
 import SwiftUI
 
-
 class ShopViewController: UIViewController, UISearchResultsUpdating {
-    
     
     
     static var BOOKING_TYPE_VAR = 0
@@ -19,52 +17,38 @@ class ShopViewController: UIViewController, UISearchResultsUpdating {
     @IBOutlet weak var tbvShops: UITableView!
     @IBOutlet weak var booking_type: UISegmentedControl!
     let activityIndicator = UIActivityIndicatorView()
-    
     let searchController = UISearchController(searchResultsController: nil)
+    
+    
+    var segmentedController: UISegmentedControl!
 
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-            
+    
         load_shops()
         tabbarConfig()
         setupNavBar()
+
     }
     
     
-    
-    
-    fileprivate func setupNavBar() {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if #available(iOS 11.0, *) {
+            navigationItem.hidesSearchBarWhenScrolling = true
+        }
         
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search Barbershops"
-        navigationItem.hidesSearchBarWhenScrolling = true
-        navigationItem.searchController = searchController
-        
-        
-        let fullLogoImageView = UIImageView(image: UIImage(named: "full_logo"))
-        fullLogoImageView.contentMode = .scaleAspectFit
-        fullLogoImageView.width(130)
-    
-        navigationItem.titleView = fullLogoImageView
-    }
-    
-    
-    func tabbarConfig() {
-        guard let tabbar = self.tabBarController?.tabBar else { return }
-        tabbar.layer.cornerRadius = 30
-        tabbar.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        tabbar.layer.masksToBounds = true
-        tabbar.barTintColor = .black
-        tabbar.tintColor = UIColor(red: 1.00, green: 0.76, blue: 0.43, alpha: 1.00)
+
+
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+    
+        
         if Cart.currentCart.items.isEmpty {
             self.tabBarController?.tabBar.items?[1].isEnabled = false
             self.tabBarController?.tabBar.items?[1].badgeValue = nil
@@ -80,6 +64,56 @@ class ShopViewController: UIViewController, UISearchResultsUpdating {
             }
         }
     }
+    
+    
+    
+    fileprivate func setupNavBar() {
+        
+        if #available(iOS 11.0, *) {
+                navigationItem.hidesSearchBarWhenScrolling = false
+            }
+        
+        
+        booking_type.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont(name: "American Typewriter Semibold", size: 17) ?? UIFont.systemFont(ofSize: 17)], for: .selected)
+        
+        booking_type.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont(name: "American Typewriter", size: 15) ?? UIFont.systemFont(ofSize: 15)], for: .normal)
+        
+        searchController.searchBar.tintColor = .black
+        searchController.searchBar.keyboardAppearance = .dark
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search Barbershops", attributes: [NSAttributedString.Key.foregroundColor : UIColor(rgb:0x000000)])
+        
+        let textField = searchController.searchBar.value(forKey: "searchField") as! UITextField
+        let glassIconView = textField.leftView as! UIImageView
+        glassIconView.image = glassIconView.image?.withRenderingMode(.alwaysTemplate)
+        glassIconView.tintColor = UIColor(rgb:0x000000)
+        let clearButton = textField.value(forKey: "clearButton") as! UIButton
+        clearButton.setImage(clearButton.imageView?.image?.withRenderingMode(.alwaysTemplate), for: .normal)
+        clearButton.tintColor = UIColor(rgb:0x000000)
+        
+        
+        navigationItem.searchController = searchController
+        
+        
+
+        let fullLogoImageView = UIImageView(image: UIImage(named: "tribarb_text"))
+        fullLogoImageView.contentMode = .scaleAspectFit
+        fullLogoImageView.width(100)
+
+        navigationItem.titleView = fullLogoImageView
+    }
+    
+    
+    func tabbarConfig() {
+        guard let tabbar = self.tabBarController?.tabBar else { return }
+        tabbar.layer.cornerRadius = 30
+        tabbar.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        tabbar.layer.masksToBounds = true
+        tabbar.barTintColor = .black
+        tabbar.tintColor = UIColor(red: 1.00, green: 0.76, blue: 0.43, alpha: 1.00)
+    }
+    
     
     
     
@@ -210,7 +244,6 @@ extension ShopViewController: UITableViewDelegate, UITableViewDataSource {
         let shop: Shop
       
         if searchController.searchBar.text != "" {
-            print("Search bar")
             shop = filteredShops[indexPath.row]
         } else {
             shop = shops[indexPath.row]
@@ -234,6 +267,9 @@ extension ShopViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
 }
+
+
+
 
 
 

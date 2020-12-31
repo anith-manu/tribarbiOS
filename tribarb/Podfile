@@ -13,7 +13,7 @@ target 'tribarb' do
   pod 'TinyConstraints'
   pod 'PushNotifications'
   pod 'Floaty', '~> 4.2.0'
-
+  pod 'SkeletonView'
 
 #  target 'tribarbTests' do
  #   inherit! :search_paths

@@ -103,7 +103,7 @@ class CheckoutViewController: UIViewController, UITextFieldDelegate {
     
     func setDetails() {
         self.lbShopName.text = Cart.currentCart.shop?.name
-        if ShopViewController.BOOKING_TYPE_VAR == 0 {
+        if Cart.currentCart.bookingType == 0 {
             self.lbBookingType.text = "Shop Booking"
             self.btNext.setTitle("Payment", for: .normal)
         } else {
@@ -148,7 +148,7 @@ class CheckoutViewController: UIViewController, UITextFieldDelegate {
         Cart.currentCart.bookingTime = strDate
         Cart.currentCart.request = tfRequest.text
         
-        if ShopViewController.BOOKING_TYPE_VAR == 0 {
+        if Cart.currentCart.bookingType == 0 {
             self.performSegue(withIdentifier: "Payment", sender: self)
         } else {
             self.performSegue(withIdentifier: "Address", sender: self)

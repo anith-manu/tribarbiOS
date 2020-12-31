@@ -7,18 +7,80 @@
 
 import UIKit
 import Stripe
+import CoreLocation
+import MapKit
 
 class PaymentViewController: UIViewController {
 
     @IBOutlet weak var paymentMethod: UISegmentedControl!
+    @IBOutlet weak var btPlaceBooking: CurvedButton!
 
+    @IBOutlet weak var placingIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var map: MKMapView!
+    @IBOutlet weak var lbAddress: UILabel!
+    @IBOutlet weak var lbBookingTime: UILabel!
+    @IBOutlet weak var mapView: UIView!
+    @IBOutlet weak var lbSubTotal: UILabel!
+    @IBOutlet weak var lbServiceFee: UILabel!
+    @IBOutlet weak var lbTotal: UILabel!
     var customerContext : STPCustomerContext?
     var paymentContext : STPPaymentContext?
    
     let currentShop = Cart.currentCart.shop?.name
     
+    var locationManager: CLLocationManager!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setPaymentUI()
+        setupStripe()
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "BackToCart" {
+            let vc = segue.destination as? CheckoutViewController
+            vc?.fromController = 1
+            vc?.shopName = currentShop
+        }
+    }
+  
+    
+    func setPaymentUI() {
+        navigationController?.navigationBar.prefersLargeTitles = true
+        placingIndicator.isHidden = true
+
+        var bookingType = ""
+        if Cart.currentCart.bookingType == 0 {
+            bookingType = "Shop booking"
+            self.mapView.isHidden = true
+        } else {
+            bookingType = "Home booking"
+            self.mapView.isHidden = false
+            self.lbAddress.text = "\(Cart.currentCart.address)"
+            setHomePin()
+        }
+        
+        let dateString = Cart.currentCart.bookingTime!
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+        let date = dateFormatter.date(from: dateString)
+        dateFormatter.dateFormat = "d MMM y, HH:mm"
+       
+        self.lbBookingTime.text = bookingType + " on " + dateFormatter.string(from: date!)
+        self.lbServiceFee.text = "£\(Cart.currentCart.getServiceFee())"
+        self.lbSubTotal.text = "£\(Cart.currentCart.getSubtotal())"
+        self.lbTotal.text = "£\(Cart.currentCart.getTotal())"
+    }
+    
+    
+    func setupStripe() {
         customerContext = STPCustomerContext(keyProvider: MyAPIClient())
         paymentContext = STPPaymentContext(customerContext: customerContext!)
         self.paymentContext?.delegate = self
@@ -30,16 +92,32 @@ class PaymentViewController: UIViewController {
         STPTheme.default().secondaryBackgroundColor = .white
         STPTheme.default().secondaryForegroundColor = .blue
         STPTheme.default().errorColor = .red
-
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    
+    func setHomePin() {
+        let geocoder = CLGeocoder()
+        
+        geocoder.geocodeAddressString(Cart.currentCart.address) { (placemarks, error) in
+            
+            if let placemark = placemarks?.first {
+                let coordinates: CLLocationCoordinate2D = placemark.location!.coordinate
+                
+                let region = MKCoordinateRegion(center: coordinates, span: MKCoordinateSpan.init(latitudeDelta: 0.01, longitudeDelta: 0.01))
+                
+                self.map.setRegion(region, animated: true)
+                
+                // Create pin
+                let dropPin = MKPointAnnotation()
+                dropPin.coordinate = coordinates
+                self.map.addAnnotation(dropPin)
+            }
+        }
     }
-  
+    
 
     @IBAction func placeBooking(_ sender: Any) {
+        disablePlacedBookingButton()
         Cart.currentCart.paymentMode = paymentMethod.selectedSegmentIndex
         
         if paymentMethod.selectedSegmentIndex == 1 {
@@ -49,26 +127,33 @@ class PaymentViewController: UIViewController {
                 Cart.currentCart.reset()
                 self.tabBarController?.tabBar.items?[1].isEnabled = false
                 self.tabBarController?.tabBar.items?[1].badgeValue = nil
-               // self.performSegue(withIdentifier: "BookingStatus", sender: self)
                 self.performSegue(withIdentifier: "BackToCart", sender: self)
             }
         }
     }
     
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "BackToCart" {
-            let vc = segue.destination as? CheckoutViewController
-            vc?.fromController = 1
-            vc?.shopName = currentShop
-        }
-    }
-    
 
     @IBAction func changePayment(_ sender: Any) {
         if paymentMethod.selectedSegmentIndex == 1 {
             self.paymentContext?.presentPaymentOptionsViewController()
         }
+    }
+    
+    func disablePlacedBookingButton() {
+        btPlaceBooking.setTitle("", for: .normal)
+        btPlaceBooking.isEnabled = false
+        btPlaceBooking.layer.opacity = 0.55
+        placingIndicator.isHidden = false
+        placingIndicator.startAnimating()
+    }
+    
+    func enablePlacedBookingButton() {
+        placingIndicator.stopAnimating()
+        placingIndicator.isHidden = true
+        btPlaceBooking.setTitle("Place Booking", for: .normal)
+        btPlaceBooking.isEnabled = true
+        btPlaceBooking.layer.opacity = 1
     }
 }
 
@@ -79,7 +164,6 @@ extension PaymentViewController: STPPaymentContextDelegate {
     }
     
     func paymentContext(_ paymentContext: STPPaymentContext, didFailToLoadWithError error: Error) {
-        
     }
     
     
@@ -106,7 +190,6 @@ extension PaymentViewController: STPPaymentContextDelegate {
                     // Your backend asynchronously fulfills the customer's order, e.g. via webhook
                     completion(.success, nil)
                 case .failed:
-                
                     let cancelAction = UIAlertAction(title: "Cancel", style: .default)
                     let alertView = UIAlertController(
                         title: error.unsafelyUnwrapped.localizedDescription,
@@ -114,6 +197,7 @@ extension PaymentViewController: STPPaymentContextDelegate {
                         preferredStyle: .alert)
                     alertView.addAction(cancelAction)
                     self.present(alertView, animated: true, completion: nil)
+                    self.enablePlacedBookingButton()
                     completion(.error, error) // Report error
                 case .canceled:
                     completion(.userCancellation, nil) // Customer cancelled
@@ -125,8 +209,7 @@ extension PaymentViewController: STPPaymentContextDelegate {
     }
     
     func paymentContext(_ paymentContext: STPPaymentContext, didFinishWith status: STPPaymentStatus, error: Error?) {
-        
     }
-    
-
 }
+
+

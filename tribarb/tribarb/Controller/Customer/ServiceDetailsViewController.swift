@@ -21,7 +21,6 @@ class ServiceDetailsViewController: UIViewController {
     var urls = [String]()
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         let layout = UICollectionViewFlowLayout()
@@ -33,6 +32,7 @@ class ServiceDetailsViewController: UIViewController {
         serviceImagesCV.register(CustomCell.self, forCellWithReuseIdentifier: "cell")
         serviceImagesCV.backgroundColor = .white
         
+        
         if checkServiceInCart() {
             setAddedToCartButton()
         }
@@ -41,7 +41,7 @@ class ServiceDetailsViewController: UIViewController {
        
     }
     
-    
+
     func checkServiceInCart() -> Bool {
         let cartItem = CartItem(service: self.service!)
         

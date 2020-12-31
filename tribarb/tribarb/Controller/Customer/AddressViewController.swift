@@ -26,6 +26,7 @@ class AddressViewController: UIViewController, UITextFieldDelegate, UIGestureRec
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.prefersLargeTitles = true
     
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
@@ -152,7 +153,6 @@ class AddressViewController: UIViewController, UITextFieldDelegate, UIGestureRec
             alertController.addAction(okAction)
             self.present(alertController, animated: true, completion: nil)
         } else {
-            print(Cart.currentCart.address)
            // Cart.currentCart.address = tbAddress.text
             self.performSegue(withIdentifier: "PaymentHomeBooking", sender: self)
         }

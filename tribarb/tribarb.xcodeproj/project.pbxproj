@@ -12,6 +12,7 @@
 		CA11B911256507D10040FD2F /* EmployeeAccount.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA11B910256507D10040FD2F /* EmployeeAccount.storyboard */; };
 		CA11B91625650E6C0040FD2F /* EmployeeAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA11B91525650E6C0040FD2F /* EmployeeAccountViewController.swift */; };
 		CA11B91B25650F900040FD2F /* EmployeeBookingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA11B91A25650F900040FD2F /* EmployeeBookingsViewController.swift */; };
+		CA1AF5B7259C623C0079789C /* ColorNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1AF5B6259C623C0079789C /* ColorNavigationViewController.swift */; };
 		CA4456742559401E00E96E62 /* BookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4456732559401D00E96E62 /* BookingViewController.swift */; };
 		CA5A5DA4253C946A00A268C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5A5DA3253C946A00A268C2 /* AppDelegate.swift */; };
 		CA5A5DA6253C946A00A268C2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5A5DA5253C946A00A268C2 /* SceneDelegate.swift */; };
@@ -85,6 +86,7 @@
 		CA11B910256507D10040FD2F /* EmployeeAccount.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EmployeeAccount.storyboard; sourceTree = "<group>"; };
 		CA11B91525650E6C0040FD2F /* EmployeeAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeAccountViewController.swift; sourceTree = "<group>"; };
 		CA11B91A25650F900040FD2F /* EmployeeBookingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeBookingsViewController.swift; sourceTree = "<group>"; };
+		CA1AF5B6259C623C0079789C /* ColorNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorNavigationViewController.swift; sourceTree = "<group>"; };
 		CA4456732559401D00E96E62 /* BookingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingViewController.swift; sourceTree = "<group>"; };
 		CA5A5DA0253C946A00A268C2 /* tribarb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tribarb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA5A5DA3253C946A00A268C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -285,15 +287,16 @@
 			isa = PBXGroup;
 			children = (
 				CAC2D420253EF1E000E16536 /* AddressViewController.swift */,
+				CAA5BE8725519FD90080B2CE /* PaymentViewController.swift */,
 				CA5C3B822541B788008D6DA7 /* CustomerAccountViewController.swift */,
 				CA4456732559401D00E96E62 /* BookingViewController.swift */,
 				CAEA6EC125401A590075E5C2 /* BookingsViewController.swift */,
 				CA5A5DE0253D888B00A268C2 /* ShopViewController.swift */,
 				CA5A5DEA253E1D5100A268C2 /* ServiceDetailsViewController.swift */,
-				CAA5BE8725519FD90080B2CE /* PaymentViewController.swift */,
 				CAC06ED82559D6F200E15284 /* CheckoutViewController.swift */,
 				CA6805292567B40A00C4D2C9 /* GSImageViewerController.swift */,
 				CAAE2EA92573E6A7006D4D7F /* ServiceListViewController.swift */,
+				CA1AF5B6259C623C0079789C /* ColorNavigationViewController.swift */,
 			);
 			path = Customer;
 			sourceTree = "<group>";
@@ -562,6 +565,7 @@
 				CAE9C79B25494D64004D2AC1 /* ServiceTableViewCell.swift in Sources */,
 				CA5A5DEB253E1D5200A268C2 /* ServiceDetailsViewController.swift in Sources */,
 				CA5C3B832541B788008D6DA7 /* CustomerAccountViewController.swift in Sources */,
+				CA1AF5B7259C623C0079789C /* ColorNavigationViewController.swift in Sources */,
 				CA5CD00D254446AC00290225 /* APIManager.swift in Sources */,
 				CA5CD0272546DD4100290225 /* ShopTableViewCell.swift in Sources */,
 				CA11B91B25650F900040FD2F /* EmployeeBookingsViewController.swift in Sources */,

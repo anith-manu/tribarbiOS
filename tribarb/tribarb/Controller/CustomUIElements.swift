@@ -104,3 +104,21 @@ final class CustomCell: UICollectionViewCell {
     }
     
 }
+
+
+
+class PaymentViewElements : UIView {
+    
+    override var bounds: CGRect {
+        didSet {
+            setupBorder()
+        }
+    }
+    func setupBorder() {
+        self.layer.borderWidth = 0.3
+        self.layer.cornerRadius = 10
+        self.layer.borderColor = UIColor.lightGray.cgColor
+        self.layer.masksToBounds = true
+    
+    }
+}
