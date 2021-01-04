@@ -10,8 +10,9 @@ import SwiftyJSON
 import Cosmos
 import TinyConstraints
 import MapKit
+import SkeletonView
 
-class BookingViewController: UIViewController {
+class BookingViewController: UIViewController{
     
     lazy var cosmosView: CosmosView = {
         var view = CosmosView()
@@ -27,33 +28,34 @@ class BookingViewController: UIViewController {
         return view
     }()
 
-    @IBOutlet weak var lbShopName: UILabel!
+    @IBOutlet weak var statusView: UIView!
+    @IBOutlet weak var homeAddressView: UIView!
+    @IBOutlet weak var shopAddressView: UIView!
+    @IBOutlet weak var lbHomeAddress: UILabel!
+    @IBOutlet weak var lbShopAddress: UILabel!
     @IBOutlet weak var lbBookingType: UILabel!
     @IBOutlet weak var lbStatus: UILabel!
-    @IBOutlet weak var lbAddressType: UILabel!
-    @IBOutlet weak var lbAddress: UILabel!
     @IBOutlet weak var lbBarberName: UILabel!
     @IBOutlet weak var lbSubTotal: UILabel!
     @IBOutlet weak var lbTotal: UILabel!
-    @IBOutlet weak var lbPaymentMethod: UILabel!
+    @IBOutlet weak var paymentModeImage: UIImageView!
     @IBOutlet weak var lbRequest: UILabel!
     @IBOutlet weak var lbThanksForRating: UILabel!
     @IBOutlet weak var lbServiceFee: UILabel!
     @IBOutlet weak var btSubmitRating: UIButton!
     @IBOutlet weak var bookingScrollView: UIScrollView!
     @IBOutlet weak var map: MKMapView!
-    @IBOutlet weak var mapView: UIView!
     @IBOutlet weak var requestView: UIView!
     @IBOutlet weak var cancelView: UIView!
     @IBOutlet weak var barberView: UIView!
     @IBOutlet weak var tbvServices: UITableView!
     @IBOutlet weak var ratingView: UIView!
     @IBOutlet weak var starsView: UIView!
-    @IBOutlet weak var btShopAddress: UIButton!
+    @IBOutlet weak var btCancel: CurvedButton!
     
+    var booking: Booking?
     var bookedServices = [JSON]()
     var phone = ""
-    var bookingId: Int?
     var fromController: Int = 0
     var destination: MKPlacemark?
     var source: MKPlacemark?
@@ -61,43 +63,41 @@ class BookingViewController: UIViewController {
     var timer = Timer()
     var shop_address: String?
     var shop_name: String?
-    let activityIndicator = UIActivityIndicatorView()
     
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        ratingView.isHidden = true
-        starsView.addSubview(cosmosView)
-        cosmosView.centerInSuperview()
-        btSubmitRating.layer.cornerRadius = 10
-        btSubmitRating.layer.masksToBounds = true
-        getBooking()
+        setRatingsView()
+        setBookingViewUIElements(booking: booking!)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
-    }
     
     
     override func viewWillLayoutSubviews() {
         lbRequest.sizeToFit()
     }
+    
+    
+    func setRatingsView() {
+        ratingView.isHidden = true
+        starsView.addSubview(cosmosView)
+        cosmosView.centerInSuperview()
+        btSubmitRating.layer.cornerRadius = 10
+        btSubmitRating.layer.masksToBounds = true
+    }
 
     
     func getBooking() {
-        Helpers.showWhiteOutActivityIndicator(activityIndicator, view)
-        
-        APIManager.shared.getBooking(bookingID: bookingId!) { (json) in
+        APIManager.shared.getBooking(bookingID: (booking?.id)!) { (json) in
             
             let booking = Booking(json: json!["booking"])
             
-            self.setUIElements(booking: booking)
+            self.setBookingViewUIElements(booking: booking)
             
             if booking.status == "Barber En Route" {
                 self.setTimer()
             }
-            Helpers.hideActivityIndicator(self.activityIndicator)
         }
     }
     
@@ -138,21 +138,6 @@ class BookingViewController: UIViewController {
     }
     
     
-    
-    func bookingCancelledMessage() {
-        let message = "Booking has been cancelled."
-        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        self.present(alert, animated: true)
-
-        // duration in seconds
-        let duration: Double = 2
-
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + duration) {
-            alert.dismiss(animated: true)
-        }
-    }
-    
-    
     func bookingCancelledFailedMessage() {
         let alertView = UIAlertController(
             title: "Unable To Cancel",
@@ -174,15 +159,17 @@ class BookingViewController: UIViewController {
             preferredStyle: .alert)
         
         let okAction = UIAlertAction(title: "Yes", style: .destructive) { (action: UIAlertAction!) in
-            if let bookingID = self.bookingId {
+            if let bookingID = self.booking?.id {
+                self.startCancelSkeletalAnimation()
                 APIManager.shared.cancelBooking(bookingID: bookingID) { (json) in
-            
+                
                     if json!["status"] == "success" {
                         self.getBooking()
                     } else {
                         self.bookingCancelledFailedMessage()
                     }
                 }
+                self.stopCancelSkeletalAnimation()
             }
         }
         
@@ -194,25 +181,59 @@ class BookingViewController: UIViewController {
     }
     
     
+    func startCancelSkeletalAnimation() {
+        self.btCancel.isSkeletonable = true
+        self.btCancel.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: UIColor(rgb: 0xFFC15D), secondaryColor: UIColor(rgb: 0xffdeaa)), animation: nil, transition: .crossDissolve(0.25))
+    }
     
     
-    func setUIElements(booking: Booking) {
-        self.title = "Booking #\(booking.id!)"
-        self.lbShopName.text = booking.shopName!
+    func stopCancelSkeletalAnimation() {
+        self.btCancel.stopSkeletonAnimation()
+        self.btCancel.hideSkeleton()
+    }
+    
+    
+    func setBookingViewUIElements(booking: Booking) {
+        navigationController?.view.backgroundColor = UIColor.white
+        navigationItem.prompt = "Booking #\(booking.id!)"
+        navigationItem.title = booking.shopName!
+        
         self.shop_name = booking.shopName!
+        
+        self.statusView.layer.cornerRadius = 10
+        self.statusView.layer.masksToBounds = true
+        
+        if booking.status == "Placed" {
+            self.startSkeletalAnimation(color: UIColor(red: 1.00, green: 0.76, blue: 0.36, alpha: 1.00))
+        } else if booking.status == "Accepted" || booking.status == "Barber En Route"  {
+            self.startSkeletalAnimation( color: UIColor(red: 0.23, green: 0.65, blue: 0.00, alpha: 1.00))
+        } else if booking.status == "Cancelled" || booking.status == "Declined" {
+            self.stopSkeletalAnimation()
+            self.statusView.backgroundColor = .systemRed
+        } else if  booking.status == "Completed" {
+            self.stopSkeletalAnimation()
+            self.statusView.backgroundColor = UIColor(red: 0.23, green: 0.65, blue: 0.00, alpha: 1.00)
+        }
+        
         
         var bookingType = ""
         if booking.booking_type == 0 {
             bookingType = "Shop booking"
-            self.lbAddressType.text = "Shop Address"
-            self.lbAddress.text = booking.shop_address!
+            self.homeAddressView.isHidden = true
+            self.shopAddressView.isHidden = false
+            self.lbShopAddress.text = booking.shop_address!
             self.shop_address = booking.shop_address!
             
         } else {
             bookingType = "Home booking"
-            self.lbAddressType.text = "Home Address"
-            self.lbAddress.text = booking.home_address!
-            self.btShopAddress.isHidden = true
+            self.homeAddressView.isHidden = false
+            self.shopAddressView.isHidden = true
+            self.lbHomeAddress.text = booking.home_address!
+            
+            self.getLocation(booking.home_address!, "Home") { (dest) in
+                self.destination = dest
+                self.setMapFocus(centerCoordinate: dest.coordinate, radiusInKm: 1)
+            }
         }
         
         let dateString = booking.date!
@@ -221,8 +242,6 @@ class BookingViewController: UIViewController {
         let date = dateFormatter.date(from: dateString)
         dateFormatter.dateFormat = "d MMM y, HH:mm"
         dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
-        
-        
         self.lbBookingType.text = bookingType + " on " + dateFormatter.string(from: date!)
         
 
@@ -252,9 +271,9 @@ class BookingViewController: UIViewController {
         }
 
         if booking.payment_mode == 0 {
-            self.lbPaymentMethod.text = "Cash"
+            self.paymentModeImage.image = UIImage(named: "cash")
         } else {
-            self.lbPaymentMethod.text = "Card"
+            self.paymentModeImage.image = UIImage(named: "credit_card")
         }
         
         
@@ -263,9 +282,10 @@ class BookingViewController: UIViewController {
             self.cancelView.isHidden = true
         }
         
+        
         if booking.status == "Completed" || booking.status == "Cancelled" || booking.status == "Declined"  {
-            self.mapView.isHidden = true
-            
+           
+            self.shopAddressView.isHidden = true
             if booking.status == "Completed" {
                 self.ratingView.isHidden = false
                 self.cosmosView.rating = booking.rating!
@@ -276,31 +296,13 @@ class BookingViewController: UIViewController {
                     self.cosmosView.settings.updateOnTouch = false
                 }
             }
-        } else {
-            self.mapView.isHidden = false
-        
-            
-            if booking.booking_type == 0 {
-                self.getLocation(booking.shop_address!, "\(booking.shopName!)") { (sou) in
-                    self.source = sou
-                    self.setMapFocus(centerCoordinate: sou.coordinate, radiusInKm: 1)
-                }
-            } else {
-                self.getLocation(booking.home_address!, "Home") { (dest) in
-                    self.destination = dest
-                    self.setMapFocus(centerCoordinate: dest.coordinate, radiusInKm: 1)
-                }
-            }
         }
                 
         self.lbSubTotal.text = "£\(booking.subtotal!)"
         self.lbServiceFee.text = "£\(booking.service_fee!)"
         self.lbTotal.text = "£\(booking.total!)"
-        
-        
     }
 
-    
     
     @IBAction func callBarber(_ sender: Any) {
         if let phoneCallURL = URL(string: "tel://\(phone)") {
@@ -309,8 +311,9 @@ class BookingViewController: UIViewController {
             if (application.canOpenURL(phoneCallURL)) {
                 application.open(phoneCallURL, options: [:], completionHandler: nil)
             }
-          }
+        }
     }
+    
     
     @IBAction func openMaps(_ sender: Any) {
     
@@ -320,11 +323,9 @@ class BookingViewController: UIViewController {
                 let placemarks = placemarks,
                 let location = placemarks.first?.location
             else {
-                // handle no location found
                 return
             }
             
-            // Use your location
             let regionDistance: CLLocationDistance = 1000
             let coordinates = location.coordinate
             let regionSpan = MKCoordinateRegion(center: coordinates, latitudinalMeters: regionDistance, longitudinalMeters: regionDistance)
@@ -338,19 +339,19 @@ class BookingViewController: UIViewController {
         }
     }
     
+    
     @IBAction func submitRating(_ sender: Any) {
         self.lbThanksForRating.text = "Rating Submitted"
         self.btSubmitRating.isHidden = true
         
-    
         let rating = Int(self.cosmosView.rating)
         
-
-        if let bookingID = self.bookingId {
+        if let bookingID = booking?.id{
             APIManager.shared.customerUpdateRating(bookingID: bookingID, rating: rating) { (json) in
             }
         }
     }
+    
     
     func autoZoom() {
         var zoomRect = MKMapRect.null
@@ -368,7 +369,17 @@ class BookingViewController: UIViewController {
     }
     
     
-
+    func startSkeletalAnimation(color: UIColor) {
+        self.statusView.isSkeletonable = true
+        self.statusView.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: color), animation: nil, transition: .crossDissolve(0.7))
+    }
+    
+    
+    func stopSkeletalAnimation() {
+        self.statusView.stopSkeletonAnimation()
+        self.statusView.hideSkeleton()
+    }
+    
     
     func setMapFocus(centerCoordinate: CLLocationCoordinate2D, radiusInKm radius: CLLocationDistance) {
         let diameter = radius * 2000
@@ -378,12 +389,12 @@ class BookingViewController: UIViewController {
 }
 
 
+
 extension BookingViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -402,6 +413,7 @@ extension BookingViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
 }
+
 
 
 extension BookingViewController: MKMapViewDelegate {
@@ -436,7 +448,6 @@ extension BookingViewController: MKMapViewDelegate {
             }
         }
     }
-    
 }
 
 

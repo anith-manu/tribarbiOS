@@ -16,6 +16,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p9A-ib-xO8">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tribarb" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Oz-0g-UXw">
                                 <rect key="frame" x="20" y="104" width="374" height="58"/>
                                 <fontDescription key="fontDescription" name="AmericanTypewriter-Semibold" family="American Typewriter" pointSize="50"/>
@@ -33,6 +40,9 @@
                                 <state key="normal" title="Login with Facebook">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="facebookLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NnO-aa-Ouy"/>
                                 </connections>
@@ -43,6 +53,9 @@
                                     <segment title="Client"/>
                                     <segment title="Barber"/>
                                 </segments>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="switchAccount:" destination="BYZ-38-t0r" eventType="valueChanged" id="RgG-Ds-Enh"/>
                                 </connections>
@@ -53,37 +66,41 @@
                                     <constraint firstAttribute="width" constant="240" id="CRP-DR-ggf"/>
                                     <constraint firstAttribute="height" constant="130" id="UB9-vp-nGa"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isHiddenWhenSkeletonIsActive" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="skeletonCornerRadius">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="nbV-4h-Msx">
-                                <rect key="frame" x="182" y="563" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="3FG-zC-Ccy"/>
-                                    <constraint firstAttribute="width" constant="50" id="jbQ-Ai-hV8"/>
-                                </constraints>
-                                <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="1" green="0.75686274509999996" blue="0.36470588240000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
+                            <constraint firstItem="p9A-ib-xO8" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="5Bw-Bi-J8w"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4Oz-0g-UXw" secondAttribute="trailing" constant="20" id="5l7-vd-hVs"/>
                             <constraint firstItem="4Oz-0g-UXw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="6ZW-5K-5C7"/>
-                            <constraint firstItem="nbV-4h-Msx" firstAttribute="top" secondItem="ndt-LL-dLK" secondAttribute="bottom" constant="50" id="7CZ-pU-DsP"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="cg0-RD-Q5V" secondAttribute="trailing" constant="15" id="EFM-fE-2s9"/>
+                            <constraint firstItem="p9A-ib-xO8" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="JqU-As-ZY1"/>
                             <constraint firstAttribute="trailing" secondItem="pWS-5V-met" secondAttribute="trailing" constant="15" id="Ns3-cq-BIc"/>
                             <constraint firstItem="4Oz-0g-UXw" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="60" id="Rvq-2p-VF7"/>
                             <constraint firstItem="pWS-5V-met" firstAttribute="top" secondItem="cg0-RD-Q5V" secondAttribute="bottom" constant="25" id="Xq6-hS-x5Y"/>
                             <constraint firstItem="ndt-LL-dLK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dMW-eH-m45"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="pWS-5V-met" secondAttribute="bottom" constant="60" id="l7g-Ri-yhi"/>
-                            <constraint firstItem="nbV-4h-Msx" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="lmo-21-Bfa"/>
+                            <constraint firstAttribute="bottom" secondItem="p9A-ib-xO8" secondAttribute="bottom" id="lOa-Cy-2OB"/>
                             <constraint firstItem="pWS-5V-met" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="rsU-C0-kHA"/>
+                            <constraint firstItem="p9A-ib-xO8" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="tZA-eC-VVm"/>
                             <constraint firstItem="ndt-LL-dLK" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="uKy-a5-rMK"/>
                             <constraint firstItem="cg0-RD-Q5V" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="ydA-iZ-mZB"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <navigationItem key="navigationItem" id="3rn-yY-0xC"/>
                     <connections>
-                        <outlet property="activityIndicator" destination="nbV-4h-Msx" id="v7m-Vu-BWq"/>
+                        <outlet property="background" destination="p9A-ib-xO8" id="jk3-YR-pb9"/>
                         <outlet property="facebookLogin" destination="pWS-5V-met" id="mCZ-6V-atw"/>
                         <outlet property="switchUser" destination="cg0-RD-Q5V" id="Mu5-5R-EHK"/>
                         <outlet property="userTypeImage" destination="ndt-LL-dLK" id="5C9-Ax-5kz"/>
@@ -94,7 +111,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="138" y="171"/>
+            <point key="canvasLocation" x="137.68115942028987" y="170.75892857142856"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="FfV-Ca-u7k">
@@ -124,6 +141,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JcU-Ok-I1K">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please provide the following details:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fFA-YO-M67">
                                 <rect key="frame" x="20" y="105.5" width="272" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -140,6 +161,9 @@
                                 <rect key="frame" x="20" y="171.5" width="374" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="O5k-ad-7qE" id="r29-u6-NzV"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Token" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="buV-gg-49x">
                                 <rect key="frame" x="20" y="225.5" width="47" height="20.5"/>
@@ -151,16 +175,19 @@
                                 <rect key="frame" x="20" y="251" width="374" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="O5k-ad-7qE" id="tg3-e9-uzo"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pii-Eq-mwF" customClass="CurvedButton" customModule="tribarb" customModuleProvider="target">
                                 <rect key="frame" x="20" y="335" width="374" height="50"/>
-                                <color key="backgroundColor" red="0.9989349246" green="0.764754355" blue="0.4312785864" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.29605007169999997" green="0.42629814150000001" blue="0.66277492049999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="FMa-wl-6Ox"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Submit">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <action selector="submit:" destination="O5k-ad-7qE" eventType="touchUpInside" id="6dl-RC-dRX"/>
@@ -176,12 +203,14 @@
                         <viewLayoutGuide key="safeArea" id="jr8-ls-Het"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="JcU-Ok-I1K" secondAttribute="bottom" id="0AH-gC-QAx"/>
                             <constraint firstItem="buV-gg-49x" firstAttribute="leading" secondItem="jr8-ls-Het" secondAttribute="leading" constant="20" id="42o-eY-Uen"/>
                             <constraint firstItem="sqp-mw-xQi" firstAttribute="top" secondItem="buV-gg-49x" secondAttribute="bottom" constant="5" id="4dX-LY-bSS"/>
                             <constraint firstItem="fFA-YO-M67" firstAttribute="top" secondItem="gii-cl-Gkg" secondAttribute="bottom" constant="30" id="5Nl-aH-aKI"/>
                             <constraint firstItem="QDT-KF-TGa" firstAttribute="top" secondItem="fFA-YO-M67" secondAttribute="bottom" constant="20" id="8Pc-Yu-mnN"/>
                             <constraint firstItem="pii-Eq-mwF" firstAttribute="leading" secondItem="jr8-ls-Het" secondAttribute="leading" constant="20" id="8xZ-30-2tP"/>
                             <constraint firstItem="pii-Eq-mwF" firstAttribute="top" secondItem="sqp-mw-xQi" secondAttribute="bottom" constant="50" id="8zS-NP-DWU"/>
+                            <constraint firstItem="JcU-Ok-I1K" firstAttribute="trailing" secondItem="NNw-sk-vct" secondAttribute="trailing" id="B7h-LH-Op6"/>
                             <constraint firstItem="jr8-ls-Het" firstAttribute="trailing" secondItem="sqp-mw-xQi" secondAttribute="trailing" constant="20" id="G4d-15-hS2"/>
                             <constraint firstItem="OrF-hw-lrz" firstAttribute="top" secondItem="QDT-KF-TGa" secondAttribute="bottom" constant="5" id="HLS-qA-7Bm"/>
                             <constraint firstItem="fFA-YO-M67" firstAttribute="leading" secondItem="jr8-ls-Het" secondAttribute="leading" constant="20" id="HeE-Ga-51M"/>
@@ -189,13 +218,16 @@
                             <constraint firstItem="gii-cl-Gkg" firstAttribute="centerX" secondItem="NNw-sk-vct" secondAttribute="centerX" id="Mb8-Y0-3tV"/>
                             <constraint firstItem="sqp-mw-xQi" firstAttribute="leading" secondItem="jr8-ls-Het" secondAttribute="leading" constant="20" id="NuK-Rq-A7h"/>
                             <constraint firstItem="buV-gg-49x" firstAttribute="top" secondItem="OrF-hw-lrz" secondAttribute="bottom" constant="20" id="VZD-ri-pIK"/>
+                            <constraint firstItem="JcU-Ok-I1K" firstAttribute="top" secondItem="NNw-sk-vct" secondAttribute="top" id="Xly-OH-Oyh"/>
                             <constraint firstItem="jr8-ls-Het" firstAttribute="trailing" secondItem="pii-Eq-mwF" secondAttribute="trailing" constant="20" id="ZIn-Ar-Iub"/>
                             <constraint firstItem="QDT-KF-TGa" firstAttribute="leading" secondItem="jr8-ls-Het" secondAttribute="leading" constant="20" id="d1B-30-Fvp"/>
                             <constraint firstItem="OrF-hw-lrz" firstAttribute="leading" secondItem="jr8-ls-Het" secondAttribute="leading" constant="20" id="gXM-aA-JnB"/>
                             <constraint firstItem="jr8-ls-Het" firstAttribute="trailing" secondItem="OrF-hw-lrz" secondAttribute="trailing" constant="20" id="h3T-5e-mt2"/>
+                            <constraint firstItem="JcU-Ok-I1K" firstAttribute="leading" secondItem="NNw-sk-vct" secondAttribute="leading" id="o1D-pL-rWL"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="background" destination="JcU-Ok-I1K" id="jUR-uR-iHN"/>
                         <outlet property="tbShopId" destination="OrF-hw-lrz" id="HJp-BI-dpK"/>
                         <outlet property="tbToken" destination="sqp-mw-xQi" id="vu8-gc-uPm"/>
                         <segue destination="VX5-qo-2PV" kind="presentation" identifier="EmployeeView" modalPresentationStyle="fullScreen" id="cIu-kj-zry"/>
@@ -203,7 +235,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dwQ-Z7-zxV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1445" y="-218"/>
+            <point key="canvasLocation" x="1444.9275362318842" y="-218.30357142857142"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="U2d-kn-1W2">
@@ -285,7 +317,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="fHO-cq-3v3"/>
+        <segue reference="cIu-kj-zry"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="tribarb-logo" width="413.82000732421875" height="502.95001220703125"/>

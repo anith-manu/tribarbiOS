@@ -10,32 +10,104 @@ import FBSDKLoginKit
 import MapKit
 import CoreLocation
 
-class CustomerAccountViewController: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
+class CustomerAccountViewController: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate, UITextViewDelegate {
 
     @IBOutlet weak var accountScroll: UIScrollView!
     @IBOutlet weak var accountStackView: UIStackView!
-    
     @IBOutlet weak var addressTextView: UITextView!
-    @IBOutlet weak var lbName: UILabel!
-    @IBOutlet weak var lbEmail: UILabel!
-    @IBOutlet weak var imgAvatar: UIImageView!
     @IBOutlet weak var tbPhone: UITextField!
     @IBOutlet weak var map: MKMapView!
+    @IBOutlet weak var btUpdate: CurvedButton!
     
     var locationManager: CLLocationManager!
-    
     var previousLocation: CLLocation?
-    let activityIndicator = UIActivityIndicatorView()
+    
+    private let imageView = CustomImageView()
+    
+    private struct Const {
+        /// Image height/width for Large NavBar state
+        static let ImageSizeForLargeState: CGFloat = 40
+        /// Margin from right anchor of safe area to right anchor of Image
+        static let ImageRightMargin: CGFloat = 20
+        /// Margin from bottom anchor of NavBar to bottom anchor of Image for Large NavBar state
+        static let ImageBottomMarginForLargeState: CGFloat = 12
+        /// Margin from bottom anchor of NavBar to bottom anchor of Image for Small NavBar state
+        static let ImageBottomMarginForSmallState: CGFloat = 6
+        /// Image height/width for Small NavBar state
+        static let ImageSizeForSmallState: CGFloat = 32
+        /// Height of NavBar for Small state. Usually it's just 44
+        static let NavBarHeightSmallState: CGFloat = 44
+        /// Height of NavBar for Large state. Usually it's just 96.5 but if you have a custom font for the title, please make sure to edit this value since it changes the height for Large state of NavBar
+        static let NavBarHeightLargeState: CGFloat = 96.5
+    }
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavBar()
+        setupDelegates()
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        disableUpdateButton()
+        
+        if User.currentUser.name == nil {
+            APIManager.shared.customerGetDetails { (json) in
+                if json != nil {
+                    User.currentUser.setCustomerInfo(json: json!)
+                    self.setCustomerInfo()
+                }
+            }
+        } else {
+            setCustomerInfo()
+        }
+        
+        
+        if addressTextView.text == "" {
+            addressTextView.text = "Enter address here"
+            addressTextView.textColor = UIColor.lightGray
+        } else {
+            addressTextView.textColor = UIColor.black
+        }
+    }
+    
+    
+    func disableUpdateButton() {
+        self.btUpdate.isEnabled = false
+        self.btUpdate.layer.opacity = 0.5
+    }
+    
+    
+    func enableUpdateButton() {
+        self.btUpdate.isEnabled = true
+        self.btUpdate.layer.opacity = 1
+    }
+    
+    
+    private func setupDelegates() {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: #selector(doneClicked))
+        doneButton.tintColor = UIColor(red: 1.00, green: 0.76, blue: 0.43, alpha: 1.00)
+        toolbar.setItems([doneButton], animated: false)
+        
+        addressTextView.layer.borderWidth = 0
+        addressTextView.delegate = self
+        accountScroll.delegate = self
+        accountScroll.keyboardDismissMode = .interactive
+        addressTextView.inputAccessoryView = toolbar
+        tbPhone.inputAccessoryView = toolbar
         
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(touchMap(_:)))
         gestureRecognizer.delegate = self
         map.addGestureRecognizer(gestureRecognizer)
         
-        if CLLocationManager.locationServicesEnabled() { 
+        if CLLocationManager.locationServicesEnabled() {
             locationManager = CLLocationManager()
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -44,68 +116,94 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate, UIGe
             self.map.showsUserLocation = true
         }
         
-        
-        navigationController?.setNavigationBarHidden(true, animated: false)
-        
-        accountScroll.keyboardDismissMode = .interactive
-        
-        
-        imgAvatar.layer.cornerRadius = 100/2
-        imgAvatar.layer.borderWidth = 1.0
-        imgAvatar.layer.borderColor = UIColor.white.cgColor
-        imgAvatar.clipsToBounds = true
-        
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        
-        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: #selector(doneClicked))
-        doneButton.tintColor = UIColor(red: 1.00, green: 0.76, blue: 0.43, alpha: 1.00)
-        toolbar.setItems([doneButton], animated: false)
-        
-        addressTextView.inputAccessoryView = toolbar
-        tbPhone.inputAccessoryView = toolbar
-        
-        addressTextView.layer.cornerRadius = 5
-        addressTextView.layer.borderColor = UIColor.lightGray.cgColor
-        addressTextView.layer.borderWidth = 0.30
-        addressTextView.layer.masksToBounds = true
-    
-        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardAppear(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDisappear(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-        
+        tbPhone.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+
     }
     
+    
+    @objc private func textFieldDidChange(_ textField: UITextField) {
+        enableUpdateButton()
+    }
+    
+    
+    private func setupNavBar() {
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        guard let navigationBar = self.navigationController?.navigationBar else { return }
+        navigationBar.addSubview(imageView)
+        imageView.layer.cornerRadius = Const.ImageSizeForLargeState / 2
+        imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            imageView.rightAnchor.constraint(equalTo: navigationBar.rightAnchor, constant: -Const.ImageRightMargin),
+            imageView.bottomAnchor.constraint(equalTo: navigationBar.bottomAnchor, constant: -Const.ImageBottomMarginForLargeState),
+            imageView.heightAnchor.constraint(equalToConstant: Const.ImageSizeForLargeState),
+            imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor)
+        ])
+    }
+    
+    
+    private func moveAndResizeImage(for height: CGFloat) {
+        let coeff: CGFloat = {
+            let delta = height - Const.NavBarHeightSmallState
+            let heightDifferenceBetweenStates = (Const.NavBarHeightLargeState - Const.NavBarHeightSmallState)
+            return delta / heightDifferenceBetweenStates
+        }()
+
+        let factor = Const.ImageSizeForSmallState / Const.ImageSizeForLargeState
+
+        let scale: CGFloat = {
+            let sizeAddendumFactor = coeff * (1.0 - factor)
+            return min(1.0, sizeAddendumFactor + factor)
+        }()
+
+        // Value of difference between icons for large and small states
+        let sizeDiff = Const.ImageSizeForLargeState * (1.0 - factor) // 8.0
+        let yTranslation: CGFloat = {
+            /// This value = 14. It equals to difference of 12 and 6 (bottom margin for large and small states). Also it adds 8.0 (size difference when the image gets smaller size)
+            let maxYTranslation = Const.ImageBottomMarginForLargeState - Const.ImageBottomMarginForSmallState + sizeDiff
+            return max(0, min(maxYTranslation, (maxYTranslation - coeff * (Const.ImageBottomMarginForSmallState + sizeDiff))))
+        }()
+
+        let xTranslation = max(0, sizeDiff - coeff * sizeDiff)
+
+        imageView.transform = CGAffineTransform.identity
+            .scaledBy(x: scale, y: scale)
+            .translatedBy(x: xTranslation, y: yTranslation)
+    }
+    
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard let height = navigationController?.navigationBar.frame.height else { return }
+        moveAndResizeImage(for: height)
+    }
 
     
-    override func viewWillAppear(_ animated: Bool) {
-        if User.currentUser.name == nil {
-    
-            Helpers.showWhiteOutActivityIndicator(activityIndicator, view)
-            APIManager.shared.customerGetDetails { (json) in
-                if json != nil {
-                    User.currentUser.setCustomerInfo(json: json!)
-                    self.setCustomerInfo()
-                }
-                Helpers.hideActivityIndicator(self.activityIndicator)
-
-            }
-        } else {
-            setCustomerInfo()
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if addressTextView.textColor == UIColor.lightGray {
+            addressTextView.text = nil
+            addressTextView.textColor = UIColor.black
         }
-        
     }
     
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if addressTextView.text.isEmpty {
+            addressTextView.text = "Enter address here"
+            addressTextView.textColor = UIColor.lightGray
+        }
+    }
     
+
     func setCustomerInfo() {
         map.removeAnnotations(map.annotations)
-        lbName.text = User.currentUser.name
-        lbEmail.text = User.currentUser.email
-        
+        navigationItem.title = User.currentUser.name
+
         if User.currentUser.pictureURL != nil {
-            imgAvatar.image = try! UIImage(data: Data(contentsOf: URL(string: User.currentUser.pictureURL!)!))
+            imageView.loadImage(User.currentUser.pictureURL!)
         }
         
         addressTextView.text = User.currentUser.address
@@ -154,9 +252,8 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate, UIGe
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinate
         map.addAnnotation(annotation)
+        enableUpdateButton()
     }
-    
-    
     
     
     @objc func doneClicked() {
@@ -165,16 +262,21 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate, UIGe
  
     
     @IBAction func searchAddress(_ sender: Any) {
-        map.removeAnnotations(map.annotations)
+        var address = addressTextView.text!
         
-        var address = ""
-        
-        address = addressTextView.text!
-        
-        if address == "" {
-            address = User.currentUser.address!
+        if addressTextView.textColor == UIColor.lightGray {
+            address = ""
         }
-        pinAddress(address: address)
+        
+        if address != "" && address != User.currentUser.address! {
+            print("Called")
+            map.removeAnnotations(map.annotations)
+            pinAddress(address: address)
+        }
+        
+        if address != User.currentUser.address! {
+            enableUpdateButton()
+        }
     }
     
     
@@ -189,6 +291,7 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate, UIGe
                 let okAction = UIAlertAction(title: "Cancel", style: .default)
                 alertController.addAction(okAction)
                 self.present(alertController, animated: true, completion: nil)
+                self.disableUpdateButton()
             }
             
             if let placemark = placemarks?.first {
@@ -207,23 +310,18 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate, UIGe
                 Cart.currentCart.address = address
             }
         }
-        
     }
     
     
-    
-
     @objc func keyboardAppear(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
             
-            
             if tabBarController?.tabBar.bounds.height != nil {
                 accountScroll.contentSize = CGSize(width: self.view.frame.width, height: accountStackView.frame.height+keyboardHeight-(tabBarController?.tabBar.bounds.height)!)
             }
         }
-         
     }
     
     
@@ -232,8 +330,6 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate, UIGe
     }
     
     
-
-
     @IBAction func logOut(_ sender: Any) {
         let alertView = UIAlertController(
             title: "Logging Out",
@@ -262,8 +358,7 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate, UIGe
     
     
     @IBAction func updateInfo(_ sender: Any) {
-        
-        
+
         var phone = ""
         
         if tbPhone.hasText {
@@ -273,14 +368,10 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate, UIGe
         }
 
         
-        var address = ""
+        var address = addressTextView.text!
         
-        if addressTextView.hasText {
-            address = addressTextView.text!
-        }
-        
-        if address == "" {
-            address = User.currentUser.address!
+        if addressTextView.textColor == UIColor.lightGray {
+            address = ""
         }
         
         if address != User.currentUser.address! {
@@ -288,7 +379,7 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate, UIGe
             let geocoder = CLGeocoder()
             
             geocoder.geocodeAddressString(address) { (placemarks, error) in
-                if (error != nil) {
+                if (error != nil) && address != "" {
                     let alertController = UIAlertController(title: "Invalid Address", message: "Please enter a valid address.", preferredStyle: .alert)
                     let okAction = UIAlertAction(title: "Cancel", style: .default)
                     alertController.addAction(okAction)
@@ -300,11 +391,8 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate, UIGe
                         self.viewWillAppear(true)
                         self.updateCompleteMessage()
                     }
-                    
-                    
                 }
             }
-            
         }
         
         if phone != User.currentUser.phone! {
@@ -315,8 +403,8 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate, UIGe
             }
         }
         
+        disableUpdateButton()
     }
-    
     
     
     func updateCompleteMessage() {

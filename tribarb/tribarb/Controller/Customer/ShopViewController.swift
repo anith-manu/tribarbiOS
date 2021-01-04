@@ -39,16 +39,12 @@ class ShopViewController: UIViewController, UISearchResultsUpdating {
         if #available(iOS 11.0, *) {
             navigationItem.hidesSearchBarWhenScrolling = true
         }
-        
-
-
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     
-        
         if Cart.currentCart.items.isEmpty {
             self.tabBarController?.tabBar.items?[1].isEnabled = false
             self.tabBarController?.tabBar.items?[1].badgeValue = nil
@@ -72,11 +68,7 @@ class ShopViewController: UIViewController, UISearchResultsUpdating {
         if #available(iOS 11.0, *) {
                 navigationItem.hidesSearchBarWhenScrolling = false
             }
-        
-        
-        booking_type.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont(name: "American Typewriter Semibold", size: 17) ?? UIFont.systemFont(ofSize: 17)], for: .selected)
-        
-        booking_type.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont(name: "American Typewriter", size: 15) ?? UIFont.systemFont(ofSize: 15)], for: .normal)
+    
         
         searchController.searchBar.tintColor = .black
         searchController.searchBar.keyboardAppearance = .dark
@@ -118,7 +110,9 @@ class ShopViewController: UIViewController, UISearchResultsUpdating {
     
     
     func load_shops() {
-        Helpers.showActivityIndicator(activityIndicator, view)
+        
+        shops = []
+        
         ShopViewController.BOOKING_TYPE_VAR = booking_type.selectedSegmentIndex
         
         APIManager.shared.get_shops(filterID:  ShopViewController.BOOKING_TYPE_VAR) { (json) in
@@ -131,8 +125,8 @@ class ShopViewController: UIViewController, UISearchResultsUpdating {
                         let shop = Shop(json: item)
                         self.shops.append(shop)
                     }
+                    
                     self.tbvShops.reloadData()
-                    Helpers.hideActivityIndicator(self.activityIndicator)
                 }
             }
         }
@@ -154,8 +148,6 @@ class ShopViewController: UIViewController, UISearchResultsUpdating {
                 Cart.currentCart.reset()
                 self.tabBarController?.tabBar.items?[1].isEnabled = false
                 self.tabBarController?.tabBar.items?[1].badgeValue = nil
-                self.shops.removeAll()
-                self.tbvShops.reloadData()
                 self.load_shops()
                 self.viewWillAppear(true)
             }
@@ -169,8 +161,6 @@ class ShopViewController: UIViewController, UISearchResultsUpdating {
             self.present(alertView, animated: true, completion: nil)
             
         } else if Cart.currentCart.items.isEmpty {
-            shops.removeAll()
-            tbvShops.reloadData()
             load_shops()
         }
     }
@@ -215,6 +205,7 @@ class ShopViewController: UIViewController, UISearchResultsUpdating {
 
 extension ShopViewController: UITableViewDelegate, UITableViewDataSource {
     
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -239,6 +230,7 @@ extension ShopViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.ratingView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         cell.ratingView.layer.cornerRadius = 15
+        cell.ratingView.layer.masksToBounds = true
 
 
         let shop: Shop
@@ -261,15 +253,13 @@ extension ShopViewController: UITableViewDelegate, UITableViewDataSource {
         cell.lbShopName.text = shop.name!
         cell.lbShopAddress.text = shop.address!
         
+        
         if let logoName = shop.logo {
-            Helpers.loadImage(cell.shopLogo, "\(logoName)")
+            cell.shopLogo.loadImage("\(logoName)")
+            cell.shopLogo.contentMode = .scaleAspectFill
         }
         return cell
     }
 }
-
-
-
-
 
 

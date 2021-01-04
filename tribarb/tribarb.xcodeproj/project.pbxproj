@@ -41,13 +41,13 @@
 		CA78C052256172A100AFD776 /* Account.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA78C051256172A100AFD776 /* Account.storyboard */; };
 		CA78C084256267B100AFD776 /* EmployeeVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA78C083256267B100AFD776 /* EmployeeVerificationViewController.swift */; };
 		CA88A4C325584B8600CEA1D2 /* FilterBookingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA88A4C225584B8600CEA1D2 /* FilterBookingTableViewCell.swift */; };
-		CA88A4C825584C5300CEA1D2 /* Bookings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA88A4C725584C5300CEA1D2 /* Bookings.swift */; };
 		CA8F3799255E7F710045DC01 /* Booking.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8F3798255E7F710045DC01 /* Booking.swift */; };
 		CAA5BE71254E8F290080B2CE /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA5BE70254E8F290080B2CE /* Cart.swift */; };
 		CAA5BE76254EBF0A0080B2CE /* CheckoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA5BE75254EBF090080B2CE /* CheckoutTableViewCell.swift */; };
 		CAA5BE7B25500F1F0080B2CE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA5BE7A25500F1F0080B2CE /* CoreLocation.framework */; };
 		CAA5BE802551632C0080B2CE /* StripeAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA5BE7F255163280080B2CE /* StripeAPIManager.swift */; };
 		CAA5BE8825519FDA0080B2CE /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA5BE8725519FD90080B2CE /* PaymentViewController.swift */; };
+		CAA6890C259E0C3C0061F372 /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA6890B259E0C3C0061F372 /* CustomImageView.swift */; };
 		CAA811232557CC6F00E9558F /* BookingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA811222557CC6F00E9558F /* BookingTableViewCell.swift */; };
 		CAAE2EAA2573E6A8006D4D7F /* ServiceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAE2EA92573E6A7006D4D7F /* ServiceListViewController.swift */; };
 		CAC06ED92559D6F200E15284 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC06ED82559D6F200E15284 /* CheckoutViewController.swift */; };
@@ -117,13 +117,13 @@
 		CA78C051256172A100AFD776 /* Account.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Account.storyboard; sourceTree = "<group>"; };
 		CA78C083256267B100AFD776 /* EmployeeVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeVerificationViewController.swift; sourceTree = "<group>"; };
 		CA88A4C225584B8600CEA1D2 /* FilterBookingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterBookingTableViewCell.swift; sourceTree = "<group>"; };
-		CA88A4C725584C5300CEA1D2 /* Bookings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookings.swift; sourceTree = "<group>"; };
 		CA8F3798255E7F710045DC01 /* Booking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Booking.swift; sourceTree = "<group>"; };
 		CAA5BE70254E8F290080B2CE /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
 		CAA5BE75254EBF090080B2CE /* CheckoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutTableViewCell.swift; sourceTree = "<group>"; };
 		CAA5BE7A25500F1F0080B2CE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		CAA5BE7F255163280080B2CE /* StripeAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripeAPIManager.swift; sourceTree = "<group>"; };
 		CAA5BE8725519FD90080B2CE /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
+		CAA6890B259E0C3C0061F372 /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 		CAA811222557CC6F00E9558F /* BookingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingTableViewCell.swift; sourceTree = "<group>"; };
 		CAAE2EA92573E6A7006D4D7F /* ServiceListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceListViewController.swift; sourceTree = "<group>"; };
 		CAC06ED82559D6F200E15284 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
@@ -213,7 +213,6 @@
 				CA5CD0212546B60500290225 /* Shop.swift */,
 				CAE9C79225494C5F004D2AC1 /* Service.swift */,
 				CAA5BE70254E8F290080B2CE /* Cart.swift */,
-				CA88A4C725584C5300CEA1D2 /* Bookings.swift */,
 				CA8F3798255E7F710045DC01 /* Booking.swift */,
 				CA6805392567C0F300C4D2C9 /* EmployeeBookings.swift */,
 			);
@@ -286,17 +285,18 @@
 		CA78C0612562653100AFD776 /* Customer */ = {
 			isa = PBXGroup;
 			children = (
+				CA5C3B822541B788008D6DA7 /* CustomerAccountViewController.swift */,
+				CAEA6EC125401A590075E5C2 /* BookingsViewController.swift */,
+				CA4456732559401D00E96E62 /* BookingViewController.swift */,
 				CAC2D420253EF1E000E16536 /* AddressViewController.swift */,
 				CAA5BE8725519FD90080B2CE /* PaymentViewController.swift */,
-				CA5C3B822541B788008D6DA7 /* CustomerAccountViewController.swift */,
-				CA4456732559401D00E96E62 /* BookingViewController.swift */,
-				CAEA6EC125401A590075E5C2 /* BookingsViewController.swift */,
 				CA5A5DE0253D888B00A268C2 /* ShopViewController.swift */,
 				CA5A5DEA253E1D5100A268C2 /* ServiceDetailsViewController.swift */,
 				CAC06ED82559D6F200E15284 /* CheckoutViewController.swift */,
 				CA6805292567B40A00C4D2C9 /* GSImageViewerController.swift */,
 				CAAE2EA92573E6A7006D4D7F /* ServiceListViewController.swift */,
 				CA1AF5B6259C623C0079789C /* ColorNavigationViewController.swift */,
+				CAA6890B259E0C3C0061F372 /* CustomImageView.swift */,
 			);
 			path = Customer;
 			sourceTree = "<group>";
@@ -570,12 +570,12 @@
 				CA5CD0272546DD4100290225 /* ShopTableViewCell.swift in Sources */,
 				CA11B91B25650F900040FD2F /* EmployeeBookingsViewController.swift in Sources */,
 				CAE9C79325494C5F004D2AC1 /* Service.swift in Sources */,
+				CAA6890C259E0C3C0061F372 /* CustomImageView.swift in Sources */,
 				CA11B91625650E6C0040FD2F /* EmployeeAccountViewController.swift in Sources */,
 				CA5C3B7925417936008D6DA7 /* LoginViewController.swift in Sources */,
 				CA4456742559401E00E96E62 /* BookingViewController.swift in Sources */,
 				CAC06ED92559D6F200E15284 /* CheckoutViewController.swift in Sources */,
 				CAAE2EAA2573E6A8006D4D7F /* ServiceListViewController.swift in Sources */,
-				CA88A4C825584C5300CEA1D2 /* Bookings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

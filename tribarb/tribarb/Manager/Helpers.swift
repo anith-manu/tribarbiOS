@@ -14,6 +14,7 @@ class Helpers {
     
     // Helper to load image asynchronously
     static func loadImage(_ imageView: UIImageView,_ urlString: String) {
+        
         let imgURL: URL = URL(string: urlString)!
         URLSession.shared.dataTask(with: imgURL) { (data, response, error) in
             
@@ -62,6 +63,5 @@ class Helpers {
         activityIndicator.startAnimating()
         
     }
-    
     
 }

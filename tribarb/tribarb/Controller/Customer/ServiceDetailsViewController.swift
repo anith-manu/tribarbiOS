@@ -8,6 +8,7 @@
 import UIKit
 
 
+
 class ServiceDetailsViewController: UIViewController {
 
     @IBOutlet weak var serviceImagesCV: UICollectionView!
@@ -144,43 +145,52 @@ class ServiceDetailsViewController: UIViewController {
 
 extension ServiceDetailsViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width - 30, height: collectionView.frame.height - 30)
+        return CGSize(width: 210, height: 210)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //return data.count
-        
         return self.urls.count
     }
+    
+
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CustomCell
         
-        let serviceDefault = UIImageView()
-        let defaultImage = UIImage(named: "loading")
-        serviceDefault.image = defaultImage
+        cell.layer.cornerRadius = 12
+        cell.layer.masksToBounds = true
+        
+        let serviceDefault = CustomImageView()
+        let urlString = self.urls[indexPath.item]
+        serviceDefault.loadImage("\(urlString)")
 
         cell.data = self.urls[indexPath.item]
         cell.backgroundView = serviceDefault
-        cell.layer.cornerRadius = 12
+        
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        var image: UIImage?
-        let urlString = self.urls[indexPath.item]
 
-        let url = NSURL(string: urlString)! as URL
-        if let imageData: NSData = NSData(contentsOf: url) {
-            image = UIImage(data: imageData as Data)
-        }
+        let urlString = self.urls[indexPath.item]
+        var image: UIImage?
         
+        if let imageFromCache = imageCache.object(forKey: urlString as AnyObject) as? UIImage {
+            image = imageFromCache
+        } else {
+            let url = NSURL(string: urlString)! as URL
+            if let imageData: NSData = NSData(contentsOf: url) {
+                image = UIImage(data: imageData as Data)
+            }
+        }
+    
         let imageInfo = GSImageInfo(image: image!, imageMode: .aspectFit)
         let transitionInfo = GSTransitionInfo(fromView: collectionView)
         let imageViewer = GSImageViewerController(imageInfo: imageInfo, transitionInfo: transitionInfo)
-      
+
         present(imageViewer, animated: true)
+        
     }
 }
 

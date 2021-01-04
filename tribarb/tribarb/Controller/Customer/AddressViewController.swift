@@ -9,15 +9,13 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class AddressViewController: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
+class AddressViewController: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate, UITextViewDelegate  {
 
     @IBOutlet weak var addressStackView: UIStackView!
     @IBOutlet weak var addressScrollView: UIScrollView!
     @IBOutlet weak var savedAddress: UIView!
-    @IBOutlet weak var lbSavedAddress: UILabel!
-    @IBOutlet weak var newAddress: UIView!
     @IBOutlet weak var map: MKMapView!
-    @IBOutlet weak var btDifferentAddress: UIButton!
+
     
     @IBOutlet weak var addressTextView: UITextView!
     
@@ -27,6 +25,7 @@ class AddressViewController: UIViewController, UITextFieldDelegate, UIGestureRec
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
+        addressTextView.delegate = self
     
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
@@ -38,10 +37,13 @@ class AddressViewController: UIViewController, UITextFieldDelegate, UIGestureRec
         
         addressTextView.inputAccessoryView = toolbar
         
-        addressTextView.layer.cornerRadius = 5
-        addressTextView.layer.borderColor = UIColor.lightGray.cgColor
-        addressTextView.layer.borderWidth = 0.30
-        addressTextView.layer.masksToBounds = true
+
+        addressTextView.layer.borderWidth = 0
+        
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(touchMap(_:)))
+        gestureRecognizer.delegate = self
+        map.addGestureRecognizer(gestureRecognizer)
+ 
         
         if CLLocationManager.locationServicesEnabled() {
             locationManager = CLLocationManager()
@@ -53,16 +55,15 @@ class AddressViewController: UIViewController, UITextFieldDelegate, UIGestureRec
         }
         
         if User.currentUser.address != nil && User.currentUser.address! != "" {
-            self.btDifferentAddress.isHidden = false
-            self.newAddress.isHidden = true
-            self.lbSavedAddress.text = User.currentUser.address!
+            ADDRESS_SET = true
+            self.addressTextView.text = User.currentUser.address!
             self.pinAddress(address: User.currentUser.address!)
             Cart.currentCart.address = User.currentUser.address!
+     
         } else {
             ADDRESS_SET = false
-            self.lbSavedAddress.text = "No address set."
-            self.newAddress.isHidden = false
-            self.btDifferentAddress.isHidden = true
+            self.addressTextView.text = "Enter address here"
+            self.addressTextView.textColor = UIColor.lightGray
         }
     
         
@@ -116,7 +117,7 @@ class AddressViewController: UIViewController, UITextFieldDelegate, UIGestureRec
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: false)
+
     }
     
     
@@ -145,6 +146,21 @@ class AddressViewController: UIViewController, UITextFieldDelegate, UIGestureRec
         view.endEditing(true)
     }
     
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if addressTextView.textColor == UIColor.lightGray {
+            addressTextView.text = nil
+            addressTextView.textColor = UIColor.black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if addressTextView.text.isEmpty {
+            addressTextView.text = "Enter address here"
+            addressTextView.textColor = UIColor.lightGray
+        }
+    }
+    
     @IBAction func addPayment(_ sender: Any) {
         
          if ADDRESS_SET == false {
@@ -160,7 +176,7 @@ class AddressViewController: UIViewController, UITextFieldDelegate, UIGestureRec
     
 
     
-    @IBAction func searchAddress(_ sender: Any) {
+    @IBAction func setAddress(_ sender: Any) {
         
         map.removeAnnotations(map.annotations)
         
@@ -203,7 +219,7 @@ class AddressViewController: UIViewController, UITextFieldDelegate, UIGestureRec
                 self.map.addAnnotation(dropPin)
                 self.ADDRESS_SET = true
                 
-                self.lbSavedAddress.text = address
+//                self.lbSavedAddress.text = address
                 Cart.currentCart.address = address
             }
         }
@@ -211,18 +227,7 @@ class AddressViewController: UIViewController, UITextFieldDelegate, UIGestureRec
     }
     
 
-    @IBAction func chooseDifferentAddress(_ sender: Any) {
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(touchMap(_:)))
-        gestureRecognizer.delegate = self
-        map.addGestureRecognizer(gestureRecognizer)
         
-        self.btDifferentAddress.isHidden = true
-        self.newAddress.isHidden = false
-        self.viewWillAppear(true)
-    }
-    
-    
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false

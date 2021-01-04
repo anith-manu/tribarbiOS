@@ -14,8 +14,6 @@ class PaymentViewController: UIViewController {
 
     @IBOutlet weak var paymentMethod: UISegmentedControl!
     @IBOutlet weak var btPlaceBooking: CurvedButton!
-
-    @IBOutlet weak var placingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var lbAddress: UILabel!
     @IBOutlet weak var lbBookingTime: UILabel!
@@ -54,7 +52,6 @@ class PaymentViewController: UIViewController {
     
     func setPaymentUI() {
         navigationController?.navigationBar.prefersLargeTitles = true
-        placingIndicator.isHidden = true
 
         var bookingType = ""
         if Cart.currentCart.bookingType == 0 {
@@ -117,6 +114,8 @@ class PaymentViewController: UIViewController {
     
 
     @IBAction func placeBooking(_ sender: Any) {
+        
+        
         disablePlacedBookingButton()
         Cart.currentCart.paymentMode = paymentMethod.selectedSegmentIndex
         
@@ -141,19 +140,17 @@ class PaymentViewController: UIViewController {
     }
     
     func disablePlacedBookingButton() {
-        btPlaceBooking.setTitle("", for: .normal)
         btPlaceBooking.isEnabled = false
-        btPlaceBooking.layer.opacity = 0.55
-        placingIndicator.isHidden = false
-        placingIndicator.startAnimating()
+        paymentMethod.isEnabled = false
+        btPlaceBooking.isSkeletonable = true
+        self.btPlaceBooking.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: UIColor(rgb: 0xFFC15D), secondaryColor: UIColor(rgb: 0xffdeaa)), animation: nil, transition: .crossDissolve(0.25))
     }
     
     func enablePlacedBookingButton() {
-        placingIndicator.stopAnimating()
-        placingIndicator.isHidden = true
-        btPlaceBooking.setTitle("Place Booking", for: .normal)
         btPlaceBooking.isEnabled = true
-        btPlaceBooking.layer.opacity = 1
+        paymentMethod.isEnabled = true
+        self.btPlaceBooking.stopSkeletonAnimation()
+        self.btPlaceBooking.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
     }
 }
 

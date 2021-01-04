@@ -7,7 +7,7 @@
 
 import UIKit
 import FBSDKLoginKit
-
+import SkeletonView
 
 class LoginViewController: UIViewController {
     
@@ -17,30 +17,28 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var switchUser: UISegmentedControl!
     @IBOutlet weak var userTypeImage: UIImageView!
     @IBOutlet weak var facebookLogin: UIButton!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-
+    @IBOutlet weak var background: UIView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setGradientBackground()
-        
+       
         
         self.switchUser.isHidden = true
         self.facebookLogin.isHidden = true
-        self.activityIndicator.isHidden = true
-        
         
         if (AccessToken.current != nil ) {
-            activityIndicator.isHidden = false
-            activityIndicator.startAnimating()
+            
+            startSkeletalAnimation()
             FBManager.getFBUserData {
                 APIManager.shared.login(userType: self.userType) { (error) in
                     if error == nil {
                         self.fbLoginSuccess = true
                         self.viewDidAppear(true)
-                        self.activityIndicator.stopAnimating()
+                        self.stopSkeletalAnimation()
                     }
                 }
             }
@@ -48,18 +46,28 @@ class LoginViewController: UIViewController {
             self.switchUser.isHidden = false
             self.facebookLogin.isHidden = false
         }
-
     }
     
+    
+    func startSkeletalAnimation() {
+        self.background.isSkeletonable = true
+        self.background.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: UIColor(rgb: 0xFFC15D), secondaryColor: UIColor(rgb: 0xffdeaa)), animation: nil, transition: .crossDissolve(0.25))
+    }
+    
+    
+    func stopSkeletalAnimation() {
+        self.background.stopSkeletonAnimation()
+        self.view.hideSkeleton()
+    }
     
     
     func setGradientBackground() {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = self.view.bounds
-        gradientLayer.colors = [UIColor(rgb: 0xFFC15D).cgColor, UIColor(rgb: 0xFFC15D).cgColor, UIColor(rgb: 0xFFC15D).cgColor, UIColor(rgb: 0xffd590).cgColor, UIColor(rgb: 0xffdeaa).cgColor]
+        gradientLayer.colors = [UIColor(rgb: 0xFFC15D).cgColor, UIColor(rgb: 0xFFC15D).cgColor, UIColor(rgb: 0xffcb77).cgColor, UIColor(rgb: 0xffd590).cgColor, UIColor(rgb: 0xffdeaa).cgColor]
         gradientLayer.startPoint = CGPoint(x: 0, y: 1)
         gradientLayer.endPoint = CGPoint(x: 1, y: 1)
-        self.view.layer.insertSublayer(gradientLayer, at: 0)
+        self.background.layer.insertSublayer(gradientLayer, at: 0)
     }
     
     
@@ -71,6 +79,8 @@ class LoginViewController: UIViewController {
                         LoginViewController.USER_TYPE = 0
                         self.performSegue(withIdentifier: "CustomerView", sender: self)
                     } else if json!["last_logged_in_as"] ==  "employee" {
+                        self.switchUser.isHidden = false
+                        self.facebookLogin.isHidden = false
                         LoginViewController.USER_TYPE = 1
                         if json!["verified"] == false {
                             self.performSegue(withIdentifier: "EmployeeVerification", sender: self)
@@ -93,8 +103,7 @@ class LoginViewController: UIViewController {
             if (error == nil) {
                 
                 FBManager.getFBUserData {
-                    self.activityIndicator.isHidden=false
-                    self.activityIndicator.startAnimating()
+                    self.startSkeletalAnimation()
                     APIManager.shared.login(userType: self.userType) { (error) in
                         if error == nil {
                         
@@ -103,7 +112,7 @@ class LoginViewController: UIViewController {
                             
                             APIManager.shared.setLastLoggedInAs(user_type: self.userType) { (json) in
                                 self.viewDidAppear(true)
-                                self.activityIndicator.stopAnimating()
+                                self.stopSkeletalAnimation()
                             }
                         }
                     }

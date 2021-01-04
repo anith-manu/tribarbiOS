@@ -9,12 +9,11 @@ import UIKit
 
 class CheckoutViewController: UIViewController, UITextFieldDelegate {
     
-    @IBOutlet weak var lbShopName: UILabel!
-    @IBOutlet weak var lbBookingType: UILabel!
-    
+
     @IBOutlet weak var checkoutScroll: UIScrollView!
     @IBOutlet weak var checkoutStackView: UIStackView!
     
+    @IBOutlet weak var bookingPlacedBackground: UIView!
     @IBOutlet weak var shopView: UIView!
     @IBOutlet weak var tbvServices: UITableView!
     @IBOutlet weak var totalView: UIView!
@@ -35,6 +34,9 @@ class CheckoutViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(UIView())
+        
+        navigationController?.view.backgroundColor = UIColor.white
 
         self.bookingDate.minimumDate = Date()
         
@@ -66,12 +68,18 @@ class CheckoutViewController: UIViewController, UITextFieldDelegate {
 
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationItem.largeTitleDisplayMode = .always
+        self.navigationItem.setHidesBackButton(true, animated: false)
+    
+        
         self.tbvServices.reloadData()
         
         if Cart.currentCart.items.isEmpty {
             tabBarController?.tabBar.items?[1].badgeValue = nil
             tabBarController?.tabBar.items?[1].isEnabled = false
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
             self.shopView.isHidden = true
             self.totalView.isHidden = true
             self.tbvServices.isHidden = true
@@ -96,18 +104,26 @@ class CheckoutViewController: UIViewController, UITextFieldDelegate {
             self.bookingPlacedView.isHidden = true
             self.emptyCartView.isHidden = true
             setDetails()
+            
         }
     }
     
     
+
+    
     
     func setDetails() {
-        self.lbShopName.text = Cart.currentCart.shop?.name
+        navigationItem.title = Cart.currentCart.shop?.name
+        
         if Cart.currentCart.bookingType == 0 {
-            self.lbBookingType.text = "Shop Booking"
+            navigationItem.prompt = "Shop Booking"
+            navigationItem.backBarButtonItem = UIBarButtonItem(
+                title: "Shop Booking", style: .plain, target: nil, action: nil)
             self.btNext.setTitle("Payment", for: .normal)
         } else {
-            self.lbBookingType.text = "Home Booking"
+            navigationItem.backBarButtonItem = UIBarButtonItem(
+                title: "Home Booking", style: .plain, target: nil, action: nil)
+            navigationItem.prompt = "Home Booking"
             self.btNext.setTitle("Address", for: .normal)
         }
         self.lbServiceFee.text = "£\(Cart.currentCart.getServiceFee())"

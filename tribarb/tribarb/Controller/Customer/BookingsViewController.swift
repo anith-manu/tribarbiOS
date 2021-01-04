@@ -6,15 +6,14 @@
 //
 
 import UIKit
-
+import SkeletonView
 
 class BookingsViewController: UIViewController {
 
     
     @IBOutlet weak var tbvBookings: UITableView!
     var filter_bookings_var = 0
-    let activityIndicator = UIActivityIndicatorView()
-    var bookings = [Bookings]()
+    var bookings = [Booking]()
     
     @IBOutlet weak var filterBookings: UISegmentedControl!
     
@@ -24,7 +23,7 @@ class BookingsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: false)
+
         load_bookings()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { // Change `2.0` to the desired number of seconds.
@@ -40,11 +39,11 @@ class BookingsViewController: UIViewController {
     
     
     
-
-    
-    
     func load_bookings() {
-        Helpers.showActivityIndicator(activityIndicator, view)
+    
+        self.view.isSkeletonable = true
+        self.view.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: UIColor(rgb: 0xEEEEEF)), animation: nil, transition: .none)
+
         filter_bookings_var = filterBookings.selectedSegmentIndex
         
         APIManager.shared.customerGetBookings(filterID: filter_bookings_var) { (json) in
@@ -55,11 +54,17 @@ class BookingsViewController: UIViewController {
                 if let listBarber = json?["bookings"].array {
                     for item in listBarber {
 
-                        let booking = Bookings(json: item)
+                        let booking = Booking(json: item)
                         self.bookings.append(booking)
                     }
+                    
+                    
+
+                    self.view.stopSkeletonAnimation()
+                    self.view.hideSkeleton()
+
                     self.tbvBookings.reloadData()
-                    Helpers.hideActivityIndicator(self.activityIndicator)
+                
                 }
             }
         }
@@ -74,7 +79,7 @@ class BookingsViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "BookingDetail" {
             let controller = segue.destination as! BookingViewController
-            controller.bookingId = bookings[(tbvBookings.indexPathForSelectedRow?.row)!].id
+            controller.booking = bookings[(tbvBookings.indexPathForSelectedRow?.row)!]
         }
     }
 }
@@ -94,14 +99,14 @@ extension BookingsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BookingCell", for: indexPath) as! FilterBookingTableViewCell
         
-        let booking: Bookings
+        let booking: Booking
         
        
         booking = bookings[indexPath.row]
         
         cell.lbShopName.text = booking.shopName
         
-        if booking.booking_type == "1" {
+        if booking.booking_type == 1 {
             cell.lbBookingType.text = "Home Booking"
         } else {
             cell.lbBookingType.text = "Shop Booking"

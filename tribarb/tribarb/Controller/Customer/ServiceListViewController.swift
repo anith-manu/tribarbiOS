@@ -8,11 +8,12 @@
 import UIKit
 import CoreLocation
 import MapKit
+import SkeletonView
 
 
 class ServiceListViewController: UIViewController {
     
-    @IBOutlet weak var shopLogo: UIImageView!
+    @IBOutlet weak var shopLogo: CustomImageView!
     @IBOutlet weak var btShopIg: UIButton!
     @IBOutlet weak var btShopFb: UIButton!
     @IBOutlet weak var btShopPhone: UIButton!
@@ -25,6 +26,7 @@ class ServiceListViewController: UIViewController {
     @IBOutlet weak var ratingView: UIView!
     @IBOutlet weak var lbNumberOfRatings: UILabel!
     @IBOutlet weak var lbServicesType: UILabel!
+    @IBOutlet weak var loadingView: UIView!
     
     static var lastFractionComplete: CGFloat = 0
     var comingFromRoot: Bool = false
@@ -41,6 +43,8 @@ class ServiceListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationItem.largeTitleDisplayMode = .always
         setServiceListUI()
         getBookedServices()
         loadServices()
@@ -94,11 +98,10 @@ class ServiceListViewController: UIViewController {
             self.lbServicesType.text = "Home Services"
         }
         
- 
         if let imageUrl = shop?.logo {
-            Helpers.loadImage(shopLogo, "\(imageUrl)")
+            shopLogo.loadImage("\(imageUrl)")
+            shopLogo.contentMode = .scaleAspectFill
         }
-        
 
         ig = (self.shop?.instagram)!
         fb = (self.shop?.facebook)!
@@ -131,7 +134,8 @@ class ServiceListViewController: UIViewController {
     
     
     func loadServices() {
-        Helpers.showWhiteOutActivityIndicator(activityIndicator, view)
+        self.loadingView.isSkeletonable = true
+        self.loadingView.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: UIColor(rgb: 0xEEEEEF)), animation: nil, transition: .crossDissolve(0.25))
         
         if let shopId = shop?.id {
             APIManager.shared.getServices(filterID: ShopViewController.BOOKING_TYPE_VAR, shopID: shopId) { (json) in
@@ -144,9 +148,14 @@ class ServiceListViewController: UIViewController {
                             let service = Service(json: item)
                             self.services.append(service)
                         }
+                        
+                        
+                        self.loadingView.isHidden = true
+                        self.loadingView.stopSkeletonAnimation()
+                        self.loadingView.hideSkeleton()
+                    
                         self.tbvServices.reloadData()
                     }
-                    Helpers.hideActivityIndicator(self.activityIndicator)
    
                 }
             }
@@ -225,7 +234,12 @@ class ServiceListViewController: UIViewController {
 
 
 
-extension ServiceListViewController: UITableViewDelegate, UITableViewDataSource {
+extension ServiceListViewController: UITableViewDelegate, SkeletonTableViewDataSource {
+    
+    
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return "ServiceCell"
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -241,6 +255,8 @@ extension ServiceListViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ServiceCell", for: indexPath) as! ServiceTableViewCell
+        
+        cell.isSkeletonable = true
         
         let service = services[indexPath.row]
         cell.lbServiceName.text = service.name
@@ -263,3 +279,5 @@ extension ServiceListViewController: UITableViewDelegate, UITableViewDataSource 
         coverHeightConstraint.constant = newHeight
     }
 }
+
+
