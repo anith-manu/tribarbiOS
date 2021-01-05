@@ -6,25 +6,40 @@
 //
 
 import UIKit
+import SkeletonView
 
 class EmployeeBookingsViewController: UIViewController {
     
     @IBOutlet weak var tbvBookings: UITableView!
     @IBOutlet weak var filterBookings: UISegmentedControl!
-    let activityIndicator = UIActivityIndicatorView()
-    var bookings = [EmployeeBookings]()
+    @IBOutlet weak var loadingView: UIView!
+    var bookings = [Booking]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         tabbarConfig()
+        loadBookings()
         // Do any additional setup after loading the view.
+        
+        pushNotifications.start(instanceId: "e4ca64ad-a6d3-41af-b291-f7b39f7f9ba2")
+        pushNotifications.registerForRemoteNotifications()
+        try? pushNotifications.addDeviceInterest(interest: "hello")
     }
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationItem.title = "Bookings"
+        navigationItem.prompt = User.currentUser.shop
+        loadBookings()
+    }
+    
+
     func loadBookings() {
-        Helpers.showActivityIndicator(activityIndicator, view)
-       
+        
+        self.showLoadingSkeleton()
         APIManager.shared.employeeGetBookings(filterID: filterBookings.selectedSegmentIndex) { (json) in
+            
+            
             if json != nil {
                 
                 self.bookings = []
@@ -32,11 +47,11 @@ class EmployeeBookingsViewController: UIViewController {
                 if let listBarber = json?["bookings"].array {
                     for item in listBarber {
 
-                        let booking = EmployeeBookings(json: item)
+                        let booking = Booking(json: item)
                         self.bookings.append(booking)
                     }
+                    self.hideLoadingSkeleton()
                     self.tbvBookings.reloadData()
-                    Helpers.hideActivityIndicator(self.activityIndicator)
                 }
             }
         }
@@ -54,19 +69,25 @@ class EmployeeBookingsViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "BookingDetail" {
             let controller = segue.destination as! EmployeeBookingViewController
-            controller.bookingId = bookings[(tbvBookings.indexPathForSelectedRow?.row)!].id
-            controller.bookingStatus = bookings[(tbvBookings.indexPathForSelectedRow?.row)!].status
+            controller.booking = bookings[(tbvBookings.indexPathForSelectedRow?.row)!]
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        
-        
+
+    func showLoadingSkeleton() {
+        self.loadingView.isHidden = false
+        self.loadingView.isSkeletonable = true
+        self.loadingView.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: UIColor(rgb: 0xEEEEEF)), animation: nil, transition: .crossDissolve(0.25))
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        loadBookings()
+    func hideLoadingSkeleton() {
+        self.loadingView.isHidden = true
+        self.loadingView.stopSkeletonAnimation()
+        self.loadingView.hideSkeleton()
     }
+    
+    
+
 
     @IBAction func switchBookingType(_ sender: Any) {
         loadBookings()
@@ -91,12 +112,12 @@ extension EmployeeBookingsViewController: UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BookingCell", for: indexPath) as! EmployeeBookingTableViewCell
         
-        let booking: EmployeeBookings
+        let booking: Booking
         
        
         booking = bookings[indexPath.row]
         
-        if booking.booking_type == "1" {
+        if booking.booking_type == 1 {
             cell.lbBookingType.text = "Home Booking"
         } else {
             cell.lbBookingType.text = "Shop Booking"
@@ -107,7 +128,7 @@ extension EmployeeBookingsViewController: UITableViewDelegate, UITableViewDataSo
         cell.lbStatus.text = booking.status
         cell.lbStatus.layer.cornerRadius = 10
         cell.lbStatus.layer.masksToBounds = true
-        cell.lbBarberName.text = booking.barber
+        cell.lbBarberName.text = booking.employee_name
         cell.barberView.isHidden = false
         
         if booking.status == "Placed" {

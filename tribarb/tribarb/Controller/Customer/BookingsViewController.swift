@@ -11,6 +11,7 @@ import SkeletonView
 class BookingsViewController: UIViewController {
 
     
+    @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var tbvBookings: UITableView!
     var filter_bookings_var = 0
     var bookings = [Booking]()
@@ -41,8 +42,7 @@ class BookingsViewController: UIViewController {
     
     func load_bookings() {
     
-        self.view.isSkeletonable = true
-        self.view.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: UIColor(rgb: 0xEEEEEF)), animation: nil, transition: .none)
+        self.showLoadingSkeleton()
 
         filter_bookings_var = filterBookings.selectedSegmentIndex
         
@@ -58,11 +58,7 @@ class BookingsViewController: UIViewController {
                         self.bookings.append(booking)
                     }
                     
-                    
-
-                    self.view.stopSkeletonAnimation()
-                    self.view.hideSkeleton()
-
+                    self.hideLoadingSkeleton()
                     self.tbvBookings.reloadData()
                 
                 }
@@ -81,6 +77,19 @@ class BookingsViewController: UIViewController {
             let controller = segue.destination as! BookingViewController
             controller.booking = bookings[(tbvBookings.indexPathForSelectedRow?.row)!]
         }
+    }
+    
+    
+    func showLoadingSkeleton() {
+        self.loadingView.isHidden = false
+        self.loadingView.isSkeletonable = true
+        self.loadingView.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: UIColor(rgb: 0xEEEEEF)), animation: nil, transition: .crossDissolve(0.25))
+    }
+    
+    func hideLoadingSkeleton() {
+        self.loadingView.isHidden = true
+        self.loadingView.stopSkeletonAnimation()
+        self.loadingView.hideSkeleton()
     }
 }
 

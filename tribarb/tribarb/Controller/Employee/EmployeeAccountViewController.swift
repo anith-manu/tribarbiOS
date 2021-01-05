@@ -9,6 +9,7 @@ import UIKit
 
 class EmployeeAccountViewController: UIViewController, UITextFieldDelegate {
     
+    @IBOutlet weak var btUpdate: CurvedButton!
     @IBOutlet weak var tfPhone: UITextField!
     @IBOutlet weak var accountScroll: UIScrollView!
     
@@ -49,16 +50,36 @@ class EmployeeAccountViewController: UIViewController, UITextFieldDelegate {
         toolbar.setItems([doneButton], animated: false)
         
         tfPhone.inputAccessoryView = toolbar
+        tfPhone.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
 
         // Do any additional setup after loading the view.
     }
     
+    
+    func disableUpdateButton() {
+        self.btUpdate.isEnabled = false
+        self.btUpdate.layer.opacity = 0.5
+    }
+    
+    
+    func enableUpdateButton() {
+        self.btUpdate.isEnabled = true
+        self.btUpdate.layer.opacity = 1
+    }
+    
+    @objc private func textFieldDidChange(_ textField: UITextField) {
+        enableUpdateButton()
+    }
     
     @objc func doneClicked() {
         view.endEditing(true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        disableUpdateButton()
+        
         if User.currentUser.shop == nil {
         
             Helpers.showWhiteOutActivityIndicator(activityIndicator, view)

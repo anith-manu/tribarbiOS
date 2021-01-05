@@ -30,6 +30,11 @@ class ShopViewController: UIViewController, UISearchResultsUpdating {
         load_shops()
         tabbarConfig()
         setupNavBar()
+        
+        
+        pushNotifications.start(instanceId: "e4ca64ad-a6d3-41af-b291-f7b39f7f9ba2")
+        pushNotifications.registerForRemoteNotifications()
+        try? pushNotifications.addDeviceInterest(interest: "hello")
 
     }
     

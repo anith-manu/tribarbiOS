@@ -12,23 +12,21 @@ import MapKit
 
 class EmployeeBookingViewController: UIViewController {
 
-    @IBOutlet weak var lbBookingType: UILabel!
+
+    @IBOutlet weak var statusView: UIView!
     @IBOutlet weak var lbBookingDate: UILabel!
     @IBOutlet weak var lbCustomer: UILabel!
-    @IBOutlet weak var imgAvatar: UIImageView!
+    @IBOutlet weak var imgAvatar: CustomImageView!
     @IBOutlet weak var lbStatus: UILabel!
-    
+    @IBOutlet weak var paymentModeImage: UIImageView!
     @IBOutlet weak var mapView: UIView!
     @IBOutlet weak var map: MKMapView!
-    @IBOutlet weak var addressView: UIView!
     @IBOutlet weak var lbAddress: UILabel!
     @IBOutlet weak var lbSubtotal: UILabel!
     @IBOutlet weak var lbTotal: UILabel!
-    @IBOutlet weak var lbPaymentMode: UILabel!
     @IBOutlet weak var requestView: UIView!
     @IBOutlet weak var lbRequest: UILabel!
     @IBOutlet weak var lbServiceFee: UILabel!
-    
     @IBOutlet weak var buttonsView: UIView!
     @IBOutlet weak var acceptView: UIView!
     @IBOutlet weak var declineView: UIView!
@@ -36,18 +34,13 @@ class EmployeeBookingViewController: UIViewController {
     @IBOutlet weak var CompleteView: UIView!
     @IBOutlet weak var tbvServices: ContentSizedTableView!
     
-    var bookingId: Int?
-    var bookingStatus: String?
-    
+    var booking: Booking?
     var phone = ""
     var bookedServices = [JSON]()
-    let activityIndicator = UIActivityIndicatorView()
-    
     var destination: MKPlacemark?
     var source: MKPlacemark?
     var employeePin: MKPointAnnotation!
     var lastLocation: CLLocationCoordinate2D!
-    
     var locationManager: CLLocationManager!
     var client_address: String?
     
@@ -55,16 +48,12 @@ class EmployeeBookingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.setNavigationBarHidden(false, animated: false)
-        self.addressView.isHidden = true
-        self.mapView.isHidden = true
-        
-        self.imgAvatar.layer.cornerRadius = 75/2
-        self.imgAvatar.layer.borderWidth = 1.0
-        self.imgAvatar.layer.borderColor = UIColor.white.cgColor
-        self.imgAvatar.clipsToBounds = true
-        
-        
+        self.setUIElements(booking: booking!)
+        self.setDelegates()
+    }
+    
+    
+    func setDelegates() {
         if CLLocationManager.locationServicesEnabled() {
             locationManager = CLLocationManager()
             locationManager.delegate = self
@@ -74,19 +63,16 @@ class EmployeeBookingViewController: UIViewController {
             self.map.showsUserLocation = true
         }
         
-       
-        if bookingStatus! == "Barber En Route" {
+        if booking?.status == "Barber En Route" {
             timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(updateLocation(_:)), userInfo: nil, repeats: true)
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        getBooking()
-    }
-    
+
     override func viewWillLayoutSubviews() {
         lbRequest.sizeToFit()
     }
+    
     
     @objc func updateLocation(_ sender: AnyObject) {
         APIManager.shared.updateEmployeeLocation(location: self.lastLocation) { (json) in
@@ -97,57 +83,62 @@ class EmployeeBookingViewController: UIViewController {
     
     
     func getBooking() {
-        Helpers.showWhiteOutActivityIndicator(activityIndicator, view)
 
-        APIManager.shared.getBooking(bookingID: bookingId!) { (json) in
+        APIManager.shared.getBooking(bookingID: (booking?.id)!) { (json) in
 
             let booking = Booking(json: json!["booking"])
             
             self.setUIElements(booking: booking)
             
-            Helpers.hideActivityIndicator(self.activityIndicator)
         }
     }
+    
 
     func setUIElements(booking: Booking) {
-        self.title = "Booking #\(bookingId!)"
+        navigationController?.view.backgroundColor = UIColor.white
+        navigationItem.prompt = "Booking #\((booking.id)!)"
         
+        var bookingType = ""
         if booking.booking_type == 0 {
-            self.lbBookingType.text = "Shop Booking"
+            navigationItem.title = "Shop Booking"
+            bookingType = "Shop Booking"
+            self.mapView.isHidden = true
             self.OTWView.isHidden = true
         } else {
-            self.lbBookingType.text = "Home booking"
+            navigationItem.title = "Home Booking"
+            bookingType = "Home Booking"
             self.mapView.isHidden = false
-            self.addressView.isHidden = false
             self.lbAddress.text = booking.home_address!
             self.client_address = booking.home_address!
-            
             self.getLocation(booking.home_address!, "Client") { (dest) in
                 self.destination = dest
-
             }
         }
         
-
-        if booking.status == "Completed" || booking.status == "Cancelled" || booking.status == "Declined"  {
-            self.mapView.isHidden = true
-            self.buttonsView.isHidden = true
+        self.statusView.layer.cornerRadius = 10
+        self.statusView.layer.masksToBounds = true
+        if booking.status == "Placed" {
+            self.startSkeletalAnimation(color: UIColor(red: 1.00, green: 0.76, blue: 0.36, alpha: 1.00))
+        } else if booking.status == "Accepted" || booking.status == "Barber En Route"  {
+            self.startSkeletalAnimation( color: UIColor(red: 0.23, green: 0.65, blue: 0.00, alpha: 1.00))
+        } else if booking.status == "Cancelled" || booking.status == "Declined" {
+            self.statusView.backgroundColor = .systemRed
+        } else if  booking.status == "Completed" {
+            self.statusView.backgroundColor = UIColor(red: 0.23, green: 0.65, blue: 0.00, alpha: 1.00)
             
-            if booking.status == "Completed" && booking.booking_type == 1 {
+            if booking.booking_type == 1 {
                 self.timer.invalidate()
             }
-
         }
+        self.lbStatus.text = booking.status!
         
         if booking.status == "Placed" {
             self.OTWView.isHidden = true
             self.CompleteView.isHidden = true
         }
         
-        
         if booking.status == "Accepted" {
             self.acceptView.isHidden = true
-            
             
             if booking.booking_type == 0 {
                 self.OTWView.isHidden = true
@@ -158,7 +149,6 @@ class EmployeeBookingViewController: UIViewController {
             }
         }
         
-        
         if booking.status == "Barber En Route" {
             self.declineView.isHidden = false
             self.CompleteView.isHidden = false
@@ -166,13 +156,11 @@ class EmployeeBookingViewController: UIViewController {
             self.OTWView.isHidden = true
         }
         
-        
-        if booking.request! == "" {
-            self.requestView.isHidden = true
-        } else {
-            self.requestView.isHidden = false
-            self.lbRequest.text = booking.request!
+        if booking.status == "Completed" || booking.status == "Cancelled" || booking.status == "Declined"  {
+            self.mapView.isHidden = true
+            self.buttonsView.isHidden = true
         }
+        
         
         let dateString = booking.date!
         let dateFormatter = DateFormatter()
@@ -181,36 +169,55 @@ class EmployeeBookingViewController: UIViewController {
         dateFormatter.dateFormat = "d MMM y, HH:mm"
         dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
         
-        self.lbBookingDate.text = dateFormatter.string(from: date!)
+        self.lbBookingDate.text = bookingType + " on " + dateFormatter.string(from: date!)
+        
+        self.imgAvatar.layer.cornerRadius = imgAvatar.bounds.height/2
+        self.imgAvatar.layer.borderWidth = 1.0
+        self.imgAvatar.layer.borderColor = UIColor.white.cgColor
+        self.imgAvatar.clipsToBounds = true
         
         if booking.customer_avatar != nil {
-            self.imgAvatar.image = try! UIImage(data: Data(contentsOf: URL(string: booking.customer_avatar!)!))
+            imgAvatar.loadImage(booking.customer_avatar!)
         }
         
         self.lbCustomer.text = booking.customer!
         self.phone = booking.customer_phone!
-        
-        self.lbStatus.text = booking.status!
         
         if let bookingDetails = booking.booking_details {
             self.bookedServices = bookingDetails
             self.tbvServices.reloadData()
         }
         
-        
-        if booking.payment_mode == 0 {
-            self.lbPaymentMode.text = "Cash"
-        } else {
-            self.lbPaymentMode.text = "Card"
-        }
-        
-        
         self.lbSubtotal.text = "£\(booking.subtotal!)"
         self.lbServiceFee.text = "£\(booking.service_fee!)"
         self.lbTotal.text = "£\(booking.total!)"
-
+        
+        if booking.payment_mode == 0 {
+            self.paymentModeImage.image = UIImage(named: "cash")
+        } else {
+            self.paymentModeImage.image = UIImage(named: "credit_card")
+        }
+        
+        if booking.request! == "" {
+            self.requestView.isHidden = true
+        } else {
+            self.requestView.isHidden = false
+            self.lbRequest.text = booking.request!
+        }
     }
 
+    
+    func startSkeletalAnimation(color: UIColor) {
+        self.statusView.isSkeletonable = true
+        self.statusView.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: color), animation: nil, transition: .crossDissolve(0.7))
+    }
+    
+    
+    func stopSkeletalAnimation() {
+        self.statusView.stopSkeletonAnimation()
+        self.statusView.hideSkeleton()
+    }
+    
 
     
     @IBAction func call(_ sender: Any) {
@@ -291,23 +298,28 @@ class EmployeeBookingViewController: UIViewController {
         let okAction = UIAlertAction(title: "Yes", style: .destructive) { (action: UIAlertAction!) in
             
             if bookingAction == 0 {
-                APIManager.shared.employeeAcceptBooking(bookingID: self.bookingId!) { (json) in
-                    self.viewWillAppear(true)
+                APIManager.shared.employeeAcceptBooking(bookingID: (self.booking?.id)!) { (json) in
+                    self.stopSkeletalAnimation()
+                    self.getBooking()
+                    
                 }
                 
             } else if bookingAction == 1 {
-                APIManager.shared.employeeDeclineBooking(bookingID: self.bookingId!) { (json) in
-                    self.viewWillAppear(true)
+                APIManager.shared.employeeDeclineBooking(bookingID: (self.booking?.id)!) { (json) in
+                    self.stopSkeletalAnimation()
+                    self.getBooking()
                 }
         
             } else if bookingAction == 2 {
-                APIManager.shared.employeeEnroute(bookingID: self.bookingId!) { (json) in
-                    self.viewWillAppear(true)
+                APIManager.shared.employeeEnroute(bookingID: (self.booking?.id)!) { (json) in
+                    self.stopSkeletalAnimation()
+                    self.getBooking()
                 }
                 
             } else if bookingAction == 3 {
-                APIManager.shared.employeeCompleteBooking(bookingID: self.bookingId!) { (json) in
-                    self.viewWillAppear(true)
+                APIManager.shared.employeeCompleteBooking(bookingID: (self.booking?.id)!) { (json) in
+                    self.stopSkeletalAnimation()
+                    self.getBooking()
                 }
                 
             }

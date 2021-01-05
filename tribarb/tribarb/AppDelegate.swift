@@ -7,10 +7,12 @@ import FBSDKCoreKit
 import Stripe
 import PushNotifications
 
+let pushNotifications = PushNotifications.shared
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate  {
     
-    let pushNotifications = PushNotifications.shared
+    
 
     
     func application(
@@ -18,12 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         
-        self.pushNotifications.start(instanceId: "e4ca64ad-a6d3-41af-b291-f7b39f7f9ba2")
-        self.pushNotifications.registerForRemoteNotifications()
-        try? self.pushNotifications.addDeviceInterest(interest: "hello")
+
           
         Stripe.setDefaultPublishableKey("pk_test_51GwZcgJGRtokdLfWGTP34rmIWR1Rzqb2rx7KruKurcBeRD6mglqetEFuUdRwCdLNtm93siuUqtgV24mvS3yDcHdG00Mvjovux2")
         STPPaymentConfiguration.shared().appleMerchantIdentifier = "merchant.com.tribarb"
+        
         ApplicationDelegate.shared.application(
             application,
             didFinishLaunchingWithOptions: launchOptions
@@ -34,11 +35,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        self.pushNotifications.registerDeviceToken(deviceToken)
+        pushNotifications.registerDeviceToken(deviceToken)
     }
 
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        self.pushNotifications.handleNotification(userInfo: userInfo)
+        pushNotifications.handleNotification(userInfo: userInfo)
     }
           
     func application(

@@ -33,7 +33,6 @@
 		CA5CD0272546DD4100290225 /* ShopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5CD0262546DD4100290225 /* ShopTableViewCell.swift */; };
 		CA68052A2567B40A00C4D2C9 /* GSImageViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6805292567B40A00C4D2C9 /* GSImageViewerController.swift */; };
 		CA6805352567C06600C4D2C9 /* EmployeeBookingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6805342567C06600C4D2C9 /* EmployeeBookingTableViewCell.swift */; };
-		CA68053A2567C0F300C4D2C9 /* EmployeeBookings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6805392567C0F300C4D2C9 /* EmployeeBookings.swift */; };
 		CA68053F25690F0600C4D2C9 /* EmployeeBookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA68053E25690F0600C4D2C9 /* EmployeeBookingViewController.swift */; };
 		CA78C04325616D5300AFD776 /* Shops.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA78C04225616D5200AFD776 /* Shops.storyboard */; };
 		CA78C04825616FCE00AFD776 /* Checkout.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA78C04725616FCE00AFD776 /* Checkout.storyboard */; };
@@ -109,7 +108,6 @@
 		CA5CD0262546DD4100290225 /* ShopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopTableViewCell.swift; sourceTree = "<group>"; };
 		CA6805292567B40A00C4D2C9 /* GSImageViewerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSImageViewerController.swift; sourceTree = "<group>"; };
 		CA6805342567C06600C4D2C9 /* EmployeeBookingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeBookingTableViewCell.swift; sourceTree = "<group>"; };
-		CA6805392567C0F300C4D2C9 /* EmployeeBookings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeBookings.swift; sourceTree = "<group>"; };
 		CA68053E25690F0600C4D2C9 /* EmployeeBookingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeBookingViewController.swift; sourceTree = "<group>"; };
 		CA78C04225616D5200AFD776 /* Shops.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Shops.storyboard; sourceTree = "<group>"; };
 		CA78C04725616FCE00AFD776 /* Checkout.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Checkout.storyboard; sourceTree = "<group>"; };
@@ -214,7 +212,6 @@
 				CAE9C79225494C5F004D2AC1 /* Service.swift */,
 				CAA5BE70254E8F290080B2CE /* Cart.swift */,
 				CA8F3798255E7F710045DC01 /* Booking.swift */,
-				CA6805392567C0F300C4D2C9 /* EmployeeBookings.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -285,9 +282,9 @@
 		CA78C0612562653100AFD776 /* Customer */ = {
 			isa = PBXGroup;
 			children = (
-				CA5C3B822541B788008D6DA7 /* CustomerAccountViewController.swift */,
-				CAEA6EC125401A590075E5C2 /* BookingsViewController.swift */,
 				CA4456732559401D00E96E62 /* BookingViewController.swift */,
+				CAEA6EC125401A590075E5C2 /* BookingsViewController.swift */,
+				CA5C3B822541B788008D6DA7 /* CustomerAccountViewController.swift */,
 				CAC2D420253EF1E000E16536 /* AddressViewController.swift */,
 				CAA5BE8725519FD90080B2CE /* PaymentViewController.swift */,
 				CA5A5DE0253D888B00A268C2 /* ShopViewController.swift */,
@@ -541,7 +538,6 @@
 			files = (
 				CA5A5DE1253D888B00A268C2 /* ShopViewController.swift in Sources */,
 				CAA5BE8825519FDA0080B2CE /* PaymentViewController.swift in Sources */,
-				CA68053A2567C0F300C4D2C9 /* EmployeeBookings.swift in Sources */,
 				CAE9C7A025495FEF004D2AC1 /* Helpers.swift in Sources */,
 				CA5C3B5F25417121008D6DA7 /* FBManager.swift in Sources */,
 				CAA5BE802551632C0080B2CE /* StripeAPIManager.swift in Sources */,
