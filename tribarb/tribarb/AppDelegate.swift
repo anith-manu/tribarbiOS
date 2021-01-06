@@ -13,18 +13,12 @@ let pushNotifications = PushNotifications.shared
 class AppDelegate: UIResponder, UIApplicationDelegate  {
     
     
-
-    
-    func application(
-        _ application: UIApplication,
-        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
-    ) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-
-          
         Stripe.setDefaultPublishableKey("pk_test_51GwZcgJGRtokdLfWGTP34rmIWR1Rzqb2rx7KruKurcBeRD6mglqetEFuUdRwCdLNtm93siuUqtgV24mvS3yDcHdG00Mvjovux2")
         STPPaymentConfiguration.shared().appleMerchantIdentifier = "merchant.com.tribarb"
         
+        //FB
         ApplicationDelegate.shared.application(
             application,
             didFinishLaunchingWithOptions: launchOptions
@@ -34,14 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     }
     
     
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        pushNotifications.registerDeviceToken(deviceToken)
-    }
-
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        pushNotifications.handleNotification(userInfo: userInfo)
-    }
-          
+    //FB
     func application(
         _ app: UIApplication,
         open url: URL,
@@ -54,9 +41,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
             sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
             annotation: options[UIApplication.OpenURLOptionsKey.annotation]
         )
-        
 
     }
+    
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        pushNotifications.registerDeviceToken(deviceToken)
+    }
+
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        pushNotifications.handleNotification(userInfo: userInfo)
+    }
+          
     
     
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -73,33 +70,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     }
 }
 
-
-// Class for text fields
-//import Foundation
-
-//class CustomTextField:UITextField{
-//
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//        setProperties()
-//    }
-//
-//    required init?(coder aDecoder: NSCoder) {
-//        super.init(coder: aDecoder)
-//        setProperties()
-//    }
-//
-//    func setProperties(){
-//
-//        backgroundColor = UIColor.white
-//        textAlignment = .left
-//        textColor = .black
-//        font = UIFont.systemFont(ofSize: 15)
-//        layer.borderWidth = 1.0
-//        layer.cornerRadius = 5
-//        if let placeholder = self.placeholder {
-//            self.attributedPlaceholder = NSAttributedString(string:placeholder, attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
-//        }
-//    }
-//}
 

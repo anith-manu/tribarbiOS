@@ -15,6 +15,7 @@ target 'tribarb' do
   pod 'Floaty', '~> 4.2.0'
   pod 'SkeletonView'
 
+  pod 'FBSDKLoginKit'
 #  target 'tribarbTests' do
  #   inherit! :search_paths
     # Pods for testing
