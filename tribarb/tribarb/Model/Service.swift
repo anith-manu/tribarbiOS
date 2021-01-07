@@ -9,7 +9,7 @@ import Foundation
 import SwiftyJSON
 
 class Service {
-    
+
     var id: Int?
     var name: String?
     var short_description: String?

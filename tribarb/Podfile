@@ -9,7 +9,11 @@ target 'tribarb' do
   pod 'Stripe'
   pod 'SwiftyJSON', '5.0.0'
   pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git'
-
+  pod 'Cosmos'
+  pod 'TinyConstraints'
+  pod 'PushNotifications'
+  pod 'Floaty', '~> 4.2.0'
+  pod 'SkeletonView'
 
 #  target 'tribarbTests' do
  #   inherit! :search_paths

@@ -16,21 +16,44 @@ class User {
     var address: String?
     var email: String?
     var pictureURL: String?
+    var shop: String?
+    var shopID: Int?
     
     static let currentUser = User()
     
-    func setInfo(json: JSON) {
-        self.name = json["name"].string
-        self.email = json["email"].string
-
-        let image = json["picture"].dictionary
-        let imageData = image?["data"]?.dictionary
-        self.pictureURL = imageData?["url"]?.string
+    func setCustomerInfo(json: JSON) {
+        self.name = json["customer"]["name"].string
+        self.email = json["customer"]["email"].string
+        self.phone = json["customer"]["phone"].string
+        self.address = json["customer"]["address"].string
+        self.pictureURL = json["customer"]["avatar"].string
     }
     
-    func resetInfo() {
+    
+    func setEmployeeInfo(json: JSON) {
+        self.name = json["employee"]["name"].string
+        self.email = json["employee"]["email"].string
+        self.phone = json["employee"]["phone"].string
+        self.pictureURL = json["employee"]["avatar"].string
+        self.shop = json["employee"]["shop_name"].string
+        self.shopID = json["employee"]["shop"].int
+    }
+    
+    func resetCustomerInfo() {
         self.name = nil
         self.email = nil
+        self.phone = nil
+        self.address = nil
         self.pictureURL = nil
+    }
+    
+    
+    func resetEmployeeInfo() {
+        self.name = nil
+        self.email = nil
+        self.phone = nil
+        self.pictureURL = nil
+        self.shop = nil
+        self.shopID = nil
     }
 }

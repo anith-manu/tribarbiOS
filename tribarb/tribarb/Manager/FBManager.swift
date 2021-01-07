@@ -18,17 +18,34 @@ class FBManager {
     public class func getFBUserData(completionHandler: @escaping () -> Void) {
         
         if (AccessToken.current != nil) {
-            GraphRequest(graphPath: "me", parameters: ["fields": "name, email, picture.type(normal)"]).start { (connection, result, error) in
-                
-                if (error ==  nil) {
-                    let json = JSON(result!)
 
-                    User.currentUser.setInfo(json: json)
+            GraphRequest(graphPath: "me", parameters: ["fields": "name, email, picture.type(normal)"]).start { (connection, result, error) in
+    
+                if (error ==  nil) {
                     
                     completionHandler()
+                    
+                    // Set customer info
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        
+                        if LoginViewController.USER_TYPE == 0 {
+                            APIManager.shared.customerGetDetails { (json) in
+                                if json != nil {
+                                    User.currentUser.setCustomerInfo(json: json!)
+                                }
+                            }
+                        } else {
+                            APIManager.shared.employeeGetDetails { (json) in
+                                if json != nil {
+                                    User.currentUser.setEmployeeInfo(json: json!)
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    print(error ?? "")
                 }
             }
         }
     }
-    
 }

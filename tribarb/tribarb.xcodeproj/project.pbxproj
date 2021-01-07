@@ -8,14 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		3CF9EE9A9D1D0FD7B65E3F4C /* Pods_tribarb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2A0D4D9CB703AE73A796819 /* Pods_tribarb.framework */; };
+		CA11B90C256505E40040FD2F /* EmployeeBookings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA11B90B256505E40040FD2F /* EmployeeBookings.storyboard */; };
+		CA11B911256507D10040FD2F /* EmployeeAccount.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA11B910256507D10040FD2F /* EmployeeAccount.storyboard */; };
+		CA11B91625650E6C0040FD2F /* EmployeeAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA11B91525650E6C0040FD2F /* EmployeeAccountViewController.swift */; };
+		CA11B91B25650F900040FD2F /* EmployeeBookingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA11B91A25650F900040FD2F /* EmployeeBookingsViewController.swift */; };
+		CA1AF5B7259C623C0079789C /* ColorNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1AF5B6259C623C0079789C /* ColorNavigationViewController.swift */; };
 		CA4456742559401E00E96E62 /* BookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4456732559401D00E96E62 /* BookingViewController.swift */; };
 		CA5A5DA4253C946A00A268C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5A5DA3253C946A00A268C2 /* AppDelegate.swift */; };
 		CA5A5DA6253C946A00A268C2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5A5DA5253C946A00A268C2 /* SceneDelegate.swift */; };
 		CA5A5DAB253C946A00A268C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA5A5DA9253C946A00A268C2 /* Main.storyboard */; };
 		CA5A5DAD253C947000A268C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA5A5DAC253C947000A268C2 /* Assets.xcassets */; };
-		CA5A5DB0253C947000A268C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA5A5DAE253C947000A268C2 /* LaunchScreen.storyboard */; };
 		CA5A5DE1253D888B00A268C2 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5A5DE0253D888B00A268C2 /* ShopViewController.swift */; };
-		CA5A5DE6253DAA9100A268C2 /* ServiceListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5A5DE5253DAA9100A268C2 /* ServiceListTableViewController.swift */; };
 		CA5A5DEB253E1D5200A268C2 /* ServiceDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5A5DEA253E1D5100A268C2 /* ServiceDetailsViewController.swift */; };
 		CA5C3B5625416A5A008D6DA7 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = CA5C3B5525416A5A008D6DA7 /* FacebookCore */; };
 		CA5C3B5825416A5A008D6DA7 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = CA5C3B5725416A5A008D6DA7 /* FacebookLogin */; };
@@ -28,15 +31,25 @@
 		CA5CD01D254447CC00290225 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5CD01C254447CC00290225 /* Constants.swift */; };
 		CA5CD0222546B60600290225 /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5CD0212546B60500290225 /* Shop.swift */; };
 		CA5CD0272546DD4100290225 /* ShopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5CD0262546DD4100290225 /* ShopTableViewCell.swift */; };
+		CA68052A2567B40A00C4D2C9 /* GSImageViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6805292567B40A00C4D2C9 /* GSImageViewerController.swift */; };
+		CA6805352567C06600C4D2C9 /* EmployeeBookingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6805342567C06600C4D2C9 /* EmployeeBookingTableViewCell.swift */; };
+		CA68053A2567C0F300C4D2C9 /* EmployeeBookings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6805392567C0F300C4D2C9 /* EmployeeBookings.swift */; };
+		CA68053F25690F0600C4D2C9 /* EmployeeBookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA68053E25690F0600C4D2C9 /* EmployeeBookingViewController.swift */; };
+		CA78C04325616D5300AFD776 /* Shops.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA78C04225616D5200AFD776 /* Shops.storyboard */; };
+		CA78C04825616FCE00AFD776 /* Checkout.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA78C04725616FCE00AFD776 /* Checkout.storyboard */; };
+		CA78C04D2561715200AFD776 /* Bookings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA78C04C2561715200AFD776 /* Bookings.storyboard */; };
+		CA78C052256172A100AFD776 /* Account.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA78C051256172A100AFD776 /* Account.storyboard */; };
+		CA78C084256267B100AFD776 /* EmployeeVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA78C083256267B100AFD776 /* EmployeeVerificationViewController.swift */; };
 		CA88A4C325584B8600CEA1D2 /* FilterBookingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA88A4C225584B8600CEA1D2 /* FilterBookingTableViewCell.swift */; };
-		CA88A4C825584C5300CEA1D2 /* Booking.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA88A4C725584C5300CEA1D2 /* Booking.swift */; };
-		CAA5BE58254D68970080B2CE /* GSImageViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA5BE57254D68960080B2CE /* GSImageViewerController.swift */; };
+		CA8F3799255E7F710045DC01 /* Booking.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8F3798255E7F710045DC01 /* Booking.swift */; };
 		CAA5BE71254E8F290080B2CE /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA5BE70254E8F290080B2CE /* Cart.swift */; };
 		CAA5BE76254EBF0A0080B2CE /* CheckoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA5BE75254EBF090080B2CE /* CheckoutTableViewCell.swift */; };
 		CAA5BE7B25500F1F0080B2CE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA5BE7A25500F1F0080B2CE /* CoreLocation.framework */; };
 		CAA5BE802551632C0080B2CE /* StripeAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA5BE7F255163280080B2CE /* StripeAPIManager.swift */; };
 		CAA5BE8825519FDA0080B2CE /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA5BE8725519FD90080B2CE /* PaymentViewController.swift */; };
+		CAA6890C259E0C3C0061F372 /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA6890B259E0C3C0061F372 /* CustomImageView.swift */; };
 		CAA811232557CC6F00E9558F /* BookingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA811222557CC6F00E9558F /* BookingTableViewCell.swift */; };
+		CAAE2EAA2573E6A8006D4D7F /* ServiceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAE2EA92573E6A7006D4D7F /* ServiceListViewController.swift */; };
 		CAC06ED92559D6F200E15284 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC06ED82559D6F200E15284 /* CheckoutViewController.swift */; };
 		CAC2D41F253EF18E00E16536 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAC2D41E253EF18E00E16536 /* MapKit.framework */; };
 		CAC2D421253EF1E000E16536 /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC2D420253EF1E000E16536 /* AddressViewController.swift */; };
@@ -44,7 +57,8 @@
 		CAE9C79B25494D64004D2AC1 /* ServiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE9C79A25494D64004D2AC1 /* ServiceTableViewCell.swift */; };
 		CAE9C7A025495FEF004D2AC1 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE9C79F25495FEF004D2AC1 /* Helpers.swift */; };
 		CAEA6EC225401A5A0075E5C2 /* BookingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEA6EC125401A590075E5C2 /* BookingsViewController.swift */; };
-		CAEA6ECF254040A40075E5C2 /* PreviousBookingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEA6ECE254040A40075E5C2 /* PreviousBookingsTableViewController.swift */; };
+		CAEE6002258F3E870028021C /* CustomUIElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEE6001258F3E870028021C /* CustomUIElements.swift */; };
+		CAF726ED2593362E00BBBC5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAF726EC2593362E00BBBC5B /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,18 +82,21 @@
 		09A1E9E7E507A1FFD2EF7859 /* Pods-tribarb.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tribarb.release.xcconfig"; path = "Target Support Files/Pods-tribarb/Pods-tribarb.release.xcconfig"; sourceTree = "<group>"; };
 		A2A0D4D9CB703AE73A796819 /* Pods_tribarb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tribarb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C68D426DEADD15ABF96CC5A4 /* Pods-tribarb.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tribarb.debug.xcconfig"; path = "Target Support Files/Pods-tribarb/Pods-tribarb.debug.xcconfig"; sourceTree = "<group>"; };
+		CA11B90B256505E40040FD2F /* EmployeeBookings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EmployeeBookings.storyboard; sourceTree = "<group>"; };
+		CA11B910256507D10040FD2F /* EmployeeAccount.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EmployeeAccount.storyboard; sourceTree = "<group>"; };
+		CA11B91525650E6C0040FD2F /* EmployeeAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeAccountViewController.swift; sourceTree = "<group>"; };
+		CA11B91A25650F900040FD2F /* EmployeeBookingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeBookingsViewController.swift; sourceTree = "<group>"; };
+		CA1AF5B6259C623C0079789C /* ColorNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorNavigationViewController.swift; sourceTree = "<group>"; };
 		CA4456732559401D00E96E62 /* BookingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingViewController.swift; sourceTree = "<group>"; };
 		CA5A5DA0253C946A00A268C2 /* tribarb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tribarb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA5A5DA3253C946A00A268C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CA5A5DA5253C946A00A268C2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		CA5A5DAA253C946A00A268C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CA5A5DAC253C947000A268C2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		CA5A5DAF253C947000A268C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CA5A5DB1253C947000A268C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA5A5DB6253C947000A268C2 /* tribarbTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tribarbTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA5A5DC1253C947000A268C2 /* tribarbUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tribarbUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA5A5DE0253D888B00A268C2 /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
-		CA5A5DE5253DAA9100A268C2 /* ServiceListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceListTableViewController.swift; sourceTree = "<group>"; };
 		CA5A5DEA253E1D5100A268C2 /* ServiceDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailsViewController.swift; sourceTree = "<group>"; };
 		CA5C3B4825416855008D6DA7 /* tribarb.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = tribarb.entitlements; sourceTree = "<group>"; };
 		CA5C3B5E25417121008D6DA7 /* FBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBManager.swift; sourceTree = "<group>"; };
@@ -90,15 +107,25 @@
 		CA5CD01C254447CC00290225 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CA5CD0212546B60500290225 /* Shop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shop.swift; sourceTree = "<group>"; };
 		CA5CD0262546DD4100290225 /* ShopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopTableViewCell.swift; sourceTree = "<group>"; };
+		CA6805292567B40A00C4D2C9 /* GSImageViewerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSImageViewerController.swift; sourceTree = "<group>"; };
+		CA6805342567C06600C4D2C9 /* EmployeeBookingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeBookingTableViewCell.swift; sourceTree = "<group>"; };
+		CA6805392567C0F300C4D2C9 /* EmployeeBookings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeBookings.swift; sourceTree = "<group>"; };
+		CA68053E25690F0600C4D2C9 /* EmployeeBookingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeBookingViewController.swift; sourceTree = "<group>"; };
+		CA78C04225616D5200AFD776 /* Shops.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Shops.storyboard; sourceTree = "<group>"; };
+		CA78C04725616FCE00AFD776 /* Checkout.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Checkout.storyboard; sourceTree = "<group>"; };
+		CA78C04C2561715200AFD776 /* Bookings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Bookings.storyboard; sourceTree = "<group>"; };
+		CA78C051256172A100AFD776 /* Account.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Account.storyboard; sourceTree = "<group>"; };
+		CA78C083256267B100AFD776 /* EmployeeVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeVerificationViewController.swift; sourceTree = "<group>"; };
 		CA88A4C225584B8600CEA1D2 /* FilterBookingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterBookingTableViewCell.swift; sourceTree = "<group>"; };
-		CA88A4C725584C5300CEA1D2 /* Booking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Booking.swift; sourceTree = "<group>"; };
-		CAA5BE57254D68960080B2CE /* GSImageViewerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GSImageViewerController.swift; path = ../../../../../Downloads/GSImageViewerController.swift; sourceTree = "<group>"; };
+		CA8F3798255E7F710045DC01 /* Booking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Booking.swift; sourceTree = "<group>"; };
 		CAA5BE70254E8F290080B2CE /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
 		CAA5BE75254EBF090080B2CE /* CheckoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutTableViewCell.swift; sourceTree = "<group>"; };
 		CAA5BE7A25500F1F0080B2CE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		CAA5BE7F255163280080B2CE /* StripeAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripeAPIManager.swift; sourceTree = "<group>"; };
 		CAA5BE8725519FD90080B2CE /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
+		CAA6890B259E0C3C0061F372 /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 		CAA811222557CC6F00E9558F /* BookingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingTableViewCell.swift; sourceTree = "<group>"; };
+		CAAE2EA92573E6A7006D4D7F /* ServiceListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceListViewController.swift; sourceTree = "<group>"; };
 		CAC06ED82559D6F200E15284 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 		CAC2D41E253EF18E00E16536 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		CAC2D420253EF1E000E16536 /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
@@ -106,7 +133,8 @@
 		CAE9C79A25494D64004D2AC1 /* ServiceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTableViewCell.swift; sourceTree = "<group>"; };
 		CAE9C79F25495FEF004D2AC1 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		CAEA6EC125401A590075E5C2 /* BookingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingsViewController.swift; sourceTree = "<group>"; };
-		CAEA6ECE254040A40075E5C2 /* PreviousBookingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviousBookingsTableViewController.swift; sourceTree = "<group>"; };
+		CAEE6001258F3E870028021C /* CustomUIElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIElements.swift; sourceTree = "<group>"; };
+		CAF726EC2593362E00BBBC5B /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ../../../../.Trash/LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,16 +191,16 @@
 		CA5A5DA2253C946A00A268C2 /* tribarb */ = {
 			isa = PBXGroup;
 			children = (
+				CA78C03E25616B8E00AFD776 /* Storyboards */,
 				CA5CD0082544458A00290225 /* Manager */,
 				CA5CD0072544457000290225 /* Controller */,
 				CA5CD0062544456B00290225 /* View */,
 				CA5CD0052544456400290225 /* Model */,
 				CA5C3B4825416855008D6DA7 /* tribarb.entitlements */,
 				CA5A5DA3253C946A00A268C2 /* AppDelegate.swift */,
+				CAF726EC2593362E00BBBC5B /* LaunchScreen.storyboard */,
 				CA5A5DA5253C946A00A268C2 /* SceneDelegate.swift */,
-				CA5A5DA9253C946A00A268C2 /* Main.storyboard */,
 				CA5A5DAC253C947000A268C2 /* Assets.xcassets */,
-				CA5A5DAE253C947000A268C2 /* LaunchScreen.storyboard */,
 				CA5A5DB1253C947000A268C2 /* Info.plist */,
 			);
 			path = tribarb;
@@ -185,7 +213,8 @@
 				CA5CD0212546B60500290225 /* Shop.swift */,
 				CAE9C79225494C5F004D2AC1 /* Service.swift */,
 				CAA5BE70254E8F290080B2CE /* Cart.swift */,
-				CA88A4C725584C5300CEA1D2 /* Booking.swift */,
+				CA8F3798255E7F710045DC01 /* Booking.swift */,
+				CA6805392567C0F300C4D2C9 /* EmployeeBookings.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -193,11 +222,9 @@
 		CA5CD0062544456B00290225 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CA5CD0262546DD4100290225 /* ShopTableViewCell.swift */,
-				CAE9C79A25494D64004D2AC1 /* ServiceTableViewCell.swift */,
-				CAA5BE75254EBF090080B2CE /* CheckoutTableViewCell.swift */,
 				CAA811222557CC6F00E9558F /* BookingTableViewCell.swift */,
-				CA88A4C225584B8600CEA1D2 /* FilterBookingTableViewCell.swift */,
+				CA78C0642562654600AFD776 /* Employee */,
+				CA78C0632562653F00AFD776 /* Customer */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -205,18 +232,10 @@
 		CA5CD0072544457000290225 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				CAEE6001258F3E870028021C /* CustomUIElements.swift */,
 				CA5C3B7825417936008D6DA7 /* LoginViewController.swift */,
-				CA5A5DE0253D888B00A268C2 /* ShopViewController.swift */,
-				CA5A5DE5253DAA9100A268C2 /* ServiceListTableViewController.swift */,
-				CA5A5DEA253E1D5100A268C2 /* ServiceDetailsViewController.swift */,
-				CAA5BE57254D68960080B2CE /* GSImageViewerController.swift */,
-				CAC2D420253EF1E000E16536 /* AddressViewController.swift */,
-				CAEA6ECE254040A40075E5C2 /* PreviousBookingsTableViewController.swift */,
-				CA5C3B822541B788008D6DA7 /* CustomerAccountViewController.swift */,
-				CAEA6EC125401A590075E5C2 /* BookingsViewController.swift */,
-				CA4456732559401D00E96E62 /* BookingViewController.swift */,
-				CAC06ED82559D6F200E15284 /* CheckoutViewController.swift */,
-				CAA5BE8725519FD90080B2CE /* PaymentViewController.swift */,
+				CA78C0622562653800AFD776 /* Employee */,
+				CA78C0612562653100AFD776 /* Customer */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -231,6 +250,85 @@
 				CAA5BE7F255163280080B2CE /* StripeAPIManager.swift */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		CA78C03E25616B8E00AFD776 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				CA5A5DA9253C946A00A268C2 /* Main.storyboard */,
+				CA78C0602562651400AFD776 /* Employee */,
+				CA78C056256173A600AFD776 /* Customer */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		CA78C056256173A600AFD776 /* Customer */ = {
+			isa = PBXGroup;
+			children = (
+				CA78C04225616D5200AFD776 /* Shops.storyboard */,
+				CA78C04725616FCE00AFD776 /* Checkout.storyboard */,
+				CA78C04C2561715200AFD776 /* Bookings.storyboard */,
+				CA78C051256172A100AFD776 /* Account.storyboard */,
+			);
+			path = Customer;
+			sourceTree = "<group>";
+		};
+		CA78C0602562651400AFD776 /* Employee */ = {
+			isa = PBXGroup;
+			children = (
+				CA11B90B256505E40040FD2F /* EmployeeBookings.storyboard */,
+				CA11B910256507D10040FD2F /* EmployeeAccount.storyboard */,
+			);
+			path = Employee;
+			sourceTree = "<group>";
+		};
+		CA78C0612562653100AFD776 /* Customer */ = {
+			isa = PBXGroup;
+			children = (
+				CA5C3B822541B788008D6DA7 /* CustomerAccountViewController.swift */,
+				CAEA6EC125401A590075E5C2 /* BookingsViewController.swift */,
+				CA4456732559401D00E96E62 /* BookingViewController.swift */,
+				CAC2D420253EF1E000E16536 /* AddressViewController.swift */,
+				CAA5BE8725519FD90080B2CE /* PaymentViewController.swift */,
+				CA5A5DE0253D888B00A268C2 /* ShopViewController.swift */,
+				CA5A5DEA253E1D5100A268C2 /* ServiceDetailsViewController.swift */,
+				CAC06ED82559D6F200E15284 /* CheckoutViewController.swift */,
+				CA6805292567B40A00C4D2C9 /* GSImageViewerController.swift */,
+				CAAE2EA92573E6A7006D4D7F /* ServiceListViewController.swift */,
+				CA1AF5B6259C623C0079789C /* ColorNavigationViewController.swift */,
+				CAA6890B259E0C3C0061F372 /* CustomImageView.swift */,
+			);
+			path = Customer;
+			sourceTree = "<group>";
+		};
+		CA78C0622562653800AFD776 /* Employee */ = {
+			isa = PBXGroup;
+			children = (
+				CA78C083256267B100AFD776 /* EmployeeVerificationViewController.swift */,
+				CA11B91525650E6C0040FD2F /* EmployeeAccountViewController.swift */,
+				CA11B91A25650F900040FD2F /* EmployeeBookingsViewController.swift */,
+				CA68053E25690F0600C4D2C9 /* EmployeeBookingViewController.swift */,
+			);
+			path = Employee;
+			sourceTree = "<group>";
+		};
+		CA78C0632562653F00AFD776 /* Customer */ = {
+			isa = PBXGroup;
+			children = (
+				CA5CD0262546DD4100290225 /* ShopTableViewCell.swift */,
+				CAE9C79A25494D64004D2AC1 /* ServiceTableViewCell.swift */,
+				CAA5BE75254EBF090080B2CE /* CheckoutTableViewCell.swift */,
+				CA88A4C225584B8600CEA1D2 /* FilterBookingTableViewCell.swift */,
+			);
+			path = Customer;
+			sourceTree = "<group>";
+		};
+		CA78C0642562654600AFD776 /* Employee */ = {
+			isa = PBXGroup;
+			children = (
+				CA6805342567C06600C4D2C9 /* EmployeeBookingTableViewCell.swift */,
+			);
+			path = Employee;
 			sourceTree = "<group>";
 		};
 		CAC2D41D253EF18E00E16536 /* Frameworks */ = {
@@ -366,9 +464,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA5A5DB0253C947000A268C2 /* LaunchScreen.storyboard in Resources */,
+				CAF726ED2593362E00BBBC5B /* LaunchScreen.storyboard in Resources */,
+				CA78C04825616FCE00AFD776 /* Checkout.storyboard in Resources */,
+				CA78C04325616D5300AFD776 /* Shops.storyboard in Resources */,
+				CA11B911256507D10040FD2F /* EmployeeAccount.storyboard in Resources */,
 				CA5A5DAD253C947000A268C2 /* Assets.xcassets in Resources */,
+				CA78C04D2561715200AFD776 /* Bookings.storyboard in Resources */,
 				CA5A5DAB253C946A00A268C2 /* Main.storyboard in Resources */,
+				CA11B90C256505E40040FD2F /* EmployeeBookings.storyboard in Resources */,
+				CA78C052256172A100AFD776 /* Account.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,33 +541,41 @@
 			files = (
 				CA5A5DE1253D888B00A268C2 /* ShopViewController.swift in Sources */,
 				CAA5BE8825519FDA0080B2CE /* PaymentViewController.swift in Sources */,
+				CA68053A2567C0F300C4D2C9 /* EmployeeBookings.swift in Sources */,
 				CAE9C7A025495FEF004D2AC1 /* Helpers.swift in Sources */,
 				CA5C3B5F25417121008D6DA7 /* FBManager.swift in Sources */,
-				CA5A5DE6253DAA9100A268C2 /* ServiceListTableViewController.swift in Sources */,
-				CAEA6ECF254040A40075E5C2 /* PreviousBookingsTableViewController.swift in Sources */,
 				CAA5BE802551632C0080B2CE /* StripeAPIManager.swift in Sources */,
-				CAA5BE58254D68970080B2CE /* GSImageViewerController.swift in Sources */,
+				CA6805352567C06600C4D2C9 /* EmployeeBookingTableViewCell.swift in Sources */,
 				CAC2D421253EF1E000E16536 /* AddressViewController.swift in Sources */,
 				CA5C3B7E25418DF7008D6DA7 /* User.swift in Sources */,
+				CA78C084256267B100AFD776 /* EmployeeVerificationViewController.swift in Sources */,
 				CA5A5DA4253C946A00A268C2 /* AppDelegate.swift in Sources */,
+				CAEE6002258F3E870028021C /* CustomUIElements.swift in Sources */,
 				CA5CD0222546B60600290225 /* Shop.swift in Sources */,
 				CA5CD01D254447CC00290225 /* Constants.swift in Sources */,
 				CAEA6EC225401A5A0075E5C2 /* BookingsViewController.swift in Sources */,
 				CA88A4C325584B8600CEA1D2 /* FilterBookingTableViewCell.swift in Sources */,
 				CAA5BE71254E8F290080B2CE /* Cart.swift in Sources */,
+				CA68053F25690F0600C4D2C9 /* EmployeeBookingViewController.swift in Sources */,
+				CA68052A2567B40A00C4D2C9 /* GSImageViewerController.swift in Sources */,
 				CA5A5DA6253C946A00A268C2 /* SceneDelegate.swift in Sources */,
 				CAA811232557CC6F00E9558F /* BookingTableViewCell.swift in Sources */,
 				CAA5BE76254EBF0A0080B2CE /* CheckoutTableViewCell.swift in Sources */,
+				CA8F3799255E7F710045DC01 /* Booking.swift in Sources */,
 				CAE9C79B25494D64004D2AC1 /* ServiceTableViewCell.swift in Sources */,
 				CA5A5DEB253E1D5200A268C2 /* ServiceDetailsViewController.swift in Sources */,
 				CA5C3B832541B788008D6DA7 /* CustomerAccountViewController.swift in Sources */,
+				CA1AF5B7259C623C0079789C /* ColorNavigationViewController.swift in Sources */,
 				CA5CD00D254446AC00290225 /* APIManager.swift in Sources */,
 				CA5CD0272546DD4100290225 /* ShopTableViewCell.swift in Sources */,
+				CA11B91B25650F900040FD2F /* EmployeeBookingsViewController.swift in Sources */,
 				CAE9C79325494C5F004D2AC1 /* Service.swift in Sources */,
+				CAA6890C259E0C3C0061F372 /* CustomImageView.swift in Sources */,
+				CA11B91625650E6C0040FD2F /* EmployeeAccountViewController.swift in Sources */,
 				CA5C3B7925417936008D6DA7 /* LoginViewController.swift in Sources */,
 				CA4456742559401E00E96E62 /* BookingViewController.swift in Sources */,
 				CAC06ED92559D6F200E15284 /* CheckoutViewController.swift in Sources */,
-				CA88A4C825584C5300CEA1D2 /* Booking.swift in Sources */,
+				CAAE2EAA2573E6A8006D4D7F /* ServiceListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -503,14 +615,6 @@
 				CA5A5DAA253C946A00A268C2 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		CA5A5DAE253C947000A268C2 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CA5A5DAF253C947000A268C2 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -641,7 +745,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = tribarb/tribarb.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QV3TMVS67M;
+				DEVELOPMENT_TEAM = DV8Q9AN5T7;
 				INFOPLIST_FILE = tribarb/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -664,7 +768,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = tribarb/tribarb.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QV3TMVS67M;
+				DEVELOPMENT_TEAM = DV8Q9AN5T7;
 				INFOPLIST_FILE = tribarb/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

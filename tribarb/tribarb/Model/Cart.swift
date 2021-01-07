@@ -29,20 +29,22 @@ class Cart {
     var paymentMode: Int?
     var bookingTime: String?
     
-    
-    
     func getSubtotal() -> Float {
-        var total: Float = 0
+        var subtotal: Float = 0
         
         for item in self.items {
-            total = total + item.service.price!
+            subtotal = subtotal + item.service.price!
         }
-        return total
+        return subtotal
+    }
+    
+    func getServiceFee() -> Float {
+        return (shop?.service_fee)!
     }
     
     func getTotal() -> Float {
         let subTotal = getSubtotal()
-        let total = subTotal + 1.50
+        let total = subTotal + (shop?.service_fee)!
         return total
     }
     
