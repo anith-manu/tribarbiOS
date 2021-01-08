@@ -26,7 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         
         
         beamsClient.start(instanceId: "e4ca64ad-a6d3-41af-b291-f7b39f7f9ba2")
-        beamsClient.registerForRemoteNotifications()
 
         return true
     }

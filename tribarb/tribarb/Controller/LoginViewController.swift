@@ -25,12 +25,13 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         
         setGradientBackground()
-       
-        
-        self.switchUser.isHidden = true
-        self.facebookLogin.isHidden = true
         
         if (AccessToken.current != nil ) {
+            
+            if self.userType == "customer" {
+                self.switchUser.isHidden = true
+                self.facebookLogin.isHidden = true
+            }
             
             startSkeletalAnimation()
             FBManager.getFBUserData {
@@ -42,9 +43,6 @@ class LoginViewController: UIViewController {
                     }
                 }
             }
-        } else {
-            self.switchUser.isHidden = false
-            self.facebookLogin.isHidden = false
         }
     }
     
@@ -104,6 +102,10 @@ class LoginViewController: UIViewController {
                 
                 FBManager.getFBUserData {
                     self.startSkeletalAnimation()
+                    if self.userType == "customer" {
+                        self.switchUser.isHidden = true
+                        self.facebookLogin.isHidden = true
+                    }
                     APIManager.shared.login(userType: self.userType) { (error) in
                         if error == nil {
                         

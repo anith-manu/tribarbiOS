@@ -26,11 +26,21 @@ class ShopViewController: UIViewController, UISearchResultsUpdating {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        load_shops()
+        setCustomerDetails()
         tabbarConfig()
         setupNavBar()
-
+        beamsClient.registerForRemoteNotifications()
+    }
+    
+    
+    func setCustomerDetails() {
+        APIManager.shared.customerGetDetails { (json) in
+            if json != nil {
+                User.currentUser.setCustomerInfo(json: json!)
+                Helpers.setUserIDBeams(email: User.currentUser.email ?? "")
+                self.load_shops()
+            }
+        }
     }
     
     

@@ -13,7 +13,6 @@ class EmployeeAccountViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var tfPhone: UITextField!
     @IBOutlet weak var accountScroll: UIScrollView!
     
-    let activityIndicator = UIActivityIndicatorView()
     
     private let imageView = CustomImageView()
     
@@ -82,13 +81,11 @@ class EmployeeAccountViewController: UIViewController, UITextFieldDelegate {
         
         if User.currentUser.shop == nil {
         
-            Helpers.showWhiteOutActivityIndicator(activityIndicator, view)
             APIManager.shared.employeeGetDetails { (json) in
                 if json != nil {
                     User.currentUser.setEmployeeInfo(json: json!)
                     self.setEmployeeInfo()
                 }
-                Helpers.hideActivityIndicator(self.activityIndicator)
 
             }
         } else {
@@ -105,6 +102,8 @@ class EmployeeAccountViewController: UIViewController, UITextFieldDelegate {
         if User.currentUser.pictureURL != nil {
             imageView.loadImage(User.currentUser.pictureURL!)
         }
+        
+        tfPhone.text = User.currentUser.phone
         
     }
     
@@ -146,6 +145,10 @@ class EmployeeAccountViewController: UIViewController, UITextFieldDelegate {
                 }
             }
             
+            beamsClient.clearAllState {
+                print("Notifications off.")
+            }
+            
             self.performSegue(withIdentifier: "EmployeeLogout", sender: self)
         }
         
@@ -157,7 +160,7 @@ class EmployeeAccountViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-
+    
     func updateCompleteMessage() {
         let message = "Updated Successfully"
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .actionSheet)

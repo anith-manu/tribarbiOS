@@ -346,6 +346,10 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate, UIGe
                 }
             }
             
+            beamsClient.clearAllState {
+                print("Notifications off.")
+            }
+            
             self.performSegue(withIdentifier: "CustomerLogout", sender: self)
         }
         
@@ -406,6 +410,7 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate, UIGe
         disableUpdateButton()
     }
     
+ 
     
     func updateCompleteMessage() {
         let message = "Updated Successfully"
@@ -420,6 +425,7 @@ class CustomerAccountViewController: UIViewController, UITextFieldDelegate, UIGe
         }
     }
     
+
 }
 
 

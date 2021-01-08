@@ -70,6 +70,9 @@ class BookingViewController: UIViewController{
         super.viewDidLoad()
         setRatingsView()
         setBookingViewUIElements(booking: booking!)
+        if booking!.status == "Barber En Route" {
+            self.setTimer()
+        }
     }
     
     
@@ -94,10 +97,7 @@ class BookingViewController: UIViewController{
             let booking = Booking(json: json!["booking"])
             
             self.setBookingViewUIElements(booking: booking)
-            
-            if booking.status == "Barber En Route" {
-                self.setTimer()
-            }
+        
         }
     }
     

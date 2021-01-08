@@ -17,15 +17,27 @@ class EmployeeBookingsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setEmployeeDetails()
+        self.navigationItem.title = "Bookings"
+        beamsClient.registerForRemoteNotifications()
         tabbarConfig()
-        loadBookings()
-        // Do any additional setup after loading the view.
+    }
+    
+    
+    func setEmployeeDetails() {
+        APIManager.shared.employeeGetDetails { (json) in
+            if json != nil {
+                User.currentUser.setEmployeeInfo(json: json!)
+                Helpers.setUserIDBeams(email: User.currentUser.email ?? "")
+        
+                self.navigationItem.prompt = User.currentUser.shop
+                self.loadBookings()
+            }
+        }
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationItem.title = "Bookings"
-        navigationItem.prompt = User.currentUser.shop
         loadBookings()
     }
     
@@ -53,6 +65,7 @@ class EmployeeBookingsViewController: UIViewController {
         }
     }
     
+    
     func tabbarConfig() {
         guard let tabbar = self.tabBarController?.tabBar else { return }
         tabbar.layer.cornerRadius = 30
@@ -61,6 +74,7 @@ class EmployeeBookingsViewController: UIViewController {
         tabbar.barTintColor = .black
         tabbar.tintColor = UIColor(red: 1.00, green: 0.76, blue: 0.43, alpha: 1.00)
     }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "BookingDetail" {
@@ -76,20 +90,17 @@ class EmployeeBookingsViewController: UIViewController {
         self.loadingView.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: UIColor(rgb: 0xEEEEEF)), animation: nil, transition: .crossDissolve(0.25))
     }
     
+    
     func hideLoadingSkeleton() {
         self.loadingView.isHidden = true
         self.loadingView.stopSkeletonAnimation()
         self.loadingView.hideSkeleton()
     }
     
-    
-
 
     @IBAction func switchBookingType(_ sender: Any) {
         loadBookings()
     }
-
-
 }
 
 
@@ -152,7 +163,4 @@ extension EmployeeBookingsViewController: UITableViewDelegate, UITableViewDataSo
         
         return cell
     }
-    
-    
-    
 }

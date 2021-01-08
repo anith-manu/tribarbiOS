@@ -496,7 +496,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="mLa-dZ-WZU">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="685"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="710"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Cp-pm-lrs">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
@@ -675,7 +675,7 @@
                                                         </constraints>
                                                         <segments>
                                                             <segment title="" image="cash"/>
-                                                            <segment title="" image="credit_card"/>
+                                                            <segment title="" image="card_unavailable" enabled="NO"/>
                                                         </segments>
                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="selectedSegmentTintColor" red="0.9989349246" green="0.764754355" blue="0.4312785864" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -689,22 +689,31 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Card payments not accepted in beta version)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tY6-js-yhX">
+                                                        <rect key="frame" x="20" y="104.5" width="374" height="16"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="tY6-js-yhX" secondAttribute="trailing" constant="20" id="23N-d7-xLu"/>
                                                     <constraint firstItem="pbL-aM-Bfq" firstAttribute="top" secondItem="Vgr-aZ-fns" secondAttribute="top" constant="5" id="7Qc-uN-AQT"/>
                                                     <constraint firstAttribute="height" constant="120" id="JRg-2q-Qbf"/>
                                                     <constraint firstAttribute="trailing" secondItem="8x3-RF-55c" secondAttribute="trailing" constant="40" id="Uwz-vO-H2X"/>
                                                     <constraint firstItem="8x3-RF-55c" firstAttribute="top" secondItem="pbL-aM-Bfq" secondAttribute="bottom" constant="10" id="XIS-z1-5QP"/>
                                                     <constraint firstItem="pbL-aM-Bfq" firstAttribute="leading" secondItem="Vgr-aZ-fns" secondAttribute="leading" constant="20" id="aW9-nh-PsF"/>
+                                                    <constraint firstItem="tY6-js-yhX" firstAttribute="top" secondItem="8x3-RF-55c" secondAttribute="bottom" constant="10" id="hOl-YF-DCT"/>
+                                                    <constraint firstItem="tY6-js-yhX" firstAttribute="leading" secondItem="Vgr-aZ-fns" secondAttribute="leading" constant="20" id="zxt-av-e8p"/>
                                                     <constraint firstItem="8x3-RF-55c" firstAttribute="leading" secondItem="Vgr-aZ-fns" secondAttribute="leading" constant="40" id="zy1-ax-GXY"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ny1-CM-qmG">
-                                                <rect key="frame" x="0.0" y="610" width="414" height="75"/>
+                                                <rect key="frame" x="0.0" y="610" width="414" height="100"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yU6-nO-ADz" customClass="CurvedButton" customModule="tribarb" customModuleProvider="target">
-                                                        <rect key="frame" x="20" y="12.5" width="374" height="50"/>
+                                                        <rect key="frame" x="20" y="25" width="374" height="50"/>
                                                         <color key="backgroundColor" red="1" green="0.76470588240000004" blue="0.43137254899999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="5rK-pC-NBn"/>
@@ -726,7 +735,7 @@
                                                     <constraint firstItem="yU6-nO-ADz" firstAttribute="leading" secondItem="ny1-CM-qmG" secondAttribute="leading" constant="20" id="6Wj-by-vp2"/>
                                                     <constraint firstItem="yU6-nO-ADz" firstAttribute="centerY" secondItem="ny1-CM-qmG" secondAttribute="centerY" id="9TZ-dR-Drp"/>
                                                     <constraint firstAttribute="trailing" secondItem="yU6-nO-ADz" secondAttribute="trailing" constant="20" id="UEW-En-mbj"/>
-                                                    <constraint firstAttribute="height" constant="75" id="uaq-EX-xUo"/>
+                                                    <constraint firstAttribute="height" constant="100" id="uaq-EX-xUo"/>
                                                     <constraint firstItem="yU6-nO-ADz" firstAttribute="centerX" secondItem="ny1-CM-qmG" secondAttribute="centerX" id="via-XC-WPU"/>
                                                 </constraints>
                                             </view>
@@ -800,8 +809,8 @@
         <segue reference="FKI-9U-fdX"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="card_unavailable" width="47.049999237060547" height="45.040000915527344"/>
         <image name="cash" width="52" height="45.200000762939453"/>
-        <image name="credit_card" width="47.049999237060547" height="45.040000915527344"/>
         <image name="delete" width="29" height="29"/>
         <image name="empty-cat" width="69.260002136230469" height="63.349998474121094"/>
         <image name="icon_booking" width="24" height="24"/>

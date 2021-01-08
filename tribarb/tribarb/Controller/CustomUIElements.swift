@@ -72,14 +72,13 @@ final class CustomCell: UICollectionViewCell {
     var data: String? {
         didSet {
             guard let data = data else { return }
-
-            Helpers.loadImage(bg, data)
+            bg.loadImage(data)
         }
     }
     
     
-    fileprivate let bg: UIImageView = {
-        let iv = UIImageView()
+    fileprivate let bg: CustomImageView = {
+        let iv = CustomImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true

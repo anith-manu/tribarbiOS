@@ -159,17 +159,10 @@ extension ServiceDetailsViewController: UICollectionViewDelegateFlowLayout, UICo
         
         cell.layer.cornerRadius = 12
         cell.layer.masksToBounds = true
-        
-        let serviceDefault = CustomImageView()
-        let urlString = self.urls[indexPath.item]
-        serviceDefault.loadImage("\(urlString)")
-
         cell.data = self.urls[indexPath.item]
-        cell.backgroundView = serviceDefault
-        
-        
         return cell
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
